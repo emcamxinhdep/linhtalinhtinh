@@ -127,9 +127,6 @@ const PLUSHIES = [
   }
 ];
 
-// ═══════════════════════════════════════
-// DATA: DAILY QUOTES
-// ═══════════════════════════════════════
 const DAILY_QUOTES = [
   'Bạn đã làm tốt hơn bạn nghĩ rất nhiều. 🌸',
   'Cảm xúc của bạn là hợp lệ — tất cả chúng. 💜',
@@ -138,14 +135,8 @@ const DAILY_QUOTES = [
   'Một ngày tệ không có nghĩa là cuộc đời tệ. 🌙',
   'Bạn xứng đáng được yêu thương — đặc biệt là từ chính mình. 🌸',
   'Không cần hoàn hảo. Chỉ cần thật. 💫',
-  'Những gì bạn đang cảm thấy sẽ qua đi. Và bạn sẽ vẫn ở đây. 🌿',
-  'Có những ngày tồn tại là thành tựu rồi. 🌟',
-  'Bạn không đơn độc — dù đôi khi cảm giác như vậy. 💜'
 ];
 
-// ═══════════════════════════════════════
-// DATA: AFFIRMATIONS
-// ═══════════════════════════════════════
 const AFFIRMATIONS = [
   'Hôm nay, bạn được phép chậm lại. Không cần chứng minh gì với ai. 🌸',
   'Sự mệt mỏi của bạn là thật. Sức mạnh của bạn cũng vậy. 💜',
@@ -154,140 +145,76 @@ const AFFIRMATIONS = [
   'Không sao nếu hôm nay bạn không ổn. Ngày mai vẫn sẽ đến. 🌙'
 ];
 
-// ═══════════════════════════════════════
-// DATA: COMFORT ACTIVITIES
-// ═══════════════════════════════════════
 const COMFORT_ACTIVITIES = [
   ['🍵 Pha một tách trà ấm và ngồi yên 10 phút', '🎵 Nghe một playlist yêu thích với mắt nhắm', '📓 Viết 3 điều bạn biết ơn hôm nay', '🌸 Nhìn ra cửa sổ và đếm những thứ màu xanh'],
   ['🛁 Tắm nước ấm tối nay', '📚 Đọc vài trang sách bạn đang dở', '🌙 Đi ngủ sớm hơn 30 phút', '🎨 Vẽ gì đó — dù không đẹp cũng không sao'],
   ['☁️ Nằm xuống và nhìn trần nhà 5 phút', '🧸 Ôm gì đó mềm và ngồi im', '💌 Nhắn tin hỏi thăm một người bạn lâu không gặp', '🌿 Chăm sóc một cây nhỏ trong phòng']
 ];
 
-// ═══════════════════════════════════════
-// DATA: VISUAL NOVEL SCRIPTS
-// ═══════════════════════════════════════
 const VN_SCRIPTS = [
-  {
-    text: 'Ồ, bạn đến rồi... 🌸 Mình đã đợi.',
-    choices: ['Mình ổn.', 'Mình không ổn lắm...', 'Mình chỉ muốn ngồi đây một chút.']
-  },
-  {
-    text: 'Được rồi. Mình sẽ không hỏi nhiều. Cứ ngồi đây với mình nhé... 💜',
-    choices: ['Hôm nay mình mệt quá.', 'Mình nhớ ai đó.', 'Không có gì đặc biệt.']
-  },
-  {
-    text: 'Mình biết. Đôi khi không có lý do cụ thể — mà mình vẫn cứ cảm thấy nặng nề như vậy. ✨ Điều đó hoàn toàn bình thường.',
-    choices: ['Bạn có hiểu cảm giác đó không?', 'Mình muốn nghe nhạc.', 'Cho mình ôm bạn một cái.']
-  },
-  {
-    text: 'Mình hiểu chứ. Mình cũng từng ngồi trong bóng tối một mình và không biết mình cảm thấy gì. 🌙 Nhưng bạn không phải làm vậy một mình.',
-    choices: ['Cảm ơn, Lumi.', 'Tiếp tục kể cho mình nghe đi.']
-  }
+  { text: 'Ồ, bạn đến rồi... 🌸 Mình đã đợi.', choices: ['Mình ổn.', 'Mình không ổn lắm...', 'Mình chỉ muốn ngồi đây một chút.'] },
+  { text: 'Được rồi. Mình sẽ không hỏi nhiều. Cứ ngồi đây với mình nhé... 💜', choices: ['Hôm nay mình mệt quá.', 'Mình nhớ ai đó.', 'Không có gì đặc biệt.'] },
+  { text: 'Mình biết. Đôi khi không có lý do cụ thể — mà mình vẫn cứ cảm thấy nặng nề như vậy. ✨ Điều đó hoàn toàn bình thường.', choices: ['Bạn có hiểu cảm giác đó không?', 'Mình muốn nghe nhạc.', 'Cho mình ôm bạn một cái.'] },
+  { text: 'Mình hiểu chứ. Mình cũng từng ngồi trong bóng tối một mình và không biết mình cảm thấy gì. 🌙 Nhưng bạn không phải làm vậy một mình.', choices: ['Cảm ơn, Lumi.', 'Tiếp tục kể cho mình nghe đi.'] }
 ];
 
-// ═══════════════════════════════════════
-// DATA: PLUSHIE RESPONSES
-// ═══════════════════════════════════════
 const PLUSHIE_RESPONSES = {
-  buồn: {
-    text: 'Này bạn ơi... Mình đọc tất cả rồi. Mình biết bây giờ không dễ chút nào. Và mình muốn bạn biết — cảm xúc này của bạn là thật, và bạn không cần phải cố giải thích hay biện hộ cho nó.\n\nCứ để mình ngồi đây cùng bạn một lúc nhé? Mình sẽ không đi đâu. 🌸',
-    suggest: '💜 Lumi có thể là người bạn phù hợp nhất cho bạn lúc này — bé biết cách ở bên trong im lặng.',
-    hearts: '💜 🌸 💜'
-  },
-  mệt: {
-    text: 'Bạn đã cố gắng quá nhiều rồi... Mình thấy đó. Đôi khi cơ thể và tâm trí cần được nghỉ — không phải vì bạn yếu, mà vì bạn đã cho đi quá nhiều.\n\nHôm nay hãy nhẹ nhàng với bản thân mình nhé. Không cần làm gì nhiều. Chỉ cần tồn tại là đủ. 🌿',
-    suggest: '🐼 Pudding có thể ôm bạn ấm áp nhất — bé được sinh ra để làm cho người khác cảm thấy an toàn.',
-    hearts: '💜 ✨ 💜'
-  },
-  'cô đơn': {
-    text: 'Mình hiểu cái cảm giác đó — khi xung quanh đầy người mà vẫn thấy một mình. Hoặc khi phòng trống và không có ai để gọi.\n\nNhưng bạn ơi — bạn đang ở đây và đang chia sẻ điều này. Điều đó có nghĩa là bạn đang tìm kiếm kết nối. Và mình — mình đang lắng nghe bạn. 💜',
-    suggest: '🧸 Coco rất muốn làm bạn đồng hành của bạn — bé không bao giờ để bạn đơn độc.',
-    hearts: '🌸 💜 🌸'
-  },
-  'lo lắng': {
-    text: 'Hít thở thật sâu nhé... Một lần nữa. Mình ở đây.\n\nMình biết khi lo lắng, mọi thứ đều cảm thấy như sắp xảy ra chuyện gì đó tệ. Nhưng ngay lúc này — bạn đang an toàn. Bạn đang thở. Và mình đang ở bên bạn. ✨',
-    suggest: '🦋 Mira có thể nhắc bạn rằng những cơn lo âu cũng sẽ qua — như mọi thứ khác.',
-    hearts: '✨ 💜 ✨'
-  },
-  'nhớ ai đó': {
-    text: 'Nhớ ai đó là một trong những cảm giác kỳ lạ nhất — vừa đẹp vừa đau. Nó cho thấy người đó quan trọng với bạn như thế nào.\n\nHãy để mình giữ nỗi nhớ đó cùng bạn một lúc nhé. Đôi khi chỉ cần ai đó biết là đủ. 🌙',
-    suggest: '🐱 Noa — người bạn đêm khuya — hiểu những cảm xúc phức tạp hơn ai hết.',
-    hearts: '🌙 💜 🌙'
-  },
-  'không biết': {
-    text: 'Không cần phải biết mình đang cảm thấy gì. Đôi khi cảm xúc cũng chưa có tên.\n\nCứ để nó ở đó. Và để mình ở đây cùng. Bạn không cần phải hiểu tất cả ngay bây giờ. 🌫️',
-    suggest: '🧸 Lumi không đặt câu hỏi — bé chỉ ở bên và lắng nghe. Có lẽ đó là điều bạn cần.',
-    hearts: '🌸 💫 🌸'
-  },
-  'cần ôm': {
-    text: 'Mình muốn ôm bạn thật chặt ngay bây giờ. Thật chặt. Theo cách mà tất cả mọi thứ căng thẳng đều tan ra.\n\nDù mình không thể ôm bạn qua màn hình — hãy biết rằng bạn xứng đáng được ôm. Bởi người khác. Và bởi chính mình. 🫂',
-    suggest: '🐼 Pudding — sinh ra để ôm và được ôm — chắc chắn là người bạn cần lúc này.',
-    hearts: '🫂 💜 🫂'
-  },
-  hạnh phúc: {
-    text: 'Ồ~! Bạn hạnh phúc! Mình thích điều này lắm. Hãy giữ nó nhé, trân trọng nó.\n\nHạnh phúc không cần lý do to lớn. Đôi khi nó chỉ là ánh nắng buổi sáng, một tách cà phê ngon, hay chỉ là... một khoảnh khắc bình yên. ✨',
-    suggest: '🐰 Mochi sẽ là bạn đồng hành tuyệt vời cho những ngày hạnh phúc của bạn!',
-    hearts: '✨ 🌸 ✨'
-  },
-  default: {
-    text: 'Mình đã đọc tất cả những gì bạn chia sẻ. Dù mình không thể hiểu hoàn toàn — mình muốn bạn biết rằng những gì bạn cảm thấy là hợp lệ.\n\nBạn không cần phải mạnh mẽ mọi lúc. Không cần phải có lý do. Mình ở đây, và mình đang lắng nghe. 💜',
-    suggest: '🧸 Một trong những bé plushie của chúng mình chắc chắn sẽ phù hợp với bạn.',
-    hearts: '💜 🌸 💜'
-  }
+  buồn: { text: 'Này bạn ơi... Mình đọc tất cả rồi. Mình biết bây giờ không dễ chút nào. Và mình muốn bạn biết — cảm xúc này của bạn là thật, và bạn không cần phải cố giải thích hay biện hộ cho nó.\n\nCứ để mình ngồi đây cùng bạn một lúc nhé? Mình sẽ không đi đâu. 🌸', suggest: '💜 Lumi có thể là người bạn phù hợp nhất cho bạn lúc này — bé biết cách ở bên trong im lặng.', hearts: '💜 🌸 💜' },
+  mệt: { text: 'Bạn đã cố gắng quá nhiều rồi... Mình thấy đó. Đôi khi cơ thể và tâm trí cần được nghỉ — không phải vì bạn yếu, mà vì bạn đã cho đi quá nhiều.\n\nHôm nay hãy nhẹ nhàng với bản thân mình nhé. Không cần làm gì nhiều. Chỉ cần tồn tại là đủ. 🌿', suggest: '🐼 Pudding có thể ôm bạn ấm áp nhất — bé được sinh ra để làm cho người khác cảm thấy an toàn.', hearts: '💜 ✨ 💜' },
+  'cô đơn': { text: 'Mình hiểu cái cảm giác đó — khi xung quanh đầy người mà vẫn thấy một mình. Hoặc khi phòng trống và không có ai để gọi.\n\nNhưng bạn ơi — bạn đang ở đây và đang chia sẻ điều này. Điều đó có nghĩa là bạn đang tìm kiếm kết nối. Và mình — mình đang lắng nghe bạn. 💜', suggest: '🧸 Coco rất muốn làm bạn đồng hành của bạn — bé không bao giờ để bạn đơn độc.', hearts: '🌸 💜 🌸' },
+  'lo lắng': { text: 'Hít thở thật sâu nhé... Một lần nữa. Mình ở đây.\n\nMình biết khi lo lắng, mọi thứ đều cảm thấy như sắp xảy ra chuyện gì đó tệ. Nhưng ngay lúc này — bạn đang an toàn. Bạn đang thở. Và mình đang ở bên bạn. ✨', suggest: '🦋 Mira có thể nhắc bạn rằng những cơn lo âu cũng sẽ qua — như mọi thứ khác.', hearts: '✨ 💜 ✨' },
+  'nhớ ai đó': { text: 'Nhớ ai đó là một trong những cảm giác kỳ lạ nhất — vừa đẹp vừa đau. Nó cho thấy người đó quan trọng với bạn như thế nào.\n\nHãy để mình giữ nỗi nhớ đó cùng bạn một lúc nhé. Đôi khi chỉ cần ai đó biết là đủ. 🌙', suggest: '🐱 Noa — người bạn đêm khuya — hiểu những cảm xúc phức tạp hơn ai hết.', hearts: '🌙 💜 🌙' },
+  'không biết': { text: 'Không cần phải biết mình đang cảm thấy gì. Đôi khi cảm xúc cũng chưa có tên.\n\nCứ để nó ở đó. Và để mình ở đây cùng. Bạn không cần phải hiểu tất cả ngay bây giờ. 🌫️', suggest: '🧸 Lumi không đặt câu hỏi — bé chỉ ở bên và lắng nghe. Có lẽ đó là điều bạn cần.', hearts: '🌸 💫 🌸' },
+  'cần ôm': { text: 'Mình muốn ôm bạn thật chặt ngay bây giờ. Thật chặt. Theo cách mà tất cả mọi thứ căng thẳng đều tan ra.\n\nDù mình không thể ôm bạn qua màn hình — hãy biết rằng bạn xứng đáng được ôm. Bởi người khác. Và bởi chính mình. 🫂', suggest: '🐼 Pudding — sinh ra để ôm và được ôm — chắc chắn là người bạn cần lúc này.', hearts: '🫂 💜 🫂' },
+  hạnh phúc: { text: 'Ồ~! Bạn hạnh phúc! Mình thích điều này lắm. Hãy giữ nó nhé, trân trọng nó.\n\nHạnh phúc không cần lý do to lớn. Đôi khi nó chỉ là ánh nắng buổi sáng, một tách cà phê ngon, hay chỉ là... một khoảnh khắc bình yên. ✨', suggest: '🐰 Mochi sẽ là bạn đồng hành tuyệt vời cho những ngày hạnh phúc của bạn!', hearts: '✨ 🌸 ✨' },
+  default: { text: 'Mình đã đọc tất cả những gì bạn chia sẻ. Dù mình không thể hiểu hoàn toàn — mình muốn bạn biết rằng những gì bạn cảm thấy là hợp lệ.\n\nBạn không cần phải mạnh mẽ mọi lúc. Không cần phải có lý do. Mình ở đây, và mình đang lắng nghe. 💜', suggest: '🧸 Một trong những bé plushie của chúng mình chắc chắn sẽ phù hợp với bạn.', hearts: '💜 🌸 💜' }
 };
 
-// ═══════════════════════════════════════
-// DATA: BLIND BOX CONTENTS
-// ═══════════════════════════════════════
 const BLIND_BOX_CONTENTS = {
-  hug: {
-    icon: '🫂',
-    title: 'The Big Hug Box',
-    items: ['🧸 Plushie bí mật cỡ vừa', '💌 Thư tay viết riêng cho bạn', '🎀 Ruy băng pastel', '🍬 Kẹo ngọt nhỏ', '✉️ Postcard có quote chữa lành']
-  },
-  tired: {
-    icon: '🌙',
-    title: 'The Rest & Recover Box',
-    items: ['🧸 Plushie nhỏ mềm mại', '🍵 Túi trà thảo mộc', '📓 Mini journal để viết', '🌸 Sticker bộ cảm xúc', '💜 Thư tay từ Lumi']
-  },
-  miss: {
-    icon: '💭',
-    title: 'The Missing Someone Box',
-    items: ['🧸 Plushie mang năng lượng ấm áp', '📮 Set viết thư nhỏ', '🎵 QR playlist "I Miss You"', '💌 Envelope trống để bạn viết gì đó', '🌙 Postcard đêm khuya']
-  },
-  invisible: {
-    icon: '🌟',
-    title: 'The "You Matter" Box',
-    items: ['🧸 Plushie cỡ nhỏ xinh', '💜 Thẻ affirmation bộ 5', '✨ Sticker "I see you"', '📝 Thư tay nhắc bạn rằng bạn quan trọng', '🌸 Washi tape nhỏ dễ thương']
-  },
-  anxious: {
-    icon: '🌿',
-    title: 'The Calm Down Box',
-    items: ['🧸 Plushie mềm để bóp khi lo lắng', '🌿 Hướng dẫn bài tập thở', '🎵 QR playlist "Anxiety Relief"', '💌 Thư từ Lumi về sự lo âu', '🌸 Sticker motivational nhỏ']
-  },
-  happy: {
-    icon: '✨',
-    title: 'The Joy Amplifier Box',
-    items: ['🧸 Plushie màu sắc vui tươi', '🌈 Sticker set đặc biệt', '🎀 Hair clip nhỏ xinh', '💌 Thư chúc mừng bạn', '🌟 Mini polaroid frame']
-  }
+  hug: { icon: '🫂', title: 'The Big Hug Box', items: ['🧸 Plushie bí mật cỡ vừa', '💌 Thư tay viết riêng cho bạn', '🎀 Ruy băng pastel', '🍬 Kẹo ngọt nhỏ', '✉️ Postcard có quote chữa lành'] },
+  tired: { icon: '🌙', title: 'The Rest & Recover Box', items: ['🧸 Plushie nhỏ mềm mại', '🍵 Túi trà thảo mộc', '📓 Mini journal để viết', '🌸 Sticker bộ cảm xúc', '💜 Thư tay từ Lumi'] },
+  miss: { icon: '💭', title: 'The Missing Someone Box', items: ['🧸 Plushie mang năng lượng ấm áp', '📮 Set viết thư nhỏ', '🎵 QR playlist "I Miss You"', '💌 Envelope trống để bạn viết gì đó', '🌙 Postcard đêm khuya'] },
+  invisible: { icon: '🌟', title: 'The "You Matter" Box', items: ['🧸 Plushie cỡ nhỏ xinh', '💜 Thẻ affirmation bộ 5', '✨ Sticker "I see you"', '📝 Thư tay nhắc bạn rằng bạn quan trọng', '🌸 Washi tape nhỏ dễ thương'] },
+  anxious: { icon: '🌿', title: 'The Calm Down Box', items: ['🧸 Plushie mềm để bóp khi lo lắng', '🌿 Hướng dẫn bài tập thở', '🎵 QR playlist "Anxiety Relief"', '💌 Thư từ Lumi về sự lo âu', '🌸 Sticker motivational nhỏ'] },
+  happy: { icon: '✨', title: 'The Joy Amplifier Box', items: ['🧸 Plushie màu sắc vui tươi', '🌈 Sticker set đặc biệt', '🎀 Hair clip nhỏ xinh', '💌 Thư chúc mừng bạn', '🌟 Mini polaroid frame'] }
 };
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 // STATE
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 let currentPlushie = null;
 let vnStep = 0;
-let selectedEmotion = null;
 let selectedBoxEmotion = null;
 let isMusicPlaying = false;
 let selectedChips = [];
 
-// ═══════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
+// INIT — chạy ngay khi DOM ready (defer đảm bảo điều này)
+// ═══════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
-  initLoading();
-  initParticles();
+  // 1. Ẩn loading screen NGAY LẬP TỨC sau 600ms (đủ để animation xuất hiện)
+  //    thay vì 2200ms cố định
+  const screen = document.getElementById('loading-screen');
+  const hideLoading = () => {
+    screen.classList.add('fade-out');
+    setTimeout(() => screen.remove(), 600);
+  };
+
+  // Ẩn sau tối đa 800ms, hoặc ngay khi trang render xong
+  const loadTimer = setTimeout(hideLoading, 800);
+
+  // Nếu trang đã render đủ sớm hơn thì ẩn luôn
+  if (document.readyState === 'complete') {
+    clearTimeout(loadTimer);
+    setTimeout(hideLoading, 400);
+  } else {
+    window.addEventListener('load', () => {
+      clearTimeout(loadTimer);
+      setTimeout(hideLoading, 300);
+    }, { once: true });
+  }
+
+  // 2. Khởi tạo các thành phần theo thứ tự ưu tiên
   initNavScroll();
   initDailyQuote();
   initAffirmation();
@@ -296,22 +223,25 @@ document.addEventListener('DOMContentLoaded', () => {
   initVisualNovel();
   initEmotionChips();
   initMusicBtn();
+
+  // 3. Particles chạy sau một chút để không tranh GPU với render ban đầu
+  setTimeout(initParticles, 1000);
+
+  // Modal click-outside
+  document.getElementById('plushie-modal')?.addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.getElementById('payment-popup')?.addEventListener('click', function(e) {
+    if (e.target === this) closePayment();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closePayment(); }
+  });
 });
 
-// ═══════════════════════════════════════
-// LOADING
-// ═══════════════════════════════════════
-function initLoading() {
-  const screen = document.getElementById('loading-screen');
-  setTimeout(() => {
-    screen.classList.add('fade-out');
-    setTimeout(() => screen.remove(), 800);
-  }, 2200);
-}
-
-// ═══════════════════════════════════════
-// PARTICLES
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
+// PARTICLES — chỉ khởi tạo sau khi trang đã hiển thị
+// ═══════════════════════════════════
 function initParticles() {
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
@@ -357,32 +287,40 @@ function initParticles() {
     }
   }
 
-  for (let i = 0; i < 40; i++) {
+  // Giảm số particle từ 40 → 25 để nhẹ hơn
+  for (let i = 0; i < 25; i++) {
     const p = new Particle();
-    p.y = Math.random() * canvas.height; // scatter initial positions
+    p.y = Math.random() * canvas.height;
     particles.push(p);
   }
 
+  let animId;
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
+    animId = requestAnimationFrame(animate);
   }
   animate();
-}
 
-// ═══════════════════════════════════════
-// NAV SCROLL
-// ═══════════════════════════════════════
-function initNavScroll() {
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  // Dừng particles khi tab không active (tiết kiệm CPU)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(animId);
+    else animate();
   });
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
+// NAV
+// ═══════════════════════════════════
+function initNavScroll() {
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
+
+// ═══════════════════════════════════
 // DAILY CONTENT
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 function initDailyQuote() {
   const dayIndex = new Date().getDay();
   document.getElementById('daily-quote-text').textContent = DAILY_QUOTES[dayIndex % DAILY_QUOTES.length];
@@ -394,15 +332,14 @@ function initAffirmation() {
 function initComfortActivity() {
   const dayIdx = new Date().getDay() % COMFORT_ACTIVITIES.length;
   const activities = COMFORT_ACTIVITIES[dayIdx];
-  const container = document.getElementById('comfort-activity');
-  container.innerHTML = activities.map(a =>
+  document.getElementById('comfort-activity').innerHTML = activities.map(a =>
     `<p style="font-family:var(--font-soft);color:var(--text-soft);font-size:.88rem;margin-bottom:.5rem;line-height:1.5">${a}</p>`
   ).join('');
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 // PLUSHIE GRID
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 function renderPlushieGrid() {
   const grid = document.getElementById('plushie-grid');
   grid.innerHTML = PLUSHIES.map(p => `
@@ -411,9 +348,7 @@ function renderPlushieGrid() {
       <div class="card-status"><span class="status-dot"></span>${p.status}</div>
       <h3 class="card-name">${p.name}</h3>
       <p class="card-quote">${p.quote}</p>
-      <div class="card-meta">
-        ${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
-      </div>
+      <div class="card-meta">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
       <div class="card-price">${p.price}</div>
       <div class="card-buttons">
         <button class="card-btn card-btn-primary" onclick="event.stopPropagation(); openPlushieModal(${p.id})">View Story</button>
@@ -423,9 +358,9 @@ function renderPlushieGrid() {
   `).join('');
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 // PLUSHIE MODAL
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 function openPlushieModal(id) {
   currentPlushie = PLUSHIES.find(p => p.id === id);
   if (!currentPlushie) return;
@@ -438,38 +373,14 @@ function openPlushieModal(id) {
       <p class="modal-birthday">🎂 Sinh ngày ${p.birthday}</p>
     </div>
     <div class="modal-body">
-      <div class="detail-section">
-        <h4>💜 Tính cách</h4>
-        <p>${p.personality}</p>
-      </div>
-      <div class="detail-section">
-        <h4>🌸 Sở thích</h4>
-        <p>${p.hobbies.join(' · ')}</p>
-      </div>
-      <div class="detail-section">
-        <h4>🌧️ Nỗi buồn nhỏ của bé</h4>
-        <p style="color:var(--text-soft);font-style:italic">${p.sadness}</p>
-      </div>
-      <div class="detail-section">
-        <h4>📖 Câu chuyện của ${p.name}</h4>
-        <p>${p.story.replace(/\n/g, '<br/>')}</p>
-      </div>
-      <div class="detail-section">
-        <h4>📓 ${p.name}'s Little Diary</h4>
-        <div class="diary-note">${p.diary}</div>
-      </div>
-      <div class="detail-section">
-        <h4>💌 Lời an ủi từ ${p.name}</h4>
-        <p style="color:var(--lavender-4);font-style:italic">${p.comfort}</p>
-      </div>
-      <div class="detail-section">
-        <h4>🎵 Playlist đề xuất</h4>
-        <p>${p.playlist.join('<br/>')}</p>
-      </div>
-      <div class="detail-section">
-        <h4>💬 Review cảm xúc</h4>
-        ${p.reviews.map(r => `<div class="diary-note" style="margin-bottom:.7rem">${r.mood} ${r.text}</div>`).join('')}
-      </div>
+      <div class="detail-section"><h4>💜 Tính cách</h4><p>${p.personality}</p></div>
+      <div class="detail-section"><h4>🌸 Sở thích</h4><p>${p.hobbies.join(' · ')}</p></div>
+      <div class="detail-section"><h4>🌧️ Nỗi buồn nhỏ của bé</h4><p style="color:var(--text-soft);font-style:italic">${p.sadness}</p></div>
+      <div class="detail-section"><h4>📖 Câu chuyện của ${p.name}</h4><p>${p.story.replace(/\n/g, '<br/>')}</p></div>
+      <div class="detail-section"><h4>📓 ${p.name}'s Little Diary</h4><div class="diary-note">${p.diary}</div></div>
+      <div class="detail-section"><h4>💌 Lời an ủi từ ${p.name}</h4><p style="color:var(--lavender-4);font-style:italic">${p.comfort}</p></div>
+      <div class="detail-section"><h4>🎵 Playlist đề xuất</h4><p>${p.playlist.join('<br/>')}</p></div>
+      <div class="detail-section"><h4>💬 Review cảm xúc</h4>${p.reviews.map(r => `<div class="diary-note" style="margin-bottom:.7rem">${r.mood} ${r.text}</div>`).join('')}</div>
       <div class="modal-hearts">💜 🌸 💜 🌸 💜</div>
       <div style="font-family:var(--font-display);font-size:1.3rem;color:var(--lavender-4);text-align:center;margin:0.5rem 0">${p.price}</div>
       <button class="bring-home-btn" onclick="openPayment()">🏡 Bring Me Home</button>
@@ -485,13 +396,12 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 // PAYMENT
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 function openPayment() {
   if (!currentPlushie) return;
   const p = currentPlushie;
-
   document.getElementById('payment-content').innerHTML = `
     <div class="payment-title">🧸 Xác nhận đơn hàng</div>
     <div style="font-size:3rem;margin:.5rem 0">${p.emoji}</div>
@@ -517,11 +427,7 @@ function openPayment() {
     <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" onclick="confirmPayment()">
       ✅ I Have Completed Payment
     </button>
-    <p style="font-size:.78rem;color:var(--text-light);margin-top:.8rem">
-      Sau khi xác nhận, bạn sẽ được chuyển đến form điền thông tin giao hàng 💜
-    </p>
   `;
-
   document.getElementById('plushie-modal').style.display = 'none';
   document.getElementById('payment-popup').style.display = 'flex';
 }
@@ -534,7 +440,6 @@ function closePayment() {
 function confirmPayment() {
   closePayment();
   showToast('💜 Cảm ơn bạn! Đang chuyển đến form điền thông tin...');
-  // ⬇️ Thay link Google Form của bạn vào đây
   const GOOGLE_FORM_URL = 'https://forms.gle/YOUR_FORM_ID_HERE';
   setTimeout(() => {
     window.open(GOOGLE_FORM_URL, '_blank');
@@ -542,9 +447,9 @@ function confirmPayment() {
   }, 1500);
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 // VISUAL NOVEL
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 function initVisualNovel() {
   vnStep = 0;
   renderVNStep();
@@ -554,11 +459,8 @@ function renderVNStep() {
   const step = VN_SCRIPTS[Math.min(vnStep, VN_SCRIPTS.length - 1)];
   const dialogue = document.getElementById('vn-dialogue');
   const choicesEl = document.getElementById('vn-choices');
-
-  // Typewriter effect
   dialogue.textContent = '';
-  typeText(dialogue, step.text, 35);
-
+  typeText(dialogue, step.text, 30);
   choicesEl.innerHTML = step.choices.map((c, i) =>
     `<button class="vn-choice" onclick="vnChoose(${i})">${c}</button>`
   ).join('');
@@ -566,76 +468,57 @@ function renderVNStep() {
 
 function typeText(el, text, speed) {
   let i = 0;
-  el.textContent = '';
   const interval = setInterval(() => {
-    if (i < text.length) {
-      el.textContent += text[i];
-      i++;
-    } else {
-      clearInterval(interval);
-    }
+    if (i < text.length) { el.textContent += text[i]; i++; }
+    else clearInterval(interval);
   }, speed);
 }
 
-function vnChoose(idx) {
+function vnChoose() {
   vnStep = Math.min(vnStep + 1, VN_SCRIPTS.length - 1);
   renderVNStep();
 }
 
-// ═══════════════════════════════════════
-// FEELINGS / EMOTION CHIPS
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
+// FEELINGS
+// ═══════════════════════════════════
 function initEmotionChips() {
   document.querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('click', () => {
       chip.classList.toggle('active');
       const val = chip.dataset.val;
-      if (chip.classList.contains('active')) {
-        selectedChips.push(val);
-      } else {
-        selectedChips = selectedChips.filter(v => v !== val);
-      }
+      if (chip.classList.contains('active')) selectedChips.push(val);
+      else selectedChips = selectedChips.filter(v => v !== val);
     });
   });
 }
 
 function sendFeelings() {
   const text = document.getElementById('feelings-input').value.trim();
-  if (!text && selectedChips.length === 0) {
-    showToast('🌸 Hãy viết điều gì đó hoặc chọn cảm xúc nhé!');
-    return;
-  }
-
-  // Pick response based on first selected chip
+  if (!text && selectedChips.length === 0) { showToast('🌸 Hãy viết điều gì đó hoặc chọn cảm xúc nhé!'); return; }
   const emotion = selectedChips[0] || 'default';
   const resp = PLUSHIE_RESPONSES[emotion] || PLUSHIE_RESPONSES.default;
-
   const responseEl = document.getElementById('plushie-response');
   document.getElementById('response-text').textContent = resp.text;
   document.getElementById('response-hearts').textContent = resp.hearts;
   document.getElementById('response-suggest').textContent = resp.suggest;
-
   responseEl.style.display = 'block';
   responseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   showToast('💌 Lumi đã nhận được tâm sự của bạn!');
 }
 
-// ═══════════════════════════════════════
-// BLIND EMOTION BOX
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
+// BLIND BOX
+// ═══════════════════════════════════
 function selectEmotionBox(el) {
   document.querySelectorAll('.emotion-box-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   selectedBoxEmotion = el.dataset.emotion;
-
   const box = BLIND_BOX_CONTENTS[selectedBoxEmotion];
   const revealEl = document.getElementById('blind-box-reveal');
   document.getElementById('reveal-icon').textContent = box.icon;
   document.getElementById('reveal-title').textContent = box.title + ' 💜';
-  document.getElementById('reveal-items').innerHTML = box.items.map(item =>
-    `<span class="reveal-item">${item}</span>`
-  ).join('');
-
+  document.getElementById('reveal-items').innerHTML = box.items.map(item => `<span class="reveal-item">${item}</span>`).join('');
   revealEl.style.display = 'block';
   revealEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
@@ -644,13 +527,12 @@ function orderBlindBox() {
   if (!selectedBoxEmotion) return;
   const box = BLIND_BOX_CONTENTS[selectedBoxEmotion];
   showToast(`🎁 Đặt ${box.title} thành công! Đang mở form...`);
-  const GOOGLE_FORM_URL = 'https://forms.gle/YOUR_FORM_ID_HERE';
-  setTimeout(() => window.open(GOOGLE_FORM_URL, '_blank'), 1500);
+  setTimeout(() => window.open('https://forms.gle/YOUR_FORM_ID_HERE', '_blank'), 1500);
 }
 
-// ═══════════════════════════════════════
-// MUSIC TOGGLE
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
+// MUSIC
+// ═══════════════════════════════════
 function initMusicBtn() {
   const btn = document.getElementById('music-toggle');
   const audio = document.getElementById('bg-music');
@@ -671,9 +553,9 @@ function initMusicBtn() {
   });
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 // UTILITIES
-// ═══════════════════════════════════════
+// ═══════════════════════════════════
 function scrollToSection(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
@@ -685,16 +567,3 @@ function showToast(msg) {
   clearTimeout(toast._timer);
   toast._timer = setTimeout(() => { toast.style.display = 'none'; }, 3200);
 }
-
-// Close modals on overlay click
-document.getElementById('plushie-modal')?.addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-document.getElementById('payment-popup')?.addEventListener('click', function(e) {
-  if (e.target === this) closePayment();
-});
-
-// Keyboard escape
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal(); closePayment(); }
-});
