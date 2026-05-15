@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌙 Plushie World — Nhận Nuôi Gấu Bông Chữa Lành</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700;800&family=Fredoka+One&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- LOADING SCREEN -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="loading-screen">
+      <div class="loading-content">
+        <div class="loading-plushie">🧸</div>
+        <div class="loading-sparkles">
+          <span>✨</span><span>🌸</span><span>✨</span>
+        </div>
+        <p class="loading-text">Đang mở cánh cửa phép màu...</p>
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PARTICLE CANVAS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MUSIC TOGGLE -->
+    <!-- ═══════════════════════════════════════════ -->
+    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc">
+      <span class="music-icon">🎵</span>
+      <span class="music-label">nhạc</span>
+    </button>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NAVIGATION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav id="navbar">
+      <div class="nav-logo">
+        <span class="logo-bear">🧸</span>
+        <span class="logo-text">Plushie World</span>
+      </div>
+      <div class="nav-links">
+        <a href="#plushies" class="nav-link">Meet Our Bears</a>
+        <a href="#comfort-room" class="nav-link">Comfort Room</a>
+        <a href="#feelings" class="nav-link">Tell Feelings</a>
+        <a href="#blind-box" class="nav-link">Blind Box</a>
+      </div>
+      <div class="nav-deco">
+        <span class="nav-star">⭐</span>
+        <span class="nav-star">✨</span>
+      </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="hero">
+      <div class="hero-bg">
+        <div class="hero-clouds">
+          <div class="cloud cloud-1">☁️</div>
+          <div class="cloud cloud-2">☁️</div>
+          <div class="cloud cloud-3">☁️</div>
+        </div>
+        <div class="hero-stars">
+          <span class="star-float s1">⭐</span>
+          <span class="star-float s2">✨</span>
+          <span class="star-float s3">🌟</span>
+          <span class="star-float s4">⭐</span>
+          <span class="star-float s5">✨</span>
+        </div>
+      </div>
+
+      <div class="hero-shelf">
+        <div class="shelf-plushies">
+          <div class="hero-plushie p1" data-mood="happy">🐻</div>
+          <div class="hero-plushie p2" data-mood="dreamy">🐰</div>
+          <div class="hero-plushie p3 center-bear" data-mood="cozy">🧸</div>
+          <div class="hero-plushie p4" data-mood="gentle">🐱</div>
+          <div class="hero-plushie p5" data-mood="soft">🐼</div>
+        </div>
+        <div class="shelf-board"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-quote-wrap">
+          <p class="hero-quote">
+            "Một vài bé được tạo ra từ bông vải.<br />
+            <em>Một vài bé được tạo ra để bảo vệ những trái tim mệt mỏi.</em>"
+          </p>
+        </div>
+        <h1 class="hero-title">Plushie World</h1>
+        <p class="hero-subtitle">— thế giới nhận nuôi gấu bông chữa lành —</p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('plushies')">
+            <span>🧸</span> Adopt A Plushie
+          </button>
+          <button
+            class="btn btn-soft"
+            onclick="scrollToSection('comfort-room')">
+            <span>🌙</span> Enter Comfort Room
+          </button>
+          <button class="btn btn-soft" onclick="scrollToSection('feelings')">
+            <span>💌</span> Tell Your Feelings
+          </button>
+          <button
+            class="btn btn-outline"
+            onclick="scrollToSection('blind-box')">
+            <span>🎁</span> Open Blind Box
+          </button>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <span>cuộn xuống</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DAILY QUOTE RIBBON -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="daily-quote-ribbon">
+      <div class="ribbon-inner">
+        <span class="ribbon-icon">🌸</span>
+        <span id="daily-quote-text" class="ribbon-text"></span>
+        <span class="ribbon-icon">🌸</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PLUSHIE SHOP SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="plushies">
+      <div class="section-header">
+        <div class="section-deco">✨ ✨ ✨</div>
+        <h2 class="section-title">Meet Our Little Bears</h2>
+        <p class="section-subtitle">
+          Mỗi bé đang chờ đợi trái tim phù hợp để về nhà 🏡
+        </p>
+      </div>
+
+      <div class="plushie-grid" id="plushie-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PLUSHIE DETAIL MODAL -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="plushie-modal" class="modal-overlay" style="display: none">
+      <div class="modal-container">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-content" id="modal-content">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT POPUP -->
+    <div id="payment-popup" class="modal-overlay" style="display: none">
+      <div class="payment-container">
+        <button class="modal-close" onclick="closePayment()">✕</button>
+        <div id="payment-content"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TODAY'S COMFORT ROOM -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="comfort-room">
+      <div class="comfort-bg">
+        <div class="comfort-stars">
+          <span>⭐</span><span>✨</span><span>🌟</span><span>⭐</span
+          ><span>✨</span>
+        </div>
+      </div>
+      <div class="comfort-content">
+        <div class="section-header">
+          <h2 class="section-title comfort-title">🌙 Today's Comfort Room</h2>
+          <p class="section-subtitle">
+            Một không gian nhỏ chỉ dành riêng cho bạn hôm nay 💜
+          </p>
+        </div>
+
+        <div class="comfort-grid">
+          <div class="comfort-card" id="daily-affirmation">
+            <div class="comfort-card-icon">🌸</div>
+            <h3>Today's Affirmation</h3>
+            <p id="affirmation-text">Đang tải...</p>
+          </div>
+          <div class="comfort-card">
+            <div class="comfort-card-icon">🎵</div>
+            <h3>Playlists Chữa Lành</h3>
+            <div class="playlist-list">
+              <a href="#" class="playlist-item">🌙 Lo-fi for Rainy Nights</a>
+              <a href="#" class="playlist-item">🌸 Soft Piano Morning</a>
+              <a href="#" class="playlist-item">🧸 Cozy Bear Study</a>
+              <a href="#" class="playlist-item">✨ Dreamy Slumber Beats</a>
+            </div>
+          </div>
+          <div class="comfort-card">
+            <div class="comfort-card-icon">🍵</div>
+            <h3>Gợi Ý Hôm Nay</h3>
+            <div id="comfort-activity"></div>
+          </div>
+        </div>
+
+        <!-- Visual Novel Dialogue -->
+        <div class="visual-novel-box" id="vn-box">
+          <div class="vn-scene">
+            <div class="vn-plushie-sprite">🧸</div>
+            <div class="vn-dialogue-wrap">
+              <div class="vn-speaker">Lumi</div>
+              <div class="vn-dialogue" id="vn-dialogue"></div>
+            </div>
+          </div>
+          <div class="vn-choices" id="vn-choices"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TELL YOUR FEELINGS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="feelings">
+      <div class="section-header">
+        <div class="section-deco">💌 💌 💌</div>
+        <h2 class="section-title">Kể Cho Bé Nghe Nhé 💜</h2>
+        <p class="section-subtitle">
+          Bạn có thể nói bất cứ điều gì — bé sẽ lắng nghe và không phán xét 🌸
+        </p>
+      </div>
+
+      <div class="feelings-container">
+        <div class="feelings-form-wrap">
+          <div class="feelings-deco">
+            <span class="feel-plushie float-bear">🧸</span>
+          </div>
+          <div class="feelings-form glass-card">
+            <label class="feelings-label"
+              >Bạn đang cảm thấy thế nào hôm nay? 🌙</label
+            >
+            <div class="emotion-chips" id="emotion-chips">
+              <button class="chip" data-val="buồn">😢 Buồn</button>
+              <button class="chip" data-val="mệt">😔 Mệt mỏi</button>
+              <button class="chip" data-val="cô đơn">🥺 Cô đơn</button>
+              <button class="chip" data-val="lo lắng">😰 Lo lắng</button>
+              <button class="chip" data-val="nhớ ai đó">💭 Nhớ ai đó</button>
+              <button class="chip" data-val="không biết">🌫️ Không biết</button>
+              <button class="chip" data-val="cần ôm">🫂 Cần một cái ôm</button>
+              <button class="chip" data-val="hạnh phúc">✨ Hạnh phúc</button>
+            </div>
+            <textarea
+              id="feelings-input"
+              placeholder="Viết bất cứ điều gì bạn muốn... Bé sẽ đọc tất cả 🌸&#10;&#10;Bạn không cần phải hoàn hảo hay rõ ràng. Cứ viết thôi."
+              rows="6"></textarea>
+            <button
+              class="btn btn-primary send-feelings-btn"
+              onclick="sendFeelings()">
+              <span>💌</span> Gửi Cho Bé
+            </button>
+          </div>
+        </div>
+
+        <!-- Plushie Response -->
+        <div
+          id="plushie-response"
+          class="plushie-response glass-card"
+          style="display: none">
+          <div class="response-plushie">🧸</div>
+          <div class="response-hearts" id="response-hearts"></div>
+          <div class="response-note">
+            <div class="response-from">✉️ Thư từ Lumi</div>
+            <div class="response-text" id="response-text"></div>
+            <div class="response-suggest" id="response-suggest"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- BLIND EMOTION BOX -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="blind-box">
+      <div class="section-header">
+        <div class="section-deco">🎁 🎁 🎁</div>
+        <h2 class="section-title">Blind Emotion Box ✨</h2>
+        <p class="section-subtitle">
+          Chọn cảm xúc của bạn — shop sẽ chuẩn bị một hộp bí mật đặc biệt 💜
+        </p>
+      </div>
+
+      <div class="blind-box-container">
+        <div class="emotion-boxes" id="emotion-boxes">
+          <div
+            class="emotion-box-card"
+            data-emotion="hug"
+            onclick="selectEmotionBox(this)">
+            <div class="emotion-box-icon">🫂</div>
+            <h3>I Need A Hug</h3>
+            <p>Khi bạn chỉ muốn được ôm chặt</p>
+            <div class="box-glow"></div>
+          </div>
+          <div
+            class="emotion-box-card"
+            data-emotion="tired"
+            onclick="selectEmotionBox(this)">
+            <div class="emotion-box-icon">😮‍💨</div>
+            <h3>Emotionally Tired</h3>
+            <p>Khi tâm trí đã quá mệt mỏi rồi</p>
+            <div class="box-glow"></div>
+          </div>
+          <div
+            class="emotion-box-card"
+            data-emotion="miss"
+            onclick="selectEmotionBox(this)">
+            <div class="emotion-box-icon">💭</div>
+            <h3>I Miss Someone</h3>
+            <p>Khi nhớ ai đó mà không nói được</p>
+            <div class="box-glow"></div>
+          </div>
+          <div
+            class="emotion-box-card"
+            data-emotion="invisible"
+            onclick="selectEmotionBox(this)">
+            <div class="emotion-box-icon">🌫️</div>
+            <h3>I Feel Invisible</h3>
+            <p>Khi cảm giác không ai hiểu mình</p>
+            <div class="box-glow"></div>
+          </div>
+          <div
+            class="emotion-box-card"
+            data-emotion="anxious"
+            onclick="selectEmotionBox(this)">
+            <div class="emotion-box-icon">🌀</div>
+            <h3>I Feel Anxious</h3>
+            <p>Khi lo âu không biết từ đâu</p>
+            <div class="box-glow"></div>
+          </div>
+          <div
+            class="emotion-box-card"
+            data-emotion="happy"
+            onclick="selectEmotionBox(this)">
+            <div class="emotion-box-icon">🌟</div>
+            <h3>Just Be Happy</h3>
+            <p>Khi muốn thêm một chút phép màu</p>
+            <div class="box-glow"></div>
+          </div>
+        </div>
+
+        <div
+          id="blind-box-reveal"
+          class="blind-box-reveal glass-card"
+          style="display: none">
+          <div class="reveal-icon" id="reveal-icon">🎁</div>
+          <h3 id="reveal-title">Hộp bí mật của bạn 💜</h3>
+          <div class="reveal-items" id="reveal-items"></div>
+          <p class="reveal-note">
+            📦 Shop sẽ chuẩn bị riêng cho bạn với tất cả tình yêu thương ✨
+          </p>
+          <button class="btn btn-primary" onclick="orderBlindBox()">
+            <span>🎁</span> Đặt Hộp Bí Mật Này
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer id="footer">
+      <div class="footer-stars">
+        <span>⭐</span><span>✨</span><span>🌟</span><span>⭐</span
+        ><span>✨</span><span>🌟</span>
+      </div>
+      <div class="footer-sleeping-bears">
+        <div class="sleeping-bear sb1">🧸<span class="zzz">💤</span></div>
+        <div class="sleeping-bear sb2">🐻<span class="zzz">💤</span></div>
+        <div class="sleeping-bear sb3">🐰<span class="zzz">💤</span></div>
+      </div>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <span class="footer-bear">🧸</span>
+          <span class="footer-name">Plushie World</span>
+        </div>
+        <p class="footer-quote">
+          "Một nơi trú ẩn phép màu nhỏ bé dành cho những trái tim mệt mỏi."
+        </p>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <span>·</span>
+          <a href="#">Facebook</a>
+          <span>·</span>
+          <a href="#">TikTok</a>
+        </div>
+        <p class="footer-copy">
+          © 2025 Plushie World · Made with 💜 & bông gòn
+        </p>
+      </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NOTIFICATION TOAST -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="toast" class="toast" style="display: none"></div>
+
+    <!-- Audio (silent by default) -->
+    <audio id="bg-music" loop>
+      <source
+        src="https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3"
+        type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
