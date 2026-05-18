@@ -26,10 +26,10 @@
   --glass-border: rgba(220, 198, 255, 0.4);
 
   /* Font stack: Google Fonts → system fallback ngay lập tức */
-  --font-display: "Fredoka One", "Trebuchet MS", cursive;
-  --font-body: "Quicksand", "Segoe UI", sans-serif;
-  --font-soft: "Quicksand", "Segoe UI", sans-serif;
-  --font-serif: Georgia, "Times New Roman", serif;
+  --font-display: "Segoe UI", sans-serif;
+  --font-body: "Segoe UI", sans-serif;
+  --font-soft: "Segoe UI", sans-serif;
+  --font-serif: "Segoe UI", sans-serif;
 }
 
 *,
