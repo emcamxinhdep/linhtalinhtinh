@@ -26,10 +26,10 @@
   --glass-border: rgba(220, 198, 255, 0.4);
 
   /* Font stack: Google Fonts → system fallback ngay lập tức */
-  --font-display: "Segoe UI", sans-serif;
-  --font-body: "Segoe UI", sans-serif;
-  --font-soft: "Segoe UI", sans-serif;
-  --font-serif: "Segoe UI", sans-serif;
+  --font-display: 'Nunito', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+  --font-soft: 'Nunito', sans-serif;
+  --font-serif: 'Nunito', sans-serif;
 }
 
 *,
