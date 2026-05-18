@@ -223,20 +223,20 @@ const PLUSHIES = [
 
 const DAILY_QUOTES = [
   "Bạn đã làm tốt hơn bạn nghĩ rất nhiều. 🌸",
-  "Cảm xúc của bạn là hợp lệ — tất cả chúng. 💜",
-  "Hôm nay cứ nhẹ nhàng với bản thân mình nhé. 🧸",
+  "Dù hôm nay thế nào, luôn có một bạn gấu nhỏ ở đây chờ bạn. 🧸",
+  "Mong bạn gặp thật nhiều điều dễ thương trong ngày hôm nay. 💜",
   "Được phép mệt. Được phép cần giúp đỡ. Đó là con người. ✨",
   "Một ngày tệ không có nghĩa là cuộc đời tệ. 🌙",
-  "Bạn xứng đáng được yêu thương — đặc biệt là từ chính mình. 🌸",
-  "Không cần hoàn hảo. Chỉ cần thật. 💫",
+  "Bạn xứng đáng nhận được những cái ôm ấm áp và thật nhiều yêu thương. 🌸",
+  "Hy vọng trái tim bạn hôm nay được lấp đầy bởi những điều nhỏ bé nhưng hạnh phúc. 💫",
 ];
 
 const AFFIRMATIONS = [
-  "Hôm nay, bạn được phép chậm lại. Không cần chứng minh gì với ai. 🌸",
-  "Sự mệt mỏi của bạn là thật. Sức mạnh của bạn cũng vậy. 💜",
-  "Bạn đang làm tốt nhất mình có thể — và điều đó là đủ. ✨",
-  "Hôm nay hãy uống đủ nước, thở sâu, và nhớ rằng bạn quan trọng. 🌿",
-  "Không sao nếu hôm nay bạn không ổn. Ngày mai vẫn sẽ đến. 🌙",
+  "Mình mong hôm nay bạn sẽ mỉm cười ít nhất một lần thật nhẹ nhàng. 💜",
+  "Bạn không cần trở nên hoàn hảo để được yêu thương đâu. 🌸",
+  "Bạn đang cố gắng từng chút một, và điều đó thật đáng quý. 💜✨",
+  "Nhớ uống đủ nước, nghỉ ngơi một chút và tự ôm mình thật nhẹ nha. 🌿",
+  "Dù hôm nay thế nào, bạn vẫn luôn xứng đáng với yêu thương. 🌙",
 ];
 
 const COMFORT_ACTIVITIES = [
@@ -332,7 +332,7 @@ const PLUSHIE_RESPONSES = {
     text: "Mình muốn ôm bạn thật chặt ngay bây giờ. Thật chặt. Theo cách mà tất cả mọi thứ căng thẳng đều tan ra.\n\nDù mình không thể ôm bạn qua màn hình — hãy biết rằng bạn xứng đáng được ôm. Bởi người khác. Và bởi chính mình. 🫂",
     suggest:
       "🐼 Pudding — sinh ra để ôm và được ôm — chắc chắn là người bạn cần lúc này.",
-    hearts: "🫂 💜 🫂",
+    hearts: " 🌸",
   },
   "hạnh phúc": {
     text: "Ồ~! Bạn hạnh phúc! Mình thích điều này lắm. Hãy giữ nó nhé, trân trọng nó.\n\nHạnh phúc không cần lý do to lớn. Đôi khi nó chỉ là ánh nắng buổi sáng, một tách cà phê ngon, hay chỉ là... một khoảnh khắc bình yên. ✨",
