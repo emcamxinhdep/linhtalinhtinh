@@ -458,22 +458,27 @@ function toggleNav() {
    MUSIC
    ══════════════════════════════════════════════ */
 function toggleMusic() {
-  const audio = document.getElementById('bgm');
+  const audio = document.getElementById('audio_nen');
   const icon = document.getElementById('music-icon');
-  if (!audio.src || audio.src === window.location.href) {
-    showComfortPopup('🎵', 'Thêm nhạc nền', 'Đặt file nhạc vào thư mục audio/ và đặt tên bgm.mp3 — xem hướng dẫn trong README.md nhé!');
-    return;
-  }
+
   if (musicPlaying) {
     audio.pause();
     icon.textContent = '🔇';
     musicPlaying = false;
   } else {
-    audio.play().catch(() => {
-      showComfortPopup('🎵', 'Nhạc chưa sẵn sàng', 'Thêm file audio/bgm.mp3 vào thư mục dự án để bật nhạc nền nhé!');
-    });
-    icon.textContent = '🎵';
-    musicPlaying = true;
+    audio.play()
+      .then(() => {
+        icon.textContent = '🎵';
+        musicPlaying = true;
+      })
+      .catch(err => {
+        console.log(err);
+        showComfortPopup(
+          '🎵',
+          'Lỗi phát nhạc',
+          'Không tìm thấy file hoặc trình duyệt đang chặn autoplay.'
+        );
+      });
   }
 }
 
