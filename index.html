@@ -6,9 +6,12 @@
   <title>Linh ta linh tinh — Nhận Nuôi Gấu Bông Chữa Lành 🐻</title>
   <link rel="stylesheet" href="style.css" />
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Fredoka+One&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Fredoka+One&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,30OTH;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -57,7 +60,7 @@
 
   <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc" onclick="toggleMusic()">
     <span id="music-icon">🎵</span>
-    <span class="music-label">Nhạc</span>
+    <!-- <span class="music-label">Nhạc</span> -->
   </button>
 
   <!-- ══════════════════════════════════════════ -->
@@ -71,8 +74,7 @@
     <div class="nav-links">
       <a href="#" onclick="showSection('home')" class="nav-link active">Trang Chủ</a>
       <a href="#" onclick="showSection('shop')" class="nav-link">Nhận Nuôi</a>
-      <a href="#" onclick="showSection('comfort-room')" class="nav-link">Comfort Room</a>
-      <a href="#" onclick="showSection('feelings')" class="nav-link">Tâm Sự</a>
+      <a href="#" onclick="showSection('goc-tam-su')" class="nav-link">Góc Tâm Sự</a>
       <a href="#" onclick="showSection('blind-box')" class="nav-link">Blind Box</a>
     </div>
     <button class="nav-hamburger" onclick="toggleNav()" id="hamburger">☰</button>
@@ -80,8 +82,7 @@
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="#" onclick="showSection('home');toggleNav()" class="nav-link">🏠 Trang Chủ</a>
     <a href="#" onclick="showSection('shop');toggleNav()" class="nav-link">🐻 Nhận Nuôi</a>
-    <a href="#" onclick="showSection('comfort-room');toggleNav()" class="nav-link">🌸 Comfort Room</a>
-    <a href="#" onclick="showSection('feelings');toggleNav()" class="nav-link">💌 Tâm Sự</a>
+    <a href="#" onclick="showSection('goc-tam-su');toggleNav()" class="nav-link">💜 Góc Tâm Sự</a>
     <a href="#" onclick="showSection('blind-box');toggleNav()" class="nav-link">🎁 Blind Box</a>
   </div>
 
@@ -95,7 +96,7 @@
       <div class="hero-bg-overlay"></div>
 
       <div class="hero-content">
-        <div class="hero-badge">✦ Nơi trú ẩn phép màu ✦</div>
+        <!-- <div class="hero-badge">✦ Nơi trú ẩn phép màu ✦</div> -->
 
         <h1 class="hero-title">
           <span class="title-line-1">Linh ta linh tinh</span>
@@ -140,11 +141,8 @@
           <button class="btn-primary" onclick="showSection('shop')">
             <span>🐻</span> Adopt A Plushie
           </button>
-          <button class="btn-secondary" onclick="showSection('comfort-room')">
-            <span>🌸</span> Enter Comfort Room
-          </button>
-          <button class="btn-ghost" onclick="showSection('feelings')">
-            <span>💌</span> Tell Your Feelings
+          <button class="btn-secondary" onclick="showSection('goc-tam-su')">
+            <span>💜</span> Góc Tâm Sự
           </button>
           <button class="btn-ghost" onclick="showSection('blind-box')">
             <span>🎁</span> Open A Blind Emotion Box
@@ -201,124 +199,82 @@
   </section>
 
   <!-- ══════════════════════════════════════════ -->
-  <!--  SECTION: COMFORT ROOM                     -->
-  <!-- ══════════════════════════════════════════ -->
-  <section id="section-comfort-room" class="section">
-    <div class="section-header">
-      <div class="section-badge">🌸 Comfort Room</div>
-      <h2 class="section-title">Phòng Bình Yên Hôm Nay</h2>
-      <p class="section-subtitle">Một căn phòng nhỏ trên internet, dành riêng để bạn thở nhẹ một chút.</p>
+<!--  SECTION: GÓC TÂM SỰ (AI CHATBOT)         -->
+<!-- ══════════════════════════════════════════ -->
+<section id="section-goc-tam-su" class="section">
+  <div class="section-header">
+    <div class="section-badge">💜 Góc Tâm Sự</div>
+    <h2 class="section-title">Nói chuyện với bé gấu của bạn</h2>
+    <p class="section-subtitle">Chọn một bé đồng hành — bé sẽ lắng nghe và trả lời bạn bằng chính tính cách của mình.</p>
+  </div>
+
+  <div class="gts-layout">
+
+    <!-- CHỌN NHÂN VẬT -->
+    <div class="bear-picker" id="bear-picker">
+      <p class="bear-picker-label">✦ Hôm nay bạn muốn tâm sự với ai? ✦</p>
+      <div class="bear-picker-grid" id="bear-picker-grid">
+        <!-- render bằng JS -->
+      </div>
     </div>
 
-    <div class="comfort-room-inner">
+    <!-- CHAT AREA -->
+    <div class="chat-area" id="chat-area" style="display:none">
 
-      <!-- Visual novel style dialog -->
-      <div class="vn-container" id="vn-container">
-        <div class="vn-scene">
-          <div class="vn-character">🧸</div>
-          <div class="vn-dialog" id="vn-dialog">
-            <div class="vn-speaker">Mochi nói:</div>
-            <p class="vn-text" id="vn-text"></p>
-            <button class="vn-next-btn" onclick="vnNext()" id="vn-next">Tiếp →</button>
-          </div>
+      <!-- Header nhân vật đang chat -->
+      <div class="chat-header" id="chat-header">
+        <button class="chat-back-btn" onclick="resetBearPicker()">← Đổi bé</button>
+        <div class="chat-bear-info" id="chat-bear-info"></div>
+        <div class="chat-status">
+          <span class="status-dot"></span>
+          <span>Đang lắng nghe...</span>
         </div>
       </div>
 
-      <!-- Comfort cards grid -->
-      <div class="comfort-cards">
-        <div class="comfort-card">
-          <div class="comfort-card-icon">🫂</div>
-          <h3>Ôm Ảo</h3>
-          <p>Nhắm mắt lại. Hít thở sâu. Một bé gấu bông vô hình đang ôm chặt bạn lúc này.</p>
-          <button class="comfort-action-btn" onclick="sendHug()">Nhận ôm 🫂</button>
-        </div>
-        <div class="comfort-card">
-          <div class="comfort-card-icon">🌙</div>
-          <h3>Nhật Ký Plushie</h3>
-          <p>Hôm nay Mít đã viết: "Tôi thích khi trời mưa và có người ôm tôi thật chặt..."</p>
-          <button class="comfort-action-btn" onclick="showDiary()">Đọc nhật ký 📖</button>
-        </div>
-        <div class="comfort-card">
-          <div class="comfort-card-icon">🎵</div>
-          <h3>Playlist Chữa Lành</h3>
-          <p>Những bản nhạc mà các bé plushie muốn gửi đến bạn hôm nay.</p>
-          <button class="comfort-action-btn" onclick="showPlaylist()">Mở playlist 🎵</button>
-        </div>
-        <div class="comfort-card">
-          <div class="comfort-card-icon">💫</div>
-          <h3>Lời An Ủi</h3>
-          <p>Một câu nhỏ từ trái tim gấu bông, dành riêng cho bạn vào lúc này.</p>
-          <button class="comfort-action-btn" onclick="showComfortWord()">Nhận lời an ủi 💜</button>
-        </div>
+      <!-- Messages -->
+      <div class="chat-messages" id="chat-messages">
+        <!-- messages render ở đây -->
       </div>
 
-      <!-- Breathing exercise -->
-      <div class="breathing-section">
-        <h3>🌬️ Thở Cùng Mochi</h3>
-        <p>Hít vào 4 giây — Giữ 4 giây — Thở ra 4 giây</p>
-        <div class="breathing-circle" id="breathing-circle">
-          <span id="breathing-text">Bắt đầu</span>
-        </div>
-        <button class="comfort-action-btn" onclick="startBreathing()" id="breath-btn">Bắt đầu thở cùng 🌸</button>
+      <!-- Gợi ý nhanh -->
+      <div class="chat-suggestions" id="chat-suggestions">
+        <button class="chat-sug-btn" onclick="sendQuickMsg(this)">Hôm nay mình mệt lắm 😔</button>
+        <button class="chat-sug-btn" onclick="sendQuickMsg(this)">Mình đang buồn mà không biết vì sao</button>
+        <button class="chat-sug-btn" onclick="sendQuickMsg(this)">Kể chuyện vui cho mình nghe đi</button>
+        <button class="chat-sug-btn" onclick="sendQuickMsg(this)">Hôm nay mình có tin vui nè!</button>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════ -->
-  <!--  SECTION: FEELINGS (TÂM SỰ)               -->
-  <!-- ══════════════════════════════════════════ -->
-  <section id="section-feelings" class="section">
-    <div class="section-header">
-      <div class="section-badge">💌 Tâm Sự Ẩn Danh</div>
-      <h2 class="section-title">Gửi Tâm Sự Cho Plushie</h2>
-      <p class="section-subtitle">Bạn có thể kể bất cứ điều gì. Không ai phán xét. Chỉ có những bé gấu lắng nghe.</p>
-    </div>
-
-    <div class="feelings-container">
-      <div class="feelings-form-wrap">
-        <div class="feelings-note">
-          <span>📝</span> Ẩn danh hoàn toàn. Chúng mình chỉ muốn lắng nghe bạn.
-        </div>
-
-        <div class="mood-selector">
-          <p>Hôm nay bạn cảm thấy thế nào?</p>
-          <div class="mood-options">
-            <button class="mood-btn" data-mood="happy" onclick="selectMood(this)">😊 Vui</button>
-            <button class="mood-btn" data-mood="sad" onclick="selectMood(this)">😢 Buồn</button>
-            <button class="mood-btn" data-mood="tired" onclick="selectMood(this)">😔 Mệt</button>
-            <button class="mood-btn" data-mood="anxious" onclick="selectMood(this)">😰 Lo</button>
-            <button class="mood-btn" data-mood="numb" onclick="selectMood(this)">😶 Trống</button>
-            <button class="mood-btn" data-mood="lost" onclick="selectMood(this)">🌀 Lạc lối</button>
-          </div>
-        </div>
-
+      <!-- Input area -->
+      <div class="chat-input-area">
+        <button class="voice-btn" id="voice-btn" onclick="toggleVoice()" title="Nhấn để nói">
+          🎙️
+        </button>
         <textarea
-          id="feelings-input"
-          class="feelings-textarea"
-          placeholder="Viết gì đó nhé... Hôm nay bạn đang nghĩ đến điều gì? Điều gì khiến bạn thấy nặng lòng? Hay chỉ đơn giản là bạn muốn kể về một ngày bình thường của mình... 💜"
-          rows="6"
+          id="chat-input"
+          class="chat-textarea"
+          placeholder="Nhắn gì đó cho bé nhé... 💜"
+          rows="1"
+          onkeydown="handleChatKey(event)"
+          oninput="autoResizeTextarea(this)"
         ></textarea>
-
-        <button class="btn-primary full-width" onclick="sendFeelings()">
-          💌 Gửi cho plushie
+        <button class="chat-send-btn" onclick="sendChatMessage()" id="chat-send-btn">
+          <span>➤</span>
         </button>
       </div>
 
-      <!-- Reply area -->
-      <div class="feelings-reply" id="feelings-reply" style="display:none">
-        <div class="reply-plushie">🧸</div>
-        <div class="reply-bubble">
-          <div class="reply-from">Mít nói với bạn:</div>
-          <p class="reply-text" id="reply-text"></p>
+      <!-- Voice status -->
+      <div class="voice-status" id="voice-status" style="display:none">
+        <div class="voice-wave">
+          <span></span><span></span><span></span><span></span><span></span>
         </div>
-        <div class="reply-suggest" id="reply-suggest"></div>
-        <div class="reply-note-wrap">
-          <div class="reply-note" id="reply-note"></div>
-        </div>
+        <span id="voice-status-text">Đang nghe... nói đi bạn ơi 🎙️</span>
+        <button onclick="stopVoice()" class="voice-stop-btn">Xong</button>
       </div>
+
     </div>
-  </section>
+
+  </div>
+</section>
 
   <!-- ══════════════════════════════════════════ -->
   <!--  SECTION: BLIND BOX                        -->
@@ -487,13 +443,15 @@
         <span>·</span>
         <a href="#" onclick="showSection('shop')">Nhận Nuôi</a>
         <span>·</span>
-        <a href="#" onclick="showSection('feelings')">Tâm Sự</a>
+        <a href="#" onclick="showSection('goc-tam-su')">Tâm Sự</a>
       </div>
       <p class="footer-copy">Made with 💜 & lots of plushies · 2026</p>
     </div>
     <div class="footer-stars">✦ ✧ ✦ ✧ ✦</div>
   </footer>
 
+  
+  <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
