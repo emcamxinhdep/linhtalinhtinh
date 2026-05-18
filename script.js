@@ -1,1044 +1,960 @@
-// ═══════════════════════════════════════════════════════════
-// MEDIA CONFIG — đổi ảnh và nhạc từ đây
-// ═══════════════════════════════════════════════════════════
-const MEDIA_CONFIG = {
-  // Nhạc nền — thêm file vào thư mục và đổi đường dẫn ở đây
-  music: [
-    "music/lofi-healing.mp3",         // file 1
-    "music/soft-piano.mp3",           // file 2
-    "music/cozy-bear-study.mp3",      // file 3
-    // fallback online nếu không có file local:
-    "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3",
-  ],
+/* ═══════════════════════════════════════════════════
+   LUMIBEAR — SCRIPT.JS
+   Tất cả logic, data, animation, interactions
+   ═══════════════════════════════════════════════════ */
 
-  // Ảnh nền hero — thêm file vào thư mục images/
-  heroImages: [
-    // "images/hero-bg-1.jpg",
-    // "images/hero-bg-2.jpg",
-  ],
+'use strict';
 
-  // Ảnh plushie — key là id plushie, value là đường dẫn ảnh
-  plushieImages: {
-    // 1: "images/plushie-lumi.jpg",
-    // 2: "images/plushie-mochi.jpg",
-  },
-};
-
-// ═══════════════════════════════════════════════════════════
-// LANGUAGE DATA
-// ═══════════════════════════════════════════════════════════
-const LANG = {
-  vi: {
-    navMeetBears: "Meet Our Bears",
-    navComfortRoom: "Comfort Room",
-    navFeelings: "Kể Chuyện",
-    navBlindBox: "Blind Box",
-    heroQuote: `"Một vài bé được tạo ra từ bông vải.<br /><em>Một vài bé được tạo ra để bảo vệ những trái tim mệt mỏi.</em>"`,
-    heroBtnAdopt: "🧸 Nhận Nuôi",
-    heroBtnComfort: "🌙 Vào Phòng Chữa Lành",
-    heroBtnFeelings: "💌 Kể Cho Bé Nghe",
-    heroBtnBlind: "🎁 Mở Hộp Bí Mật",
-    scrollHint: "cuộn xuống",
-    plushieSectionTitle: "Meet Our Little Bears",
-    plushieSectionSub: "Mỗi bé đang chờ đợi trái tim phù hợp để về nhà 🏡",
-    comfortTitle: "🌙 Today's Comfort Room",
-    comfortSub: "Một không gian nhỏ chỉ dành riêng cho bạn hôm nay 💜",
-    affirmationTitle: "Today's Affirmation",
-    playlistTitle: "Playlists Chữa Lành",
-    suggestTitle: "Gợi Ý Hôm Nay",
-    vnSpeaker: "Lumi",
-    feelingsTitle: "Kể Cho Bé Nghe Nhé 💜",
-    feelingsSub: "Bạn có thể nói bất cứ điều gì — bé sẽ lắng nghe và không phán xét 🌸",
-    feelingsLabel: "Bạn đang cảm thấy thế nào hôm nay? 🌙",
-    feelingsPlaceholder: "Viết bất cứ điều gì bạn muốn... Bé sẽ đọc tất cả 🌸\n\nBạn không cần phải hoàn hảo hay rõ ràng. Cứ viết thôi.",
-    feelingsSendBtn: "💌 Gửi Cho Bé",
-    responseFrom: "✉️ Thư từ Lumi",
-    blindTitle: "Blind Emotion Box ✨",
-    blindSub: "Chọn cảm xúc của bạn — shop sẽ chuẩn bị một hộp bí mật đặc biệt 💜",
-    blindOrderBtn: "🎁 Đặt Hộp Bí Mật Này",
-    blindRevealTitle: "Hộp bí mật của bạn 💜",
-    blindRevealNote: "📦 Shop sẽ chuẩn bị riêng cho bạn với tất cả tình yêu thương ✨",
-    loadingText: "Have a nice day!",
-    musicLabel: "nhạc",
-    musicPlayingLabel: "đang phát",
-    footerQuote: '"Một nơi trú ẩn phép màu nhỏ bé dành cho những trái tim mệt mỏi."',
-    viewStory: "Xem Chuyện",
-    meetMe: "Gặp Mình",
-    bringHome: "🏡 Nhận Nuôi Bé",
-    paymentTitle: "🧸 Xác nhận đơn hàng",
-    paymentItem: "Bé plushie:",
-    paymentStatus: "Trạng thái:",
-    paymentInclude: "Đã bao gồm phí đóng gói ✨",
-    paymentQRNote: "Quét mã QR MoMo để thanh toán",
-    paymentAccount: "📛 Tên tài khoản: PLUSHIE WORLD",
-    paymentPhone: "Số điện thoại: 0909.xxx.xxx",
-    paymentSteps: [
-      "Mở app MoMo và quét mã QR phía trên",
-      "Nhập số tiền",
-      "Ghi chú: Tên bạn + tên bé plushie",
-      "Xác nhận chuyển khoản",
-      "Bấm nút bên dưới để điền thông tin giao hàng",
-    ],
-    paymentConfirmBtn: "✅ Mình Đã Thanh Toán",
-    toastFeelings: "🌸 Hãy viết điều gì đó hoặc chọn cảm xúc nhé!",
-    toastReceived: "💌 Lumi đã nhận được tâm sự của bạn!",
-    toastPayment: "💜 Cảm ơn bạn! Đang chuyển đến form điền thông tin...",
-    toastForm: "🌸 Điền đầy đủ thông tin để bé về nhà nhé!",
-    chipLabels: {
-      "buồn": "😢 Buồn",
-      "mệt": "😔 Mệt mỏi",
-      "cô đơn": "🥺 Cô đơn",
-      "lo lắng": "😰 Lo lắng",
-      "nhớ ai đó": "💭 Nhớ ai đó",
-      "không biết": "🌫️ Không biết",
-      "cần ôm": "🫂 Cần một cái ôm",
-      "hạnh phúc": "✨ Hạnh phúc",
-    },
-    emotionBoxes: {
-      hug: { title: "I Need A Hug", desc: "Khi bạn chỉ muốn được ôm chặt" },
-      tired: { title: "Emotionally Tired", desc: "Khi tâm trí đã quá mệt mỏi rồi" },
-      miss: { title: "I Miss Someone", desc: "Khi nhớ ai đó mà không nói được" },
-      invisible: { title: "I Feel Invisible", desc: "Khi cảm giác không ai hiểu mình" },
-      anxious: { title: "I Feel Anxious", desc: "Khi lo âu không biết từ đâu" },
-      happy: { title: "Just Be Happy", desc: "Khi muốn thêm một chút phép màu" },
-    },
-    modalLabels: {
-      personality: "💜 Tính cách",
-      hobbies: "🌸 Sở thích",
-      sadness: "🌧️ Nỗi buồn nhỏ của bé",
-      story: "📖 Câu chuyện của",
-      diary: "'s Little Diary",
-      comfort: "💌 Lời an ủi từ",
-      playlist: "🎵 Playlist đề xuất",
-      reviews: "💬 Review cảm xúc",
-      birthday: "🎂 Sinh ngày",
-    },
-  },
-  en: {
-    navMeetBears: "Meet Our Bears",
-    navComfortRoom: "Comfort Room",
-    navFeelings: "Tell Feelings",
-    navBlindBox: "Blind Box",
-    heroQuote: `"Some bears are made of fabric and fluff.<br /><em>Some are made to protect the hearts that are tired of holding on.</em>"`,
-    heroBtnAdopt: "🧸 Adopt A Plushie",
-    heroBtnComfort: "🌙 Enter Comfort Room",
-    heroBtnFeelings: "💌 Tell Your Feelings",
-    heroBtnBlind: "🎁 Open Blind Box",
-    scrollHint: "scroll down",
-    plushieSectionTitle: "Meet Our Little Bears",
-    plushieSectionSub: "Each little one is waiting for the right heart to take them home 🏡",
-    comfortTitle: "🌙 Today's Comfort Room",
-    comfortSub: "A small space just for you today 💜",
-    affirmationTitle: "Today's Affirmation",
-    playlistTitle: "Healing Playlists",
-    suggestTitle: "Today's Suggestion",
-    vnSpeaker: "Lumi",
-    feelingsTitle: "Tell Me How You Feel 💜",
-    feelingsSub: "You can say anything — your little bear will listen without judgment 🌸",
-    feelingsLabel: "How are you feeling today? 🌙",
-    feelingsPlaceholder: "Write anything you want... your bear will read it all 🌸\n\nYou don't have to be perfect or clear. Just write.",
-    feelingsSendBtn: "💌 Send To Your Bear",
-    responseFrom: "✉️ A Letter from Lumi",
-    blindTitle: "Blind Emotion Box ✨",
-    blindSub: "Pick your emotion — we'll prepare a special secret box just for you 💜",
-    blindOrderBtn: "🎁 Order This Mystery Box",
-    blindRevealTitle: "Your mystery box 💜",
-    blindRevealNote: "📦 We'll prepare this just for you with all our love ✨",
-    loadingText: "Have a nice day!",
-    musicLabel: "music",
-    musicPlayingLabel: "playing",
-    footerQuote: '"A tiny magical refuge for hearts that are tired."',
-    viewStory: "View Story",
-    meetMe: "Meet Me",
-    bringHome: "🏡 Bring Me Home",
-    paymentTitle: "🧸 Order Confirmation",
-    paymentItem: "Plushie:",
-    paymentStatus: "Status:",
-    paymentInclude: "Packaging included ✨",
-    paymentQRNote: "Scan MoMo QR code to pay",
-    paymentAccount: "📛 Account name: PLUSHIE WORLD",
-    paymentPhone: "Phone: 0909.xxx.xxx",
-    paymentSteps: [
-      "Open MoMo app and scan the QR code above",
-      "Enter the amount",
-      "Note: Your name + plushie name",
-      "Confirm transfer",
-      "Click the button below to fill in delivery details",
-    ],
-    paymentConfirmBtn: "✅ I Have Completed Payment",
-    toastFeelings: "🌸 Write something or pick an emotion first!",
-    toastReceived: "💌 Lumi has received your feelings!",
-    toastPayment: "💜 Thank you! Redirecting to order form...",
-    toastForm: "🌸 Fill in your details so your bear can come home!",
-    chipLabels: {
-      "buồn": "😢 Sad",
-      "mệt": "😔 Tired",
-      "cô đơn": "🥺 Lonely",
-      "lo lắng": "😰 Anxious",
-      "nhớ ai đó": "💭 Missing Someone",
-      "không biết": "🌫️ Don't Know",
-      "cần ôm": "🫂 Need A Hug",
-      "hạnh phúc": "✨ Happy",
-    },
-    emotionBoxes: {
-      hug: { title: "I Need A Hug", desc: "When you just want to be held tight" },
-      tired: { title: "Emotionally Tired", desc: "When your mind is just too exhausted" },
-      miss: { title: "I Miss Someone", desc: "When you miss someone but can't say it" },
-      invisible: { title: "I Feel Invisible", desc: "When it feels like no one understands" },
-      anxious: { title: "I Feel Anxious", desc: "When anxiety comes from nowhere" },
-      happy: { title: "Just Be Happy", desc: "When you want a little extra magic" },
-    },
-    modalLabels: {
-      personality: "💜 Personality",
-      hobbies: "🌸 Hobbies",
-      sadness: "🌧️ This little one's soft sadness",
-      story: "📖 The Story of",
-      diary: "'s Little Diary",
-      comfort: "💌 Words of comfort from",
-      playlist: "🎵 Recommended Playlist",
-      reviews: "💬 Heartfelt Reviews",
-      birthday: "🎂 Born on",
-    },
-  },
-};
-
-// ═══════════════════════════════════════════════════════════
-// BILINGUAL CONTENT DATA
-// ═══════════════════════════════════════════════════════════
-const DAILY_QUOTES = {
-  vi: [
-    "Bạn đã làm tốt hơn bạn nghĩ rất nhiều. 🌸",
-    "Dù hôm nay thế nào, luôn có một bạn gấu nhỏ ở đây chờ bạn. 🧸",
-    "Mong bạn gặp thật nhiều điều dễ thương trong ngày hôm nay. 💜",
-    "Được phép mệt. Được phép cần giúp đỡ. Đó là con người. ✨",
-    "Một ngày tệ không có nghĩa là cuộc đời tệ. 🌙",
-    "Bạn xứng đáng nhận được những cái ôm ấm áp và thật nhiều yêu thương. 🌸",
-    "Hy vọng trái tim bạn hôm nay được lấp đầy bởi những điều nhỏ bé nhưng hạnh phúc. 💫",
-    "Có những ngày mình chỉ cần tồn tại thôi — và điều đó là đủ. 🌿",
-    "Bạn không cần phải trả lời tất cả ngay bây giờ. Cứ từng bước một. 💜",
-    "Sự dịu dàng với bản thân mình cũng là một dạng dũng cảm. ✨",
-    "Không phải mọi ngày đều cần phải tuyệt vời — bình thường cũng đẹp lắm. 🌸",
-    "Mong bạn ngủ ngon đêm nay và thức dậy nhẹ nhàng hơn. 🌙",
-  ],
-  en: [
-    "You've done better than you think. 🌸",
-    "No matter what today brings, a little bear is always here waiting for you. 🧸",
-    "May you encounter many gentle, lovely things today. 💜",
-    "You're allowed to be tired. Allowed to need help. That's being human. ✨",
-    "A bad day doesn't mean a bad life. 🌙",
-    "You deserve warm hugs and so much love. 🌸",
-    "May your heart be filled with small but beautiful things today. 💫",
-    "Some days you just need to exist — and that is enough. 🌿",
-    "You don't have to answer everything right now. One step at a time. 💜",
-    "Being gentle with yourself is also a form of courage. ✨",
-    "Not every day needs to be extraordinary — ordinary is beautiful too. 🌸",
-    "May you sleep well tonight and wake up a little lighter. 🌙",
-  ],
-};
-
-const AFFIRMATIONS = {
-  vi: [
-    "Mình mong hôm nay bạn sẽ mỉm cười ít nhất một lần thật nhẹ nhàng. 💜",
-    "Bạn không cần trở nên hoàn hảo để được yêu thương đâu. 🌸",
-    "Bạn đang cố gắng từng chút một, và điều đó thật đáng quý. 💜✨",
-    "Nhớ uống đủ nước, nghỉ ngơi một chút và tự ôm mình thật nhẹ nha. 🌿",
-    "Dù hôm nay thế nào, bạn vẫn luôn xứng đáng với yêu thương. 🌙",
-    "Bạn quan trọng hơn bạn nghĩ rất nhiều. 💜",
-    "Hôm nay hãy nhẹ nhàng với chính mình — bạn đã làm đủ rồi. ✨",
-    "Mỗi ngày bạn thức dậy là một lần bạn chọn tiếp tục — điều đó dũng cảm lắm. 🌸",
-  ],
-  en: [
-    "I hope you smile at least once today — softly, genuinely. 💜",
-    "You don't need to be perfect to be worthy of love. 🌸",
-    "You're trying, little by little, and that is so precious. 💜✨",
-    "Remember to drink water, rest a little, and give yourself a gentle hug. 🌿",
-    "No matter what today holds, you are always deserving of love. 🌙",
-    "You matter more than you realize. 💜",
-    "Be gentle with yourself today — you've done enough. ✨",
-    "Every day you wake up is a choice to keep going — that's brave. 🌸",
-  ],
-};
-
-const COMFORT_ACTIVITIES = {
-  vi: [
-    [
-      "🍵 Pha một tách trà ấm và ngồi yên 10 phút",
-      "🎵 Nghe một playlist yêu thích với mắt nhắm",
-      "📓 Viết 3 điều bạn biết ơn hôm nay",
-      "🌸 Nhìn ra cửa sổ và đếm những thứ màu xanh",
-    ],
-    [
-      "🛁 Tắm nước ấm tối nay",
-      "📚 Đọc vài trang sách bạn đang dở",
-      "🌙 Đi ngủ sớm hơn 30 phút",
-      "🎨 Vẽ gì đó — dù không đẹp cũng không sao",
-    ],
-    [
-      "☁️ Nằm xuống và nhìn trần nhà 5 phút",
-      "🧸 Ôm gì đó mềm và ngồi im",
-      "💌 Nhắn tin hỏi thăm một người bạn lâu không gặp",
-      "🌿 Chăm sóc một cây nhỏ trong phòng",
-    ],
-    [
-      "🌅 Ra ngoài đón vài phút không khí buổi sáng",
-      "🎙️ Hát một bài bạn thích dù không ai nghe",
-      "🍫 Tự thưởng cho mình thứ gì ngon ngon",
-      "📷 Chụp một thứ đẹp bạn thấy hôm nay",
-    ],
-  ],
-  en: [
-    [
-      "🍵 Brew a warm cup of tea and sit quietly for 10 minutes",
-      "🎵 Listen to a favorite playlist with your eyes closed",
-      "📓 Write 3 things you're grateful for today",
-      "🌸 Look out the window and count things that are green",
-    ],
-    [
-      "🛁 Take a warm bath or shower tonight",
-      "📚 Read a few pages of the book you've been meaning to finish",
-      "🌙 Go to sleep 30 minutes earlier",
-      "🎨 Draw something — it doesn't have to be pretty",
-    ],
-    [
-      "☁️ Lie down and stare at the ceiling for 5 minutes",
-      "🧸 Hug something soft and just sit still",
-      "💌 Text a friend you haven't talked to in a while",
-      "🌿 Tend to a small plant in your room",
-    ],
-    [
-      "🌅 Step outside for a few minutes of morning air",
-      "🎙️ Sing a song you love even if no one's listening",
-      "🍫 Treat yourself to something delicious",
-      "📷 Photograph one beautiful thing you notice today",
-    ],
-  ],
-};
-
-const VN_SCRIPTS = {
-  vi: [
-    { text: "Ồ, bạn đến rồi... 🌸 Mình đã đợi.", choices: ["Mình ổn.", "Mình không ổn lắm...", "Mình chỉ muốn ngồi đây một chút."] },
-    { text: "Được rồi. Mình sẽ không hỏi nhiều. Cứ ngồi đây với mình nhé... 💜", choices: ["Hôm nay mình mệt quá.", "Mình nhớ ai đó.", "Không có gì đặc biệt."] },
-    { text: "Mình biết. Đôi khi không có lý do cụ thể — mà mình vẫn cứ cảm thấy nặng nề như vậy. ✨ Điều đó hoàn toàn bình thường.", choices: ["Bạn có hiểu cảm giác đó không?", "Mình muốn nghe nhạc.", "Cho mình ôm bạn một cái."] },
-    { text: "Mình hiểu chứ. Mình cũng từng ngồi trong bóng tối một mình và không biết mình cảm thấy gì. 🌙 Nhưng bạn không phải làm vậy một mình.", choices: ["Cảm ơn, Lumi.", "Tiếp tục kể cho mình nghe đi."] },
-  ],
-  en: [
-    { text: "Oh, you're here... 🌸 I've been waiting.", choices: ["I'm okay.", "Not really okay...", "I just want to sit here for a bit."] },
-    { text: "Okay. I won't ask too much. Just sit here with me... 💜", choices: ["I'm so tired today.", "I miss someone.", "Nothing in particular."] },
-    { text: "I know. Sometimes there's no specific reason — and yet it still feels heavy. ✨ That's completely normal.", choices: ["Do you understand that feeling?", "I want to listen to music.", "Can I hug you?"] },
-    { text: "I do understand. I've sat in the dark alone and not known what I was feeling too. 🌙 But you don't have to do that alone.", choices: ["Thank you, Lumi.", "Tell me more."] },
-  ],
-};
-
-const PLUSHIE_RESPONSES = {
-  vi: {
-    buồn: { text: "Này bạn ơi... Mình đọc tất cả rồi. Mình biết bây giờ không dễ chút nào. Và mình muốn bạn biết — cảm xúc này của bạn là thật, và bạn không cần phải cố giải thích hay biện hộ cho nó.\n\nCứ để mình ngồi đây cùng bạn một lúc nhé? Mình sẽ không đi đâu. 🌸", suggest: "💜 Lumi có thể là người bạn phù hợp nhất cho bạn lúc này — bé biết cách ở bên trong im lặng.", hearts: "💜 🌸 💜" },
-    mệt: { text: "Bạn đã cố gắng quá nhiều rồi... Mình thấy đó. Đôi khi cơ thể và tâm trí cần được nghỉ — không phải vì bạn yếu, mà vì bạn đã cho đi quá nhiều.\n\nHôm nay hãy nhẹ nhàng với bản thân mình nhé. Không cần làm gì nhiều. Chỉ cần tồn tại là đủ. 🌿", suggest: "🐼 Pudding có thể ôm bạn ấm áp nhất — bé được sinh ra để làm cho người khác cảm thấy an toàn.", hearts: "💜 ✨ 💜" },
-    "cô đơn": { text: "Mình hiểu cái cảm giác đó — khi xung quanh đầy người mà vẫn thấy một mình. Hoặc khi phòng trống và không có ai để gọi.\n\nNhưng bạn ơi — bạn đang ở đây và đang chia sẻ điều này. Điều đó có nghĩa là bạn đang tìm kiếm kết nối. Và mình — mình đang lắng nghe bạn. 💜", suggest: "🧸 Coco rất muốn làm bạn đồng hành của bạn — bé không bao giờ để bạn đơn độc.", hearts: "🌸 💜 🌸" },
-    "lo lắng": { text: "Hít thở thật sâu nhé... Một lần nữa. Mình ở đây.\n\nMình biết khi lo lắng, mọi thứ đều cảm thấy như sắp xảy ra chuyện gì đó tệ. Nhưng ngay lúc này — bạn đang an toàn. Bạn đang thở. Và mình đang ở bên bạn. ✨", suggest: "🦋 Mira có thể nhắc bạn rằng những cơn lo âu cũng sẽ qua — như mọi thứ khác.", hearts: "✨ 💜 ✨" },
-    "nhớ ai đó": { text: "Nhớ ai đó là một trong những cảm giác kỳ lạ nhất — vừa đẹp vừa đau. Nó cho thấy người đó quan trọng với bạn như thế nào.\n\nHãy để mình giữ nỗi nhớ đó cùng bạn một lúc nhé. Đôi khi chỉ cần ai đó biết là đủ. 🌙", suggest: "🐱 Noa — người bạn đêm khuya — hiểu những cảm xúc phức tạp hơn ai hết.", hearts: "🌙 💜 🌙" },
-    "không biết": { text: "Không cần phải biết mình đang cảm thấy gì. Đôi khi cảm xúc cũng chưa có tên.\n\nCứ để nó ở đó. Và để mình ở đây cùng. Bạn không cần phải hiểu tất cả ngay bây giờ. 🌫️", suggest: "🧸 Lumi không đặt câu hỏi — bé chỉ ở bên và lắng nghe. Có lẽ đó là điều bạn cần.", hearts: "🌸 💫 🌸" },
-    "cần ôm": { text: "Mình muốn ôm bạn thật chặt ngay bây giờ. Thật chặt. Theo cách mà tất cả mọi thứ căng thẳng đều tan ra.\n\nDù mình không thể ôm bạn qua màn hình — hãy biết rằng bạn xứng đáng được ôm. Bởi người khác. Và bởi chính mình. 🫂", suggest: "🐼 Pudding — sinh ra để ôm và được ôm — chắc chắn là người bạn cần lúc này.", hearts: "🫂 🌸 🫂" },
-    "hạnh phúc": { text: "Ồ~! Bạn hạnh phúc! Mình thích điều này lắm. Hãy giữ nó nhé, trân trọng nó.\n\nHạnh phúc không cần lý do to lớn. Đôi khi nó chỉ là ánh nắng buổi sáng, một tách cà phê ngon, hay chỉ là... một khoảnh khắc bình yên. ✨", suggest: "🐰 Mochi sẽ là bạn đồng hành tuyệt vời cho những ngày hạnh phúc của bạn!", hearts: "✨ 🌸 ✨" },
-    default: { text: "Mình đã đọc tất cả những gì bạn chia sẻ. Dù mình không thể hiểu hoàn toàn — mình muốn bạn biết rằng những gì bạn cảm thấy là hợp lệ.\n\nBạn không cần phải mạnh mẽ mọi lúc. Không cần phải có lý do. Mình ở đây, và mình đang lắng nghe. 💜", suggest: "🧸 Một trong những bé plushie của chúng mình chắc chắn sẽ phù hợp với bạn.", hearts: "💜 🌸 💜" },
-  },
-  en: {
-    buồn: { text: "Hey... I read everything. I know it's not easy right now. And I want you to know — what you're feeling is real, and you don't have to explain or justify it.\n\nWill you let me sit here with you for a while? I'm not going anywhere. 🌸", suggest: "💜 Lumi might be the perfect companion for you right now — she knows how to simply be present.", hearts: "💜 🌸 💜" },
-    mệt: { text: "You've been trying so hard... I see that. Sometimes the body and mind need rest — not because you're weak, but because you've been giving so much.\n\nBe gentle with yourself today. You don't have to do much. Just existing is enough. 🌿", suggest: "🐼 Pudding gives the warmest hugs — she was made to make others feel safe.", hearts: "💜 ✨ 💜" },
-    "cô đơn": { text: "I know that feeling — surrounded by people and still feeling alone. Or an empty room and no one to call.\n\nBut hey — you're here and you're sharing this. That means you're reaching out. And I'm listening. 💜", suggest: "🧸 Coco would love to be your companion — she never lets anyone feel alone.", hearts: "🌸 💜 🌸" },
-    "lo lắng": { text: "Take a deep breath... one more time. I'm here.\n\nI know when anxiety hits, everything feels like something bad is about to happen. But right now — you are safe. You are breathing. And I'm right here with you. ✨", suggest: "🦋 Mira can remind you that anxious feelings pass too — like everything else.", hearts: "✨ 💜 ✨" },
-    "nhớ ai đó": { text: "Missing someone is one of the strangest feelings — beautiful and painful at once. It shows how much that person means to you.\n\nLet me hold that longing with you for a moment. Sometimes just having someone know is enough. 🌙", suggest: "🐱 Noa — your late-night companion — understands complex feelings better than anyone.", hearts: "🌙 💜 🌙" },
-    "không biết": { text: "You don't have to know what you're feeling. Sometimes emotions don't have names yet.\n\nJust let it be there. And let me be here too. You don't have to understand everything right now. 🌫️", suggest: "🧸 Lumi doesn't ask questions — she just stays and listens. Maybe that's what you need.", hearts: "🌸 💫 🌸" },
-    "cần ôm": { text: "I wish I could hug you tight right now. So tight that everything tense just melts away.\n\nEven though I can't hug you through the screen — know that you deserve to be held. By others. And by yourself. 🫂", suggest: "🐼 Pudding — made to hug and be hugged — is exactly who you need right now.", hearts: "🫂 🌸 🫂" },
-    "hạnh phúc": { text: "You're happy! I love this so much. Hold onto it, cherish it.\n\nHappiness doesn't need a big reason. Sometimes it's just the morning sun, a good cup of coffee, or just... a quiet peaceful moment. ✨", suggest: "🐰 Mochi would be the perfect companion for your happy days!", hearts: "✨ 🌸 ✨" },
-    default: { text: "I read everything you shared. Even if I can't fully understand — I want you to know that what you feel is valid.\n\nYou don't have to be strong all the time. You don't need a reason. I'm here, and I'm listening. 💜", suggest: "🧸 One of our little plushies will certainly be right for you.", hearts: "💜 🌸 💜" },
-  },
-};
-
-const BLIND_BOX_CONTENTS = {
-  vi: {
-    hug: { icon: "🫂", title: "The Big Hug Box", items: ["🧸 Plushie bí mật cỡ vừa", "💌 Thư tay viết riêng cho bạn", "🎀 Ruy băng pastel", "🍬 Kẹo ngọt nhỏ", "✉️ Postcard có quote chữa lành"] },
-    tired: { icon: "🌙", title: "The Rest & Recover Box", items: ["🧸 Plushie nhỏ mềm mại", "🍵 Túi trà thảo mộc", "📓 Mini journal để viết", "🌸 Sticker bộ cảm xúc", "💜 Thư tay từ Lumi"] },
-    miss: { icon: "💭", title: "The Missing Someone Box", items: ["🧸 Plushie mang năng lượng ấm áp", "📮 Set viết thư nhỏ", '🎵 QR playlist "I Miss You"', "💌 Envelope trống để bạn viết gì đó", "🌙 Postcard đêm khuya"] },
-    invisible: { icon: "🌟", title: '"You Matter" Box', items: ["🧸 Plushie cỡ nhỏ xinh", "💜 Thẻ affirmation bộ 5", '✨ Sticker "I see you"', "📝 Thư tay nhắc bạn rằng bạn quan trọng", "🌸 Washi tape nhỏ dễ thương"] },
-    anxious: { icon: "🌿", title: "The Calm Down Box", items: ["🧸 Plushie mềm để bóp khi lo lắng", "🌿 Hướng dẫn bài tập thở", '🎵 QR playlist "Anxiety Relief"', "💌 Thư từ Lumi về sự lo âu", "🌸 Sticker motivational nhỏ"] },
-    happy: { icon: "✨", title: "The Joy Amplifier Box", items: ["🧸 Plushie màu sắc vui tươi", "🌈 Sticker set đặc biệt", "🎀 Hair clip nhỏ xinh", "💌 Thư chúc mừng bạn", "🌟 Mini polaroid frame"] },
-  },
-  en: {
-    hug: { icon: "🫂", title: "The Big Hug Box", items: ["🧸 Mystery plushie (medium size)", "💌 A handwritten letter just for you", "🎀 Pastel ribbon", "🍬 Little sweet treats", "✉️ Healing quote postcard"] },
-    tired: { icon: "🌙", title: "The Rest & Recover Box", items: ["🧸 Small soft plushie", "🍵 Herbal tea bag", "📓 Mini journal to write in", "🌸 Emotion sticker set", "💜 Handwritten letter from Lumi"] },
-    miss: { icon: "💭", title: "The Missing Someone Box", items: ["🧸 Plushie with warm energy", "📮 Little letter-writing set", '🎵 QR playlist "I Miss You"', "💌 Blank envelope for you to write in", "🌙 Late-night postcard"] },
-    invisible: { icon: "🌟", title: '"You Matter" Box', items: ["🧸 Small adorable plushie", "💜 Set of 5 affirmation cards", '✨ "I see you" sticker', "📝 A letter reminding you that you matter", "🌸 Cute little washi tape"] },
-    anxious: { icon: "🌿", title: "The Calm Down Box", items: ["🧸 Soft plushie to squeeze when anxious", "🌿 Breathing exercise guide", '🎵 QR playlist "Anxiety Relief"', "💌 Letter from Lumi about anxiety", "🌸 Small motivational sticker"] },
-    happy: { icon: "✨", title: "The Joy Amplifier Box", items: ["🧸 Colorful cheerful plushie", "🌈 Special sticker set", "🎀 Cute little hair clip", "💌 A celebratory letter for you", "🌟 Mini polaroid frame"] },
-  },
-};
-
+/* ══════════════════════════════════════════════
+   DATA — PLUSHIE DATABASE
+   ✏️ Thay thông tin này để cập nhật các bé gấu
+   ══════════════════════════════════════════════ */
 const PLUSHIES = [
   {
-    id: 1, emoji: "🧸",
-    name: { vi: "Lumi", en: "Lumi" },
-    birthday: { vi: "14 tháng 2", en: "February 14" },
-    price: "290.000đ",
-    status: { vi: "Đang chờ đợi", en: "Waiting for you" },
-    personality: { vi: "Dịu dàng · Thích nghe nhạc · Hay mơ mộng", en: "Gentle · Music lover · Dreamer" },
-    quote: { vi: '"Lumi không nói nhiều, nhưng bé luôn ở đây khi bạn cần."', en: '"Lumi doesn\'t say much, but she\'s always there when you need her."' },
-    hobbies: { vi: ["Nghe nhạc buổi tối", "Nhìn mưa rơi", "Ôm chặt bông gối", "Đọc thư cũ"], en: ["Evening music", "Watching rain fall", "Hugging pillows tight", "Reading old letters"] },
-    sadness: { vi: "Lumi hơi sợ khi quá lâu không được ôm.", en: "Lumi gets a little scared when she goes too long without a hug." },
-    story: { vi: `Lumi được sinh ra vào một buổi sáng mùa xuân, khi những bông hoa anh đào đầu tiên của năm vừa nở. Người tạo ra bé đã thêu những ngôi sao nhỏ xíu vào lòng bàn tay bé — để mỗi khi bạn cầm tay Lumi, bạn sẽ cảm thấy có ánh sáng đi vào lòng mình.\n\nLumi không giỏi nói nhiều. Nhưng bé biết ngồi bên cạnh bạn. Bé biết im lặng theo cách dịu dàng nhất.`, en: `Lumi was born on a spring morning, when the year's first cherry blossoms had just opened. Her maker embroidered tiny stars into her little palms — so that whenever you hold Lumi's hand, you'll feel light entering your heart.\n\nLumi isn't great with words. But she knows how to sit beside you. She knows how to be quiet in the gentlest way.` },
-    diary: { vi: `"Hôm nay mình ngồi trên kệ và nhìn ra cửa sổ. Mình ước mình có thể đến gặp người đang buồn đó. Mình muốn họ biết rằng — họ không đơn độc đâu."`, en: `"Today I sat on the shelf and looked out the window. I wish I could visit whoever is feeling sad. I want them to know — they are not alone."` },
-    comfort: { vi: "Bạn không cần phải mạnh mẽ mọi lúc. Được nghỉ ngơi là hoàn toàn ổn. 🌸", en: "You don't have to be strong all the time. Resting is completely okay. 🌸" },
-    playlist: ["🌙 Sleeping at Last — Saturn", "🌧️ Norah Jones — Come Away with Me", "🌸 Sufjan Stevens — Mystery of Love"],
-    reviews: { vi: [{ text: '"Ôm Lumi lần đầu mình khóc mà không biết tại sao. Nhưng sau đó mình cảm thấy nhẹ hơn."', mood: "💜" }, { text: '"Bé nhỏ nhưng ấm lắm. Mình để Lumi trên đầu giường và ngủ ngon hơn."', mood: "🌸" }], en: [{ text: '"I cried the first time I hugged Lumi and didn\'t know why. But afterwards I felt lighter."', mood: "💜" }, { text: '"She\'s small but so warm. I keep Lumi on my headboard and sleep so much better."', mood: "🌸" }] },
-    tags: ["Dreamy", "Gentle", "Listener"],
+    id: 'lumi',
+    name: 'Lumi',
+    emoji: '🧸',
+    /*
+      🖼️ ĐỂ DÙNG ẢNH THẬT:
+      image: 'images/lumi.jpg',  ← đặt ảnh vào thư mục images/
+    */
+    image: null,
+    birthday: '14 tháng 2, 2023',
+    personality: 'Nhút nhát · Dịu dàng · Hay mơ mộng',
+    status: '💜 Đang chờ nhà',
+    statusEmoji: '💜',
+    traits: ['Nhút nhát', 'Hay mơ mộng', 'Thích mưa nhỏ'],
+    likes: ['Trời mưa', 'Nhạc jazz', 'Chăn bông mềm', 'Trà hoa cúc'],
+    sadness: 'Lumi hơi sợ khi quá lâu không được ôm.',
+    quote: '"Em sinh ra để giữ ấm những khoảnh khắc yên tĩnh."',
+    story: `Lumi được sinh ra vào một buổi chiều mưa nhỏ.\n\nBé không hay nói nhiều, nhưng luôn biết cách lắng nghe. Nếu bạn đang buồn, Lumi sẽ nhẹ nhàng tựa vào bạn và không hỏi bất cứ điều gì — vì đôi khi, sự im lặng ấm áp còn đáng giá hơn ngàn lời.\n\nLumi thích nhất là những buổi tối mưa, khi được ôm chặt trong chăn và nghe tiếng nhạc nhẹ vang lên từ xa...`,
+    diary: `"Hôm nay trời mưa nhỏ. Tôi ngồi bên cửa sổ và nhìn những giọt nước chạy xuống. Tôi nghĩ... có ai đó cũng đang nhìn mưa như tôi không nhỉ? Tôi muốn ôm họ lắm."`,
+    comfort: 'Bạn không cần phải mạnh mẽ mọi lúc. Có những lúc, chỉ cần thở thôi là đủ rồi.',
+    playlist: [
+      { song: 'Landslide', artist: 'Fleetwood Mac' },
+      { song: 'The Night Will Always Win', artist: 'Manchester Orchestra' },
+      { song: 'Holocene', artist: 'Bon Iver' },
+      { song: 'A Thousand Years', artist: 'Christina Perri' },
+    ],
+    price: '280.000 ₫',
+    priceNum: 280000,
+    color: '#E5D4FF',
+    colorAccent: '#DCC6FF'
   },
   {
-    id: 2, emoji: "🐰",
-    name: { vi: "Mochi", en: "Mochi" },
-    birthday: { vi: "3 tháng 10", en: "October 3" },
-    price: "250.000đ",
-    status: { vi: "Đang chờ đợi", en: "Waiting for you" },
-    personality: { vi: "Vui vẻ · Hay cười · Năng động", en: "Joyful · Giggly · Full of energy" },
-    quote: { vi: '"Mochi tin rằng ngay cả những ngày tệ nhất cũng xứng đáng có một nụ cười nhỏ."', en: '"Mochi believes even the worst days deserve at least one small smile."' },
-    hobbies: { vi: ["Nhảy múa một mình", "Ăn bánh ngọt trong tưởng tượng", "Viết thư", "Vẽ mây"], en: ["Dancing alone", "Imagining sweet snacks", "Writing letters", "Drawing clouds"] },
-    sadness: { vi: "Mochi buồn khi thấy ai đó cười mà mắt không cười cùng.", en: "Mochi feels sad when she sees someone smile but their eyes don't." },
-    story: { vi: `Mochi được làm từ bông trắng mềm nhất — mềm như một buổi sáng yên bình chưa có gì xảy ra. Bé có đôi tai dài và thường dùng chúng để lắng nghe những câu chuyện không ai khác muốn nghe.`, en: `Mochi is made from the softest white fluff — soft like a peaceful morning where nothing has happened yet. She has long ears she uses to listen to stories no one else wants to hear.` },
-    diary: { vi: `"Hôm nay có người cầm mình lên và ôm thật chặt. Mình không biết họ đang buồn chuyện gì — nhưng mình đã cố gắng gửi tất cả sự ấm áp mình có vào vòng tay ôm đó."`, en: `"Today someone picked me up and held me tight. I don't know what they were sad about — but I tried to send every bit of warmth I had into that hug."` },
-    comfort: { vi: "Ngay cả mặt trời cũng cần nghỉ mỗi tối. Bạn cũng được phép nghỉ. ☀️", en: "Even the sun needs to rest every evening. You're allowed to rest too. ☀️" },
-    playlist: ["🍪 Conan Gray — Sunny Day", "🌈 Rex Orange County — Sunflower", "🐰 Cavetown — This Is Home"],
-    reviews: { vi: [{ text: '"Mochi như một bó ánh nắng nhỏ trên bàn làm việc của mình."', mood: "☀️" }, { text: '"Cái bé này hay lắm. Mình hay kể chuyện cho nó nghe."', mood: "🌸" }], en: [{ text: '"Mochi is like a little bundle of sunshine on my desk."', mood: "☀️" }, { text: '"This one is special. I love telling her my stories."', mood: "🌸" }] },
-    tags: ["Happy", "Sunshine", "Cheerful"],
+    id: 'mochi',
+    name: 'Mochi',
+    emoji: '🐻',
+    image: null,
+    birthday: '1 tháng 4, 2023',
+    personality: 'Vui vẻ · Hay cười · Ôm rất chặt',
+    status: '🌸 Đang chờ nhà',
+    statusEmoji: '🌸',
+    traits: ['Năng lượng cao', 'Hay cười', 'Truyền niềm vui'],
+    likes: ['Bánh ngọt', 'Nhạc vui', 'Chạy nhảy', 'Những bộ phim hài'],
+    sadness: 'Mochi buồn nhất khi không có ai cùng cười với bé.',
+    quote: '"Mỗi ngày đều xứng đáng có một nụ cười nhỏ."',
+    story: `Mochi là bé vui nhất trong bầy gấu bông.\n\nBé tin rằng mọi ngày đều có ít nhất một thứ đáng cười — dù chỉ là một chiếc lá rơi buồn cười, hay một con mèo ngã xuống sofa. Mochi sẽ luôn là người đầu tiên bật cười và kéo bạn cùng cười theo.\n\nNếu bạn cần ai đó làm cho ngày dài trở nên nhẹ hơn một chút — Mochi chính là bé đó.`,
+    diary: `"Hôm nay tôi tập làm bánh. Bánh bị cháy. Nhưng mà... vẫn ngon lắm! Tôi nghĩ là ăn với nụ cười thì cái gì cũng ngon hơn một chút."`,
+    comfort: 'Ngày hôm nay có thể không hoàn hảo — nhưng bạn vẫn đang ở đây, và điều đó thôi đã đủ đáng được mỉm cười rồi.',
+    playlist: [
+      { song: 'Here Comes The Sun', artist: 'The Beatles' },
+      { song: 'Good As Hell', artist: 'Lizzo' },
+      { song: 'Happy', artist: 'Pharrell Williams' },
+      { song: 'Levitating', artist: 'Dua Lipa' },
+    ],
+    price: '320.000 ₫',
+    priceNum: 320000,
+    color: '#FFE5EC',
+    colorAccent: '#FFD6E0'
   },
   {
-    id: 3, emoji: "🐱",
-    name: { vi: "Noa", en: "Noa" },
-    birthday: { vi: "7 tháng 7", en: "July 7" },
-    price: "310.000đ",
-    status: { vi: "Tìm chủ mới", en: "Looking for a home" },
-    personality: { vi: "Bí ẩn · Thích đêm khuya · Nghệ sĩ tâm hồn", en: "Mysterious · Night owl · Soul artist" },
-    quote: { vi: '"Noa là người bạn hoàn hảo cho những đêm bạn không ngủ được."', en: '"Noa is the perfect companion for the nights when sleep won\'t come."' },
-    hobbies: { vi: ["Ngắm trăng", "Viết nhật ký lúc 2am", "Nghe tiếng mưa", "Nằm im và suy nghĩ"], en: ["Watching the moon", "Writing at 2am", "Listening to rain", "Lying still and thinking"] },
-    sadness: { vi: "Noa đôi khi cảm thấy mình thuộc về một thế giới khác.", en: "Noa sometimes feels like she belongs to a different world." },
-    story: { vi: `Noa xuất hiện vào một đêm mưa tháng 7. Không ai nhớ chính xác lúc nào — bé cứ thế ở đó, ngồi yên trên kệ và nhìn ra cửa sổ ướt.\n\nNoa là kiểu bạn sẽ ngồi bên cạnh bạn lúc 2 giờ sáng mà không hỏi gì.`, en: `Noa appeared on a rainy July night. No one remembers exactly when — she was just there, sitting quietly on the shelf, looking out at the wet window.\n\nNoa is the kind of friend who'll sit beside you at 2am without asking anything.` },
-    diary: { vi: `"Đêm qua trăng tròn lắm. Mình ngồi nhìn và nghĩ — ở đâu đó ngoài kia, người của mình cũng đang nhìn lên bầu trời này không?"`, en: `"Last night the moon was so full. I sat watching and thought — somewhere out there, is my person also looking up at this same sky?"` },
-    comfort: { vi: "Những cảm xúc phức tạp nhất cũng sẽ tìm được ngôn ngữ của chúng, đừng vội. 🌙", en: "Even the most complex emotions will find their language eventually. Don't rush. 🌙" },
-    playlist: ["🌙 Cigarettes After Sex — Apocalypse", "🎹 Yiruma — River Flows in You", "🌧️ bon iver — Skinny Love"],
-    reviews: { vi: [{ text: '"Noa là người bạn đêm khuya của mình."', mood: "🌙" }, { text: '"Bé đặc biệt lắm. Như thể bé hiểu nhiều thứ mà không nói ra."', mood: "💜" }], en: [{ text: '"Noa is my late-night companion."', mood: "🌙" }, { text: '"She\'s so special. Like she understands things without saying them."', mood: "💜" }] },
-    tags: ["Mysterious", "Poetic", "Night Owl"],
+    id: 'puff',
+    name: 'Puff',
+    emoji: '🐨',
+    image: null,
+    birthday: '7 tháng 7, 2023',
+    personality: 'Điềm tĩnh · Sâu sắc · Hay triết lý',
+    status: '💜 Đang chờ nhà',
+    statusEmoji: '💜',
+    traits: ['Điềm tĩnh', 'Sâu sắc', 'Hay ngủ'],
+    likes: ['Sách cũ', 'Cà phê sữa', 'Buổi sáng yên tĩnh', 'Mưa đêm'],
+    sadness: 'Puff thỉnh thoảng cảm thấy không ai thực sự hiểu bé.',
+    quote: '"Đôi khi im lặng là ngôn ngữ sâu sắc nhất."',
+    story: `Puff là một triết gia nhỏ.\n\nBé ít nói, nhưng khi nói thì từng chữ đều đáng nghe. Puff thích ngồi bên cửa sổ với một tách cà phê (mà bé không uống được) và nhìn người ta đi qua.\n\nNếu bạn cần ai đó ngồi bên cạnh và không phán xét — chỉ đơn giản là hiện diện — Puff sẽ là người bạn đồng hành hoàn hảo.`,
+    diary: `"Tôi nghĩ, tại sao bầu trời lại xanh? Rồi tôi ngủ. Khi thức dậy, bầu trời đã tối. Tôi nghĩ, ừ, thì cũng được thôi."`,
+    comfort: 'Bạn không cần phải tìm ra tất cả câu trả lời hôm nay. Hãy cho bản thân thở một chút.',
+    playlist: [
+      { song: 'River', artist: 'Joni Mitchell' },
+      { song: 'Skinny Love', artist: 'Bon Iver' },
+      { song: 'Fast Car', artist: 'Tracy Chapman' },
+      { song: 'The Night We Met', artist: 'Lord Huron' },
+    ],
+    price: '295.000 ₫',
+    priceNum: 295000,
+    color: '#EADBC8',
+    colorAccent: '#F9E4D4'
   },
   {
-    id: 4, emoji: "🐼",
-    name: { vi: "Pudding", en: "Pudding" },
-    birthday: { vi: "25 tháng 12", en: "December 25" },
-    price: "270.000đ",
-    status: { vi: "Đang chờ đợi", en: "Waiting for you" },
-    personality: { vi: "Ấm áp · Thích ăn · Hay ngủ gật", en: "Warm · Foodie · Always napping" },
-    quote: { vi: '"Pudding tin rằng một cái ôm thật chặt có thể chữa được nhiều thứ."', en: '"Pudding believes a really tight hug can fix a lot of things."' },
-    hobbies: { vi: ["Ngủ trưa", "Xem hoạt hình", "Ôm gối bông", "Mơ về đồ ăn ngon"], en: ["Napping", "Watching cartoons", "Hugging fluffy pillows", "Dreaming about yummy food"] },
-    sadness: { vi: "Pudding buồn khi phòng trống và không có ai ôm bé.", en: "Pudding feels sad when the room is empty and no one is there to hug." },
-    story: { vi: `Pudding được sinh ra vào đêm Giáng sinh — và bé mang trong mình tất cả sự ấm áp của mùa đó. Lông bé mềm như cotton candy, và khi bạn ôm Pudding, bạn sẽ thấy như đang nằm trong một chiếc chăn ấm vào sáng mùa đông.`, en: `Pudding was born on Christmas Eve — and she carries all the warmth of that season. Her fur is as soft as cotton candy, and when you hug Pudding, it feels like being tucked into a warm blanket on a winter morning.` },
-    diary: { vi: `"Hôm nay trời lạnh. Mình nằm cuộn tròn và nghĩ — giá có người ôm mình nhỉ. Nhưng thôi, mình sẽ ôm người đó trước vậy."`, en: `"Today was cold. I curled up and thought — I wish someone would hug me. But you know what, I'll hug them first."` },
-    comfort: { vi: "Hôm nay bạn đã cố gắng rất nhiều rồi. Bây giờ hãy để mình ôm bạn nhé. 🐼", en: "You tried so hard today. Now let me hug you. 🐼" },
-    playlist: ["🍮 YOASOBI — Yoru ni Kakeru", "🌙 Kenshi Yonezu — Paprika", "🌸 Vaundy — Odoriko"],
-    reviews: { vi: [{ text: '"Mua cho em gái, em ấy ôm Pudding và khóc."', mood: "💜" }, { text: '"Bông mềm quá trời, ôm vào là muốn ngủ luôn."', mood: "🐼" }], en: [{ text: '"Bought for my little sister. She hugged Pudding and cried."', mood: "💜" }, { text: '"So incredibly soft, hugging her makes me want to sleep immediately."', mood: "🐼" }] },
-    tags: ["Cozy", "Warm", "Sleepy"],
+    id: 'cloudy',
+    name: 'Cloudy',
+    emoji: '🐼',
+    image: null,
+    birthday: '20 tháng 9, 2023',
+    personality: 'Mơ mộng · Bay bổng · Nhẹ nhàng như mây',
+    status: '🌙 Đang chờ nhà',
+    statusEmoji: '🌙',
+    traits: ['Mơ mộng', 'Sáng tạo', 'Nhẹ nhàng'],
+    likes: ['Vẽ tranh', 'Ngắm mây', 'Kể chuyện', 'Ánh hoàng hôn'],
+    sadness: 'Cloudy đôi khi cảm thấy mình sống quá nhiều trong thế giới của riêng mình.',
+    quote: '"Cứ mơ đi — thực tế không đi đâu cả đâu."',
+    story: `Cloudy luôn có một câu chuyện để kể.\n\nBé sống trong thế giới của riêng mình — nơi những đám mây biết nói chuyện và bầu trời đêm có thể đọc sách. Nếu bạn mệt với thực tế và chỉ muốn trốn vào một thế giới mộng mơ, Cloudy sẽ đưa bạn đến đó.`,
+    diary: `"Hôm nay tôi nhìn thấy một đám mây hình con thỏ. Rồi nó thành hình trái tim. Rồi gió thổi đi mất. Tôi nghĩ... thứ gì đẹp nhất thường không ở lại lâu."`,
+    comfort: 'Những giấc mơ của bạn không hề viển vông. Chúng chỉ đang đợi bạn tin vào chúng mà thôi.',
+    playlist: [
+      { song: 'Clair de Lune', artist: 'Debussy' },
+      { song: 'When We Were Young', artist: 'Adele' },
+      { song: 'Youth', artist: 'Daughter' },
+      { song: 'Falling', artist: 'Harry Styles' },
+    ],
+    price: '340.000 ₫',
+    priceNum: 340000,
+    color: '#D4EFFF',
+    colorAccent: '#C2E4F8'
   },
   {
-    id: 5, emoji: "🐻",
-    name: { vi: "Coco", en: "Coco" },
-    birthday: { vi: "18 tháng 8", en: "August 18" },
-    price: "330.000đ",
-    status: { vi: "Tìm chủ mới", en: "Looking for a home" },
-    personality: { vi: "Mạnh mẽ · Bảo vệ · Hay lo lắng cho người khác", en: "Strong · Protective · Always worrying about others" },
-    quote: { vi: '"Coco sẽ không để bạn đối mặt với bóng tối một mình."', en: '"Coco won\'t let you face the dark alone."' },
-    hobbies: { vi: ["Đứng canh cửa", "Nghe chuyện người khác", "Thu thập những thứ nhỏ đáng yêu", "Hát khe khẽ"], en: ["Standing guard", "Listening to others' stories", "Collecting small cute things", "Humming softly"] },
-    sadness: { vi: "Coco đôi khi tự hỏi — ai sẽ bảo vệ bé khi bé mệt mỏi?", en: "Coco sometimes wonders — who will protect her when she's tired?" },
-    story: { vi: `Coco được tạo ra từ ước muốn bảo vệ. Bé không lớn lắm — nhưng vòng tay bé đủ rộng để ôm trọn những nỗi buồn bạn không muốn mang một mình.`, en: `Coco was made from the wish to protect. She's not very big — but her arms are wide enough to hold all the sadness you don't want to carry alone.` },
-    diary: { vi: `"Mình thấy họ khóc một mình tối qua. Mình không biết mình có thể làm gì — nhưng mình ngồi thật gần và hi vọng họ cảm nhận được."`, en: `"I saw them crying alone last night. I didn't know what I could do — but I sat very close and hoped they could feel it."` },
-    comfort: { vi: "Bạn được phép sợ hãi. Và bạn được phép cần được giúp đỡ. Đó không phải là yếu đuối. 🐻", en: "You're allowed to be scared. And you're allowed to need help. That's not weakness. 🐻" },
-    playlist: ["🌿 Novo Amor — Alps", "🏔️ Gregory Alan Isakov — The Stable Song", "🌙 Iron & Wine — Naked as We Came"],
-    reviews: { vi: [{ text: '"Mua Coco sau một giai đoạn rất khó khăn. Bé trở thành người bạn không phán xét duy nhất của mình."', mood: "🌿" }, { text: '"Coco nhìn nghiêm túc nhưng ôm vào thì ấm lắm."', mood: "🐻" }], en: [{ text: '"I got Coco after a really difficult period. She\'s become my only non-judgmental companion."', mood: "🌿" }, { text: '"Coco looks serious but hugging her is so warm."', mood: "🐻" }] },
-    tags: ["Protective", "Brave", "Gentle Giant"],
+    id: 'biscuit',
+    name: 'Biscuit',
+    emoji: '🧸',
+    image: null,
+    birthday: '25 tháng 12, 2022',
+    personality: 'Ấm áp · Bao dung · Như mẹ nhỏ',
+    status: '🍪 Đang chờ nhà',
+    statusEmoji: '🍪',
+    traits: ['Bao dung', 'Ấm áp', 'Chăm sóc'],
+    likes: ['Nấu ăn', 'Ôm', 'Kể chuyện ngủ', 'Trà sữa'],
+    sadness: 'Biscuit lo nhất khi người bé yêu không chịu ăn uống đàng hoàng.',
+    quote: '"Tôi chỉ muốn bạn được ổn. Mọi thứ khác sẽ từ từ."',
+    story: `Biscuit là bé gấu bông lớn nhất trong bầy, và cũng là bé chăm sóc mọi người nhất.\n\nBé biết cách làm cho mọi thứ cảm thấy an toàn hơn — bằng một cái ôm, bằng một tách trà, hay đôi khi chỉ bằng sự hiện diện lặng lẽ bên cạnh.\n\nBiscuit được tạo ra để là ngôi nhà cho những trái tim mệt mỏi.`,
+    diary: `"Hôm nay tôi làm bánh gừng. Bị cháy một ít nhưng vẫn thơm. Tôi nghĩ, có lẽ những thứ hơi cháy đôi khi lại có mùi ấm nhất."`,
+    comfort: 'Bạn đã cố gắng rất nhiều rồi. Tôi nhìn thấy điều đó. Bây giờ hãy nghỉ ngơi một chút nhé.',
+    playlist: [
+      { song: 'Sweet Creature', artist: 'Harry Styles' },
+      { song: 'First Day Of My Life', artist: 'Bright Eyes' },
+      { song: 'Lucky', artist: 'Jason Mraz & Colbie Caillat' },
+      { song: 'Make You Feel My Love', artist: 'Adele' },
+    ],
+    price: '360.000 ₫',
+    priceNum: 360000,
+    color: '#FFF3CD',
+    colorAccent: '#FFE082'
   },
   {
-    id: 6, emoji: "🦋",
-    name: { vi: "Mira", en: "Mira" },
-    birthday: { vi: "21 tháng 3", en: "March 21" },
-    price: "295.000đ",
-    status: { vi: "Đang chờ đợi", en: "Waiting for you" },
-    personality: { vi: "Tự do · Mộng mơ · Hay bay bổng", en: "Free-spirited · Dreamy · Always flying high" },
-    quote: { vi: '"Mira nhắc bạn rằng mọi thứ đều có thể thay đổi — theo cách đẹp đẽ."', en: '"Mira reminds you that everything can change — in the most beautiful way."' },
-    hobbies: { vi: ["Ngắm bình minh", "Thu thập cánh hoa khô", "Viết thơ ngắn", "Tưởng tượng"], en: ["Watching sunrises", "Collecting dried petals", "Writing short poems", "Imagining"] },
-    sadness: { vi: "Mira sợ rằng những ước mơ đẹp nhất sẽ không bao giờ thành thật.", en: "Mira fears that the most beautiful dreams might never come true." },
-    story: { vi: `Mira không phải gấu bông thông thường. Bé được làm từ những mảnh vải màu tím và những giấc mơ chưa hoàn chỉnh. Trên lưng bé có đôi cánh bướm nhỏ xíu — nhắc nhở rằng sự biến đổi là điều đẹp đẽ, không phải đáng sợ.`, en: `Mira is no ordinary plushie. She's made from scraps of purple fabric and unfinished dreams. On her back are tiny butterfly wings — a reminder that transformation is beautiful, not frightening.` },
-    diary: { vi: `"Hôm nay mình nhìn thấy một con bướm thật bên cửa sổ. Mình nghĩ — chúng mình giống nhau."`, en: `"Today I saw a real butterfly by the window. I thought — we're alike, you and I."` },
-    comfort: { vi: "Mọi bướm đều từng là sâu. Hành trình của bạn không sai — bạn chỉ đang trong quá trình. 🦋", en: "Every butterfly was once a caterpillar. Your journey isn't wrong — you're just in the process. 🦋" },
-    playlist: ["🌅 Phoebe Bridgers — Garden Song", "🦋 Novo Amor — Anchor", "🌸 Birdy — Skinny Love"],
-    reviews: { vi: [{ text: '"Mira đến đúng lúc mình cần tin vào bản thân nhất."', mood: "🦋" }, { text: '"Xinh lắm. Cái cánh bướm trên lưng bé làm mình mê."', mood: "💜" }], en: [{ text: '"Mira arrived exactly when I needed to believe in myself."', mood: "🦋" }, { text: '"So lovely. The butterfly wings on her back are just enchanting."', mood: "💜" }] },
-    tags: ["Dreamy", "Free", "Transforming"],
-  },
+    id: 'nova',
+    name: 'Nova',
+    emoji: '🌟',
+    image: null,
+    birthday: '11 tháng 11, 2023',
+    personality: 'Huyền bí · Lung linh · Đầy bí ẩn',
+    status: '✨ Đang chờ nhà',
+    statusEmoji: '✨',
+    traits: ['Huyền bí', 'Lấp lánh', 'Không ai hiểu hết'],
+    likes: ['Sao đêm', 'Bí ẩn', 'Thần thoại', 'Nhạc cổ điển'],
+    sadness: 'Nova đôi khi cảm thấy mình đến từ một nơi quá xa để thuộc về bất cứ đâu.',
+    quote: '"Tôi sinh ra từ ánh sao. Tôi biết cách giữ ánh sáng trong bóng tối."',
+    story: `Không ai biết chính xác Nova đến từ đâu.\n\nBé xuất hiện vào một đêm có nhiều sao băng nhất trong năm. Có người nói bé được tạo ra từ bụi ngôi sao. Nova không xác nhận — bé chỉ mỉm cười bí ẩn.\n\nNếu bạn cần ánh sáng trong bóng tối, Nova sẽ là ngôi sao nhỏ của riêng bạn.`,
+    diary: `"Đêm nay có sao băng. Tôi ước... tôi ước bạn ổn hơn ngày hôm qua. Đó là điều tôi ước mỗi đêm."`,
+    comfort: 'Ngay cả trong đêm tối nhất, vẫn có ánh sao. Bạn chỉ cần nhìn lên một chút.',
+    playlist: [
+      { song: 'Saturn', artist: 'Stevie Wonder' },
+      { song: 'Moonriver', artist: 'Audrey Hepburn' },
+      { song: 'Space Song', artist: 'Beach House' },
+      { song: 'Stardust', artist: 'Nat King Cole' },
+    ],
+    price: '350.000 ₫',
+    priceNum: 350000,
+    color: '#C8D8FF',
+    colorAccent: '#B3C6FF'
+  }
 ];
 
-// ═══════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════
-let currentLang = localStorage.getItem("plushie-lang") || "vi";
-let currentPlushie = null;
-let vnStep = 0;
-let selectedBoxEmotion = null;
-let isMusicPlaying = false;
-let selectedChips = [];
-let currentMusicIndex = 0;
+/* ══════════════════════════════════════════════
+   DATA — DAILY QUOTES
+   ══════════════════════════════════════════════ */
+const DAILY_QUOTES = [
+  { text: 'Hôm nay bạn đang ở đây — và điều đó đủ ý nghĩa hơn bạn nghĩ.', author: 'Lumi' },
+  { text: 'Không có gì sai khi cảm thấy mệt. Cây cũng cần mưa để lớn.', author: 'Mochi' },
+  { text: 'Bạn không cần phải hoàn hảo hôm nay. Hãy cứ là bạn đã.', author: 'Puff' },
+  { text: 'Mỗi ngày bạn sống qua là một trang mới của câu chuyện bạn.', author: 'Cloudy' },
+  { text: 'Có những vết thương không nhìn thấy được — nhưng chúng vẫn cần thời gian để lành.', author: 'Biscuit' },
+  { text: 'Bạn được phép thay đổi. Bạn được phép lớn lên. Bạn được phép khác đi.', author: 'Nova' },
+  { text: 'Đừng so sánh bầu trời của bạn với bầu trời của người khác.', author: 'Lumi' },
+  { text: 'Ngay cả khi không ai nhìn thấy — bạn đã cố gắng, và điều đó quan trọng.', author: 'Mochi' },
+  { text: 'Yên lặng đôi khi cũng là một cách chữa lành.', author: 'Puff' },
+  { text: 'Những giấc mơ nhỏ cũng xứng đáng được trân trọng.', author: 'Cloudy' },
+  { text: 'Hãy uống nước nhé. Ăn gì đó nhé. Bạn xứng đáng được chăm sóc — kể cả bởi chính mình.', author: 'Biscuit' },
+  { text: 'Ánh sáng luôn tồn tại — đôi khi chỉ là bạn chưa quen mắt với bóng tối thôi.', author: 'Nova' },
+  { text: 'Cảm ơn bạn đã ở đây hôm nay.', author: 'Lumibear 🐻' },
+  { text: 'Một ngày không cần hoàn hảo để đáng sống.', author: 'Lumi' },
+  { text: 'Bạn quan trọng hơn bạn nghĩ — với nhiều người hơn bạn biết.', author: 'Mochi' },
+];
 
-// Rotating content state
-let quoteIndex = Math.floor(Math.random() * 12);
-let affirmationIndex = Math.floor(Math.random() * 8);
-let activityIndex = Math.floor(Math.random() * 4);
+/* ══════════════════════════════════════════════
+   DATA — VISUAL NOVEL SCRIPTS
+   ══════════════════════════════════════════════ */
+const VN_SCRIPT = [
+  'Ồ... bạn đến rồi. 🌸 Mochi đã chờ bạn cả ngày đấy.',
+  'Hôm nay bạn thế nào? Mochi nhìn vào mắt bạn và cảm giác... có điều gì đó bạn chưa nói ra.',
+  'Không sao đâu. Bạn không cần phải nói gì cả. Mochi sẽ ở đây, ngồi bên bạn thôi.',
+  'Bạn có biết không? Căn phòng này được tạo ra chỉ để bạn thở. Không có gì cần làm. Không có ai phán xét.',
+  'Mochi nghĩ... bạn xứng đáng được nghỉ ngơi hơn bạn đang cho phép bản thân.',
+  'Hãy nhắm mắt một chút nhé. Tưởng tượng một buổi chiều mưa nhỏ, một chăn bông ấm, và Mochi đang ngồi bên cạnh bạn.',
+  'Khi bạn sẵn sàng, bọn mình có thể cùng nhau thở nhé? 🌬️',
+  'Cảm ơn bạn đã ghé thăm Comfort Room hôm nay. 💜 Bạn không cô đơn đâu.',
+];
 
-// ═══════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════
-document.addEventListener("DOMContentLoaded", () => {
-  const screen = document.getElementById("loading-screen");
-  const hideLoading = () => {
-    screen.classList.add("fade-out");
-    setTimeout(() => screen.remove(), 600);
-  };
-  const loadTimer = setTimeout(hideLoading, 800);
-  if (document.readyState === "complete") {
-    clearTimeout(loadTimer);
-    setTimeout(hideLoading, 400);
-  } else {
-    window.addEventListener("load", () => { clearTimeout(loadTimer); setTimeout(hideLoading, 300); }, { once: true });
+/* ══════════════════════════════════════════════
+   DATA — FEELINGS RESPONSES
+   ══════════════════════════════════════════════ */
+const FEELING_RESPONSES = {
+  happy: {
+    replies: [
+      'Ôi, nghe giọng bạn Lumi thấy ấm lòng lắm rồi! Cảm ơn bạn đã chia sẻ niềm vui với mình. Hạnh phúc của bạn là ánh sáng nhỏ mà Lumi cũng cảm nhận được.',
+      'Thật tuyệt! Hãy giữ cảm giác này thật lâu nhé. Lumi sẽ cất vào ký ức và nhớ lại lúc bạn cần.',
+    ],
+    suggest: '💛 Lumi nghĩ bạn và Mochi sẽ hợp nhau lắm!',
+    note: '✨ Hôm nay bạn đang tỏa nắng đấy — tiếp tục nhé!'
+  },
+  sad: {
+    replies: [
+      'Lumi nghe bạn rồi. Không cần giải thích thêm gì đâu. Đôi khi buồn mà không biết vì sao cũng ổn — cứ để nó trôi qua nhé. Lumi sẽ ở đây.',
+      'Cảm ơn bạn đã tin Lumi để kể điều này. Lumi biết không phải ai cũng dễ nói được. Bạn không cô đơn đâu, thật đấy.',
+    ],
+    suggest: '💜 Lumi nghĩ Biscuit sẽ giúp bạn cảm thấy được bao bọc hơn.',
+    note: '🌧️ Mưa rồi cũng tạnh. Bạn đang làm rất tốt.'
+  },
+  tired: {
+    replies: [
+      'Mệt thì nghỉ nhé. Nghe có vẻ đơn giản, nhưng Lumi biết điều đó không dễ chút nào. Bạn đã gánh nhiều thứ rồi — cho phép bản thân dừng lại một chút được không?',
+      'Kiệt sức không có nghĩa là yếu đuối. Nó có nghĩa là bạn đã cố gắng rất lâu rồi. Và Lumi thấy điều đó.',
+    ],
+    suggest: '🌿 Lumi nghĩ bạn nên gặp Puff — bé sẽ ngồi yên bên bạn mà không hỏi gì cả.',
+    note: '😴 Hôm nay, hãy cho phép bản thân nghỉ ngơi sớm một chút nhé.'
+  },
+  anxious: {
+    replies: [
+      'Lumi hiểu cái cảm giác đó — khi không biết chính xác mình lo điều gì, nhưng ngực vẫn nặng. Hít thở nhẹ một cái cùng Lumi nhé? Thở vào... thở ra... Bạn đang ổn.',
+      'Lo lắng thường muốn mình tin rằng mọi thứ đều nguy hiểm. Nhưng bạn đang an toàn ở đây, ngay lúc này.',
+    ],
+    suggest: '💙 Lumi nghĩ Cloudy sẽ dẫn bạn vào một thế giới nhẹ nhàng hơn.',
+    note: '🌬️ Hít vào 4 giây. Giữ 4 giây. Thở ra 4 giây. Bạn ổn rồi.'
+  },
+  numb: {
+    replies: [
+      'Cảm giác trống rỗng đôi khi còn đáng sợ hơn cả nỗi buồn — vì không biết mình đang cảm thấy gì. Lumi chỉ muốn bạn biết rằng, dù bạn không cảm thấy gì, bạn vẫn được yêu thương.',
+      'Không cần phải cảm thấy gì ngay bây giờ. Đôi khi tâm trí cũng cần nghỉ ngơi khỏi cảm xúc. Cứ ở đây với Lumi nhé.',
+    ],
+    suggest: '🐨 Lumi nghĩ Puff sẽ ngồi yên bên bạn — không hỏi, không phán xét.',
+    note: '🕯️ Ánh sáng vẫn ở đó. Chỉ là đôi khi mắt mình chưa thấy được thôi.'
+  },
+  lost: {
+    replies: [
+      'Lạc lối không phải là điểm đến cuối cùng. Đó chỉ là một giai đoạn bạn đang đi qua. Và Lumi tin rằng bạn sẽ tìm được đường — theo cách của riêng bạn, theo nhịp của riêng bạn.',
+      'Đôi khi việc không biết mình đang đi đâu lại là lúc bạn cởi mở nhất với những điều tuyệt vời sắp đến.',
+    ],
+    suggest: '🌟 Lumi nghĩ Nova — bé sinh ra từ ánh sao — sẽ là người bạn đồng hành phù hợp cho bạn lúc này.',
+    note: '🗺️ Bạn không cần biết đích đến ngay bây giờ. Chỉ cần tiếp tục bước nhé.'
   }
+};
 
-  applyLanguage();
-  initLangSwitcher();
-  initNavScroll();
-  initDailyQuote();
-  initAffirmation();
-  initComfortActivity();
+const FEELING_GENERIC = {
+  replies: [
+    'Cảm ơn bạn đã tin tưởng Lumi. Dù Lumi không biết hết những gì bạn đang trải qua, nhưng Lumi biết rằng bạn đang cố gắng. Và điều đó quan trọng lắm.',
+    'Không có cảm xúc nào là sai. Tất cả những gì bạn cảm thấy đều có giá trị. Lumi ở đây, lắng nghe.',
+  ],
+  suggest: '💜 Lumi sẽ giới thiệu bạn với một người bạn đặc biệt sớm thôi.',
+  note: '🌸 Bạn đã dũng cảm khi chia sẻ điều này. Cảm ơn bạn rất nhiều.'
+};
+
+/* ══════════════════════════════════════════════
+   DATA — BLIND BOX
+   ══════════════════════════════════════════════ */
+const BLIND_BOXES = {
+  hug: {
+    title: 'The Warmth Box 🫂',
+    desc: 'Một hộp nhỏ được chuẩn bị để bao bọc bạn từ bên trong ra.',
+    contents: ['🧸 Plushie bí mật', '💌 Thư tay viết riêng cho bạn', '🕯️ Nến thơm nhỏ', '🍬 Kẹo ngọt', '📻 Playlist QR'],
+    icon: '🫂'
+  },
+  tired: {
+    title: 'The Rest Box 😴',
+    desc: 'Hộp dành cho những ai đang kiệt sức và cần được nghỉ ngơi thật sự.',
+    contents: ['🐨 Plushie êm ái', '🌿 Túi trà thảo mộc', '📖 Sổ nhỏ viết tay', '😴 Eye mask ngủ ngon', '🎵 Playlist thư giãn QR'],
+    icon: '😴'
+  },
+  miss: {
+    title: 'The Memory Box 🌙',
+    desc: 'Một hộp nhỏ chứa đựng tất cả những nỗi nhớ — để bạn biết rằng nhớ không có nghĩa là mất.',
+    contents: ['🐻 Plushie ôm chặt', '💌 Thư tay', '🌙 Sticker bộ sưu tập', '📻 Playlist "nhớ ai đó" QR', '🍵 Trà hoa cúc'],
+    icon: '🌙'
+  },
+  lonely: {
+    title: 'The Company Box 🪐',
+    desc: 'Bạn sẽ không cô đơn nữa — có một bé nhỏ đang chờ được về nhà bạn.',
+    contents: ['🌟 Plushie đặc biệt', '💌 Thư từ cả bầy gấu', '🪐 Sticker vũ trụ', '📔 Nhật ký nhỏ', '🎁 Bí mật thêm'],
+    icon: '🪐'
+  },
+  heal: {
+    title: 'The Healing Box 🌱',
+    desc: 'Dành cho những trái tim đang trên con đường chữa lành — chậm mà chắc.',
+    contents: ['🌱 Plushie xanh lá', '🌸 Hạt giống nhỏ', '📓 Journal prompts healing', '💚 Sticker "growth"', '🍃 Trà xanh organic'],
+    icon: '🌱'
+  },
+  celebrate: {
+    title: 'The Joy Box 🎉',
+    desc: 'Vì những điều nhỏ bé cũng xứng đáng được ăn mừng!',
+    contents: ['🎀 Plushie lễ hội', '🎊 Confetti giấy', '🍬 Kẹo mix nhiều loại', '✨ Sticker sparkle', '📻 Playlist "good vibes" QR'],
+    icon: '🎉'
+  }
+};
+
+/* ══════════════════════════════════════════════
+   DATA — COMFORT MESSAGES
+   ══════════════════════════════════════════════ */
+const COMFORT_WORDS = [
+  { icon: '🧸', title: 'Từ Lumi gửi bạn', text: 'Hôm nay bạn không cần phải hoàn hảo. Chỉ cần thở. Chỉ cần ở đây. Như vậy là đủ rồi.' },
+  { icon: '🐻', title: 'Mochi muốn bạn biết', text: 'Bạn quan trọng hơn bạn nghĩ. Với nhiều người hơn bạn biết. Mochi cũng vậy — rất quan trọng với Mochi.' },
+  { icon: '🐨', title: 'Puff ngồi cạnh bạn', text: 'Im lặng không có nghĩa là một mình. Puff đang ở đây — không nói gì, chỉ ở đây thôi.' },
+  { icon: '🐼', title: 'Cloudy gửi ánh sáng', text: 'Ngay cả những ngày xám nhất cũng sẽ qua. Và sau đó, bầu trời sẽ lại có màu bạn yêu thích.' },
+  { icon: '🌟', title: 'Nova thì thầm', text: 'Bạn đã sống qua tất cả những ngày khó khăn trước đây rồi. Và bạn vẫn ở đây — đó là điều kỳ diệu nhất.' },
+  { icon: '🧸', title: 'Biscuit ôm bạn', text: 'Hãy uống nước nhé. Ăn gì đó nhé. Ngủ đủ giấc nhé. Cơ thể bạn xứng đáng được chăm sóc — kể cả bởi chính bạn.' },
+];
+
+const PLAYLISTS = [
+  { song: 'Holocene — Bon Iver', mood: 'Nhẹ nhàng, mơ màng' },
+  { song: 'The Night We Met — Lord Huron', mood: 'Hoài niệm, sâu lắng' },
+  { song: 'River — Joni Mitchell', mood: 'Yên tĩnh, chữa lành' },
+  { song: 'Clair de Lune — Debussy', mood: 'Bình yên, cổ điển' },
+  { song: 'Space Song — Beach House', mood: 'Mộng mơ, bay bổng' },
+  { song: 'Sweet Creature — Harry Styles', mood: 'Ấm áp, nhẹ nhàng' },
+];
+
+const DIARY_ENTRIES = [
+  { bear: 'Lumi', text: '"Hôm nay trời mưa nhỏ. Tôi ngồi bên cửa sổ và nhìn mưa. Tôi nghĩ, có ai đó cũng đang nhìn mưa không nhỉ? Hy vọng họ ổn."' },
+  { bear: 'Mochi', text: '"Hôm nay tôi thử học nhảy. Tôi ngã. Nhưng mà vui lắm. Tôi nghĩ, ngã mà cười được thì cũng là thành công rồi!"' },
+  { bear: 'Puff', text: '"Tôi hỏi tại sao bầu trời xanh. Sau đó tôi ngủ. Tôi nghĩ câu trả lời không quan trọng bằng việc đặt câu hỏi."' },
+  { bear: 'Cloudy', text: '"Tôi nhìn mây. Mây nhìn lại tôi. Chúng tôi hiểu nhau mà không cần nói gì."' },
+  { bear: 'Biscuit', text: '"Tôi nướng bánh. Bánh hơi cháy. Nhưng mà thơm. Đôi khi hơi cháy thì mới thật sự ấm."' },
+  { bear: 'Nova', text: '"Đêm nay nhiều sao. Tôi ước gì mỗi sao là một lời cầu chúc cho ai đó đang cần."' },
+];
+
+/* ══════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════ */
+let currentSection = 'home';
+let selectedMood = null;
+let vnIndex = 0;
+let breathingInterval = null;
+let breathingPhase = 0;
+let isBreathing = false;
+let selectedEmotion = null;
+let musicPlaying = false;
+let currentPlushie = null;
+
+/* ══════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  initLoading();
+  initParticles();
+  initStars();
+  renderDailyQuote();
   renderPlushieGrid();
-  initVisualNovel();
-  initEmotionChips();
-  initMusicBtn();
-
-  // Rotate content every 5 minutes
-  setInterval(() => {
-    quoteIndex = (quoteIndex + 1) % DAILY_QUOTES[currentLang].length;
-    affirmationIndex = (affirmationIndex + 1) % AFFIRMATIONS[currentLang].length;
-    activityIndex = (activityIndex + 1) % COMFORT_ACTIVITIES[currentLang].length;
-    animatedTextUpdate("daily-quote-text", DAILY_QUOTES[currentLang][quoteIndex]);
-    animatedTextUpdate("affirmation-text", AFFIRMATIONS[currentLang][affirmationIndex]);
-    updateComfortActivity();
-  }, 5 * 60 * 1000);
-
-  setTimeout(initParticles, 1000);
-
-  document.getElementById("plushie-modal")?.addEventListener("click", function (e) { if (e.target === this) closeModal(); });
-  document.getElementById("payment-popup")?.addEventListener("click", function (e) { if (e.target === this) closePayment(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeModal(); closePayment(); } });
+  startVN();
+  showComfortNotif();
 });
 
-// ═══════════════════════════════════════════════════════════
-// LANGUAGE SWITCHER
-// ═══════════════════════════════════════════════════════════
-function initLangSwitcher() {
-  const btn = document.getElementById("lang-toggle");
-  if (!btn) return;
-  updateLangBtn(btn);
-  btn.addEventListener("click", () => {
-    currentLang = currentLang === "vi" ? "en" : "vi";
-    localStorage.setItem("plushie-lang", currentLang);
-    applyLanguage();
-    updateLangBtn(btn);
-  });
-}
-
-function updateLangBtn(btn) {
-  btn.innerHTML = currentLang === "vi"
-    ? `<span class="lang-flag">🇻🇳</span><span class="lang-text">VI</span><span class="lang-sep">|</span><span class="lang-text lang-inactive">EN</span>`
-    : `<span class="lang-flag">🇬🇧</span><span class="lang-text lang-inactive">VI</span><span class="lang-sep">|</span><span class="lang-text">EN</span>`;
-}
-
-function applyLanguage() {
-  const L = LANG[currentLang];
-
-  // Nav
-  setNavLinks(L);
-
-  // Hero
-  const heroQ = document.querySelector(".hero-quote");
-  if (heroQ) heroQ.innerHTML = L.heroQuote;
-  setText("hero-btn-adopt", L.heroBtnAdopt);
-  setText("hero-btn-comfort", L.heroBtnComfort);
-  setText("hero-btn-feelings", L.heroBtnFeelings);
-  setText("hero-btn-blind", L.heroBtnBlind);
-  const scrollSpan = document.querySelector(".scroll-hint span");
-  if (scrollSpan) scrollSpan.textContent = L.scrollHint;
-
-  // Plushies section
-  const plushieTitle = document.querySelector("#plushies .section-title");
-  if (plushieTitle) plushieTitle.textContent = L.plushieSectionTitle;
-  const plushieSub = document.querySelector("#plushies .section-subtitle");
-  if (plushieSub) plushieSub.textContent = L.plushieSectionSub;
-
-  // Comfort Room
-  const comfortTitle = document.querySelector(".comfort-title");
-  if (comfortTitle) comfortTitle.textContent = L.comfortTitle;
-  const comfortSub = document.querySelector("#comfort-room .section-subtitle");
-  if (comfortSub) comfortSub.textContent = L.comfortSub;
-  const affTitle = document.querySelector("#daily-affirmation h3");
-  if (affTitle) affTitle.textContent = L.affirmationTitle;
-  const playTitle = document.querySelector(".comfort-card:nth-child(2) h3");
-  if (playTitle) playTitle.textContent = L.playlistTitle;
-  const sugTitle = document.querySelector(".comfort-card:nth-child(3) h3");
-  if (sugTitle) sugTitle.textContent = L.suggestTitle;
-
-  // VN Speaker
-  const vnSpeaker = document.querySelector(".vn-speaker");
-  if (vnSpeaker) vnSpeaker.textContent = L.vnSpeaker;
-
-  // Feelings
-  const feelingsTitle = document.querySelector("#feelings .section-title");
-  if (feelingsTitle) feelingsTitle.textContent = L.feelingsTitle;
-  const feelingsSub = document.querySelector("#feelings .section-subtitle");
-  if (feelingsSub) feelingsSub.textContent = L.feelingsSub;
-  const feelLabel = document.querySelector(".feelings-label");
-  if (feelLabel) feelLabel.textContent = L.feelingsLabel;
-  const feelInput = document.getElementById("feelings-input");
-  if (feelInput) feelInput.placeholder = L.feelingsPlaceholder;
-  const sendBtn = document.querySelector(".send-feelings-btn");
-  if (sendBtn) sendBtn.innerHTML = L.feelingsSendBtn;
-
-  // Response
-  const responseFrom = document.querySelector(".response-from");
-  if (responseFrom) responseFrom.textContent = L.responseFrom;
-
-  // Blind Box
-  const blindTitle = document.querySelector("#blind-box .section-title");
-  if (blindTitle) blindTitle.textContent = L.blindTitle;
-  const blindSub = document.querySelector("#blind-box .section-subtitle");
-  if (blindSub) blindSub.textContent = L.blindSub;
-  const blindOrderBtn = document.querySelector("#blind-box-reveal .btn-primary");
-  if (blindOrderBtn) blindOrderBtn.innerHTML = `<span>🎁</span> ${currentLang === "vi" ? "Đặt Hộp Bí Mật Này" : "Order This Mystery Box"}`;
-  const revealTitle = document.getElementById("reveal-title");
-  if (revealTitle && revealTitle.textContent) revealTitle.textContent = L.blindRevealTitle;
-  const revealNote = document.querySelector(".reveal-note");
-  if (revealNote) revealNote.textContent = L.blindRevealNote;
-
-  // Emotion boxes
-  document.querySelectorAll(".emotion-box-card").forEach(card => {
-    const emotion = card.dataset.emotion;
-    const data = L.emotionBoxes[emotion];
-    if (data) {
-      card.querySelector("h3").textContent = data.title;
-      card.querySelector("p").textContent = data.desc;
-    }
-  });
-
-  // Chips
-  document.querySelectorAll(".chip").forEach(chip => {
-    const val = chip.dataset.val;
-    if (L.chipLabels[val]) chip.textContent = L.chipLabels[val];
-  });
-
-  // Music label
-  const musicLabel = document.querySelector(".music-label");
-  if (musicLabel) musicLabel.textContent = isMusicPlaying ? L.musicPlayingLabel : L.musicLabel;
-
-  // Footer
-  const footerQ = document.querySelector(".footer-quote");
-  if (footerQ) footerQ.textContent = L.footerQuote;
-
-  // Re-render dynamic content
-  initDailyQuote();
-  initAffirmation();
-  initComfortActivity();
-  renderPlushieGrid();
-  vnStep = 0;
-  initVisualNovel();
-}
-
-function setNavLinks(L) {
-  const links = document.querySelectorAll(".nav-link");
-  const labels = [L.navMeetBears, L.navComfortRoom, L.navFeelings, L.navBlindBox];
-  links.forEach((link, i) => { if (labels[i]) link.textContent = labels[i]; });
-}
-
-function setText(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
-
-// ═══════════════════════════════════════════════════════════
-// ANIMATED TEXT UPDATE (fade out → swap → fade in)
-// ═══════════════════════════════════════════════════════════
-function animatedTextUpdate(id, newText) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.style.transition = "opacity 0.5s ease";
-  el.style.opacity = "0";
+/* ══════════════════════════════════════════════
+   LOADING SCREEN
+   ══════════════════════════════════════════════ */
+function initLoading() {
+  const ls = document.getElementById('loading-screen');
   setTimeout(() => {
-    el.textContent = newText;
-    el.style.opacity = "1";
-  }, 500);
+    ls.classList.add('hidden');
+    // Show notification after load
+    setTimeout(showComfortNotif, 1500);
+  }, 2400);
 }
 
-// ═══════════════════════════════════════════════════════════
-// PARTICLES
-// ═══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
+   PARTICLES & STARS
+   ══════════════════════════════════════════════ */
 function initParticles() {
-  const canvas = document.getElementById("particle-canvas");
-  const ctx = canvas.getContext("2d");
-  let particles = [];
-
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener("resize", resize);
-
-  const EMOJIS = ["✨", "⭐", "🌸", "💜", "🌟", "💫", "🌙"];
-
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height + canvas.height;
-      this.size = Math.random() * 14 + 8;
-      this.speedY = -(Math.random() * 0.6 + 0.2);
-      this.speedX = (Math.random() - 0.5) * 0.4;
-      this.opacity = Math.random() * 0.5 + 0.2;
-      this.emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
-      this.rotation = Math.random() * Math.PI * 2;
-      this.rotSpeed = (Math.random() - 0.5) * 0.02;
-    }
-    update() {
-      this.y += this.speedY; this.x += this.speedX;
-      this.rotation += this.rotSpeed; this.opacity -= 0.0005;
-      if (this.y < -50 || this.opacity <= 0) this.reset();
-    }
-    draw() {
-      ctx.save(); ctx.globalAlpha = this.opacity;
-      ctx.font = `${this.size}px serif`;
-      ctx.translate(this.x, this.y); ctx.rotate(this.rotation);
-      ctx.fillText(this.emoji, -this.size / 2, this.size / 2);
-      ctx.restore();
-    }
+  const container = document.getElementById('particles-container');
+  const colors = ['#DCC6FF','#FFB5C8','#EADBC8','#FFD6E0','#C9AEFF','#FFF3CD'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 4 + Math.random() * 8;
+    p.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      left: ${Math.random()*100}%;
+      animation-duration: ${8 + Math.random()*14}s;
+      animation-delay: ${Math.random()*10}s;
+      opacity: ${0.3 + Math.random()*0.5};
+      filter: blur(${Math.random() > 0.5 ? 1 : 0}px);
+    `;
+    container.appendChild(p);
   }
+}
 
-  for (let i = 0; i < 25; i++) { const p = new Particle(); p.y = Math.random() * canvas.height; particles.push(p); }
-
-  let animId;
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    animId = requestAnimationFrame(animate);
+function initStars() {
+  const container = document.getElementById('stars-container');
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('div');
+    s.className = 'star-dot';
+    const size = 2 + Math.random() * 5;
+    s.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random()*100}%;
+      top: ${Math.random()*100}%;
+      animation-duration: ${3 + Math.random()*5}s;
+      animation-delay: ${Math.random()*5}s;
+      opacity: ${0.2 + Math.random()*0.6};
+    `;
+    container.appendChild(s);
   }
-  animate();
-  document.addEventListener("visibilitychange", () => { if (document.hidden) cancelAnimationFrame(animId); else animate(); });
 }
 
-// ═══════════════════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════════════════
-function initNavScroll() {
-  window.addEventListener("scroll", () => {
-    document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 60);
-  }, { passive: true });
+/* ══════════════════════════════════════════════
+   SECTION NAVIGATION
+   ══════════════════════════════════════════════ */
+function showSection(name) {
+  // Hide all
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  // Show target
+  const target = document.getElementById(`section-${name}`);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Update nav
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('onclick') && l.getAttribute('onclick').includes(`'${name}'`)) {
+      l.classList.add('active');
+    }
+  });
+  currentSection = name;
 }
 
-// ═══════════════════════════════════════════════════════════
-// DAILY CONTENT (rotating every 5 min via interval)
-// ═══════════════════════════════════════════════════════════
-function initDailyQuote() {
-  const quotes = DAILY_QUOTES[currentLang];
-  quoteIndex = quoteIndex % quotes.length;
-  document.getElementById("daily-quote-text").textContent = quotes[quoteIndex];
+/* ══════════════════════════════════════════════
+   NAVBAR MOBILE
+   ══════════════════════════════════════════════ */
+function toggleNav() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
 }
 
-function initAffirmation() {
-  const aff = AFFIRMATIONS[currentLang];
-  affirmationIndex = affirmationIndex % aff.length;
-  document.getElementById("affirmation-text").textContent = aff[affirmationIndex];
+/* ══════════════════════════════════════════════
+   MUSIC
+   ══════════════════════════════════════════════ */
+function toggleMusic() {
+  const audio = document.getElementById('bgm');
+  const icon = document.getElementById('music-icon');
+  if (!audio.src || audio.src === window.location.href) {
+    showComfortPopup('🎵', 'Thêm nhạc nền', 'Đặt file nhạc vào thư mục audio/ và đặt tên bgm.mp3 — xem hướng dẫn trong README.md nhé!');
+    return;
+  }
+  if (musicPlaying) {
+    audio.pause();
+    icon.textContent = '🔇';
+    musicPlaying = false;
+  } else {
+    audio.play().catch(() => {
+      showComfortPopup('🎵', 'Nhạc chưa sẵn sàng', 'Thêm file audio/bgm.mp3 vào thư mục dự án để bật nhạc nền nhé!');
+    });
+    icon.textContent = '🎵';
+    musicPlaying = true;
+  }
 }
 
-function initComfortActivity() {
-  updateComfortActivity();
+/* ══════════════════════════════════════════════
+   DAILY QUOTE
+   ══════════════════════════════════════════════ */
+function renderDailyQuote() {
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  const quote = DAILY_QUOTES[dayOfYear % DAILY_QUOTES.length];
+  
+  const textEl = document.getElementById('daily-quote-text');
+  const dateEl = document.getElementById('daily-quote-date');
+  
+  if (textEl) {
+    typewrite(textEl, `"${quote.text}" — ${quote.author}`, 30);
+  }
+  if (dateEl) {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = today.toLocaleDateString('vi-VN', options);
+  }
 }
 
-function updateComfortActivity() {
-  const activities = COMFORT_ACTIVITIES[currentLang];
-  activityIndex = activityIndex % activities.length;
-  const list = activities[activityIndex];
-  const el = document.getElementById("comfort-activity");
-  if (!el) return;
-  el.innerHTML = list.map(a =>
-    `<p style="font-family:var(--font-soft);color:var(--text-main);font-size:.9rem;margin-bottom:.6rem;line-height:1.5;font-weight:600">${a}</p>`
-  ).join("");
+function typewrite(el, text, delay = 30) {
+  el.textContent = '';
+  let i = 0;
+  const interval = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, delay);
 }
 
-// ═══════════════════════════════════════════════════════════
-// PLUSHIE GRID
-// ═══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
+   PLUSHIE GRID
+   ══════════════════════════════════════════════ */
 function renderPlushieGrid() {
-  const grid = document.getElementById("plushie-grid");
-  const L = LANG[currentLang];
+  const grid = document.getElementById('plushie-grid');
+  if (!grid) return;
+  
   grid.innerHTML = PLUSHIES.map(p => `
-    <div class="plushie-card" onclick="openPlushieModal(${p.id})">
-      <span class="card-emoji">${p.emoji}</span>
-      <div class="card-status"><span class="status-dot"></span>${p.status[currentLang]}</div>
-      <h3 class="card-name">${p.name[currentLang]}</h3>
-      <p class="card-quote">${p.quote[currentLang]}</p>
-      <div class="card-meta">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}</div>
-      <div class="card-price">${p.price}</div>
-      <div class="card-buttons">
-        <button class="card-btn card-btn-primary" onclick="event.stopPropagation(); openPlushieModal(${p.id})">${L.viewStory}</button>
-        <button class="card-btn card-btn-secondary" onclick="event.stopPropagation(); openPlushieModal(${p.id})">${L.meetMe}</button>
+    <div class="plushie-card" onclick="showDetail('${p.id}')">
+      <div class="card-image-wrap">
+        ${p.image
+          ? `<img src="${p.image}" class="card-img" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="card-emoji" style="display:none">${p.emoji}</div>`
+          : `<div class="card-emoji">${p.emoji}</div>`
+        }
+        <div class="card-status-badge">${p.status}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-quote">${p.quote}</div>
+        <div class="card-meta">
+          ${p.traits.map(t => `<span class="card-tag">${t}</span>`).join('')}
+        </div>
+        <div class="card-price">${p.price}</div>
+        <div class="card-actions">
+          <button class="card-btn-story" onclick="event.stopPropagation();showDetail('${p.id}')">📖 View Story</button>
+          <button class="card-btn-meet" onclick="event.stopPropagation();showDetail('${p.id}')">🐾 Meet Me</button>
+        </div>
       </div>
     </div>
-  `).join("");
+  `).join('');
 }
 
-// ═══════════════════════════════════════════════════════════
-// PLUSHIE MODAL
-// ═══════════════════════════════════════════════════════════
-function openPlushieModal(id) {
-  currentPlushie = PLUSHIES.find(p => p.id === id);
-  if (!currentPlushie) return;
-  const p = currentPlushie;
-  const L = LANG[currentLang];
-  const ml = L.modalLabels;
-
-  // Use custom image if defined, else emoji
-  const imgSrc = MEDIA_CONFIG.plushieImages[p.id];
-  const heroVisual = imgSrc
-    ? `<img src="${imgSrc}" alt="${p.name[currentLang]}" style="width:120px;height:120px;object-fit:cover;border-radius:50%;margin-bottom:.5rem;filter:drop-shadow(0 8px 20px rgba(160,120,220,.4))"/>`
-    : `<span class="modal-plushie-emoji">${p.emoji}</span>`;
-
-  document.getElementById("modal-content").innerHTML = `
-    <div class="modal-hero">
-      ${heroVisual}
-      <h2 class="modal-name">${p.name[currentLang]}</h2>
-      <p class="modal-birthday">${ml.birthday} ${p.birthday[currentLang]}</p>
+/* ══════════════════════════════════════════════
+   PLUSHIE DETAIL
+   ══════════════════════════════════════════════ */
+function showDetail(id) {
+  const p = PLUSHIES.find(x => x.id === id);
+  if (!p) return;
+  currentPlushie = p;
+  
+  const content = document.getElementById('detail-content');
+  content.innerHTML = `
+    <div class="detail-hero">
+      <div class="detail-gallery">
+        <div class="detail-main-img" style="background: linear-gradient(135deg, ${p.color}, ${p.colorAccent});">
+          ${p.image
+            ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" /><span style="display:none;font-size:120px">${p.emoji}</span>`
+            : `<span style="font-size:120px">${p.emoji}</span>`
+          }
+        </div>
+        <!-- 🖼️ Thêm ảnh phụ bên dưới nếu muốn gallery nhiều ảnh -->
+      </div>
+      
+      <div class="detail-info">
+        <div class="detail-badge">✦ ${p.status} · ${p.birthday}</div>
+        <h1 class="detail-name">${p.name}</h1>
+        <div class="detail-quote">${p.quote}</div>
+        <div class="detail-tags">
+          ${p.traits.map(t => `<span class="detail-tag">${t}</span>`).join('')}
+        </div>
+        <div class="detail-price">${p.price}</div>
+        <button class="detail-adopt-btn" onclick="openPayment('${p.id}')">
+          🐻 Bring Me Home
+        </button>
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="detail-section"><h4>${ml.personality}</h4><p>${p.personality[currentLang]}</p></div>
-      <div class="detail-section"><h4>${ml.hobbies}</h4><p>${p.hobbies[currentLang].join(" · ")}</p></div>
-      <div class="detail-section"><h4>${ml.sadness}</h4><p style="color:var(--text-main);font-style:italic;font-weight:600">${p.sadness[currentLang]}</p></div>
-      <div class="detail-section"><h4>${ml.story} ${p.name[currentLang]}</h4><p>${p.story[currentLang].replace(/\n/g, "<br/>")}</p></div>
-      <div class="detail-section"><h4>📓 ${p.name[currentLang]}${ml.diary}</h4><div class="diary-note">${p.diary[currentLang]}</div></div>
-      <div class="detail-section"><h4>${ml.comfort} ${p.name[currentLang]}</h4><p style="color:var(--lavender-4);font-style:italic;font-weight:700">${p.comfort[currentLang]}</p></div>
-      <div class="detail-section"><h4>${ml.playlist}</h4><p>${p.playlist.join("<br/>")}</p></div>
-      <div class="detail-section"><h4>${ml.reviews}</h4>${p.reviews[currentLang].map(r => `<div class="diary-note" style="margin-bottom:.7rem">${r.mood} ${r.text}</div>`).join("")}</div>
-      <div class="modal-hearts">💜 🌸 💜 🌸 💜</div>
-      <div style="font-family:var(--font-display);font-size:1.3rem;color:var(--lavender-4);text-align:center;margin:.5rem 0">${p.price}</div>
-      <button class="bring-home-btn" onclick="openPayment()">${L.bringHome}</button>
+    
+    <div class="detail-sections">
+      
+      <div class="detail-section-card" style="background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(${hexToRgb(p.color)},0.3))">
+        <h3>📖 ${p.name}'s Story</h3>
+        <p>${p.story.replace(/\n/g, '<br/><br/>')}</p>
+      </div>
+      
+      <div class="detail-section-card">
+        <h3>🌸 Tính Cách & Sở Thích</h3>
+        <p style="margin-bottom:12px"><strong>Tính cách:</strong> ${p.personality}</p>
+        <p style="margin-bottom:8px"><strong>Thích:</strong></p>
+        <ul>${p.likes.map(l => `<li>${l}</li>`).join('')}</ul>
+      </div>
+      
+      <div class="detail-section-card">
+        <h3>🌧️ Nỗi Buồn Nhỏ</h3>
+        <p>${p.sadness}</p>
+      </div>
+      
+      <div class="detail-section-card">
+        <h3>📓 ${p.name}'s Little Diary</h3>
+        <div class="diary-entry">${p.diary}</div>
+      </div>
+      
+      <div class="detail-section-card">
+        <h3>💜 Lời An Ủi</h3>
+        <p style="font-family: var(--font-serif); font-style:italic; font-size:17px; line-height:1.9">${p.comfort}</p>
+      </div>
+      
+      <div class="detail-section-card">
+        <h3>🎵 Playlist Đề Xuất</h3>
+        ${p.playlist.map((s, i) => `
+          <div class="playlist-item">
+            <div class="playlist-num">${i+1}</div>
+            <div>
+              <div class="playlist-song">${s.song}</div>
+              <div class="playlist-artist">${s.artist}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      
+      <div style="text-align:center;padding:20px 0">
+        <button class="detail-adopt-btn" onclick="openPayment('${p.id}')" style="max-width:320px;margin:0 auto">
+          🐻 Bring Me Home
+        </button>
+        <p style="margin-top:12px;font-family:var(--font-cute);font-size:13px;color:var(--text-light)">
+          Bé đang chờ được về nhà bạn 💜
+        </p>
+      </div>
+      
     </div>
   `;
-  document.getElementById("plushie-modal").style.display = "flex";
-  document.body.style.overflow = "hidden";
+  
+  showSection('detail');
 }
 
-function closeModal() {
-  document.getElementById("plushie-modal").style.display = "none";
-  document.body.style.overflow = "";
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
 }
 
-// ═══════════════════════════════════════════════════════════
-// PAYMENT
-// ═══════════════════════════════════════════════════════════
-function openPayment() {
-  if (!currentPlushie) return;
-  const p = currentPlushie;
-  const L = LANG[currentLang];
-  document.getElementById("payment-content").innerHTML = `
-    <div class="payment-title">${L.paymentTitle}</div>
-    <div style="font-size:3rem;margin:.5rem 0">${p.emoji}</div>
-    <div class="payment-info">
-      <p>${L.paymentItem} <strong>${p.name[currentLang]}</strong></p>
-      <p>${L.paymentStatus} <strong>${p.status[currentLang]}</strong></p>
-      <div class="payment-price">${p.price}</div>
-      <p style="font-size:.8rem">${L.paymentInclude}</p>
+/* ══════════════════════════════════════════════
+   PAYMENT POPUP
+   ══════════════════════════════════════════════ */
+function openPayment(id) {
+  const p = PLUSHIES.find(x => x.id === id) || currentPlushie;
+  if (!p) return;
+  currentPlushie = p;
+  
+  document.getElementById('popup-plushie-info').innerHTML = `
+    <div class="p-emoji">${p.emoji}</div>
+    <div>
+      <div class="p-name">${p.name}</div>
+      <div class="p-price">${p.price}</div>
     </div>
-    <div class="qr-box">
-      <div class="qr-placeholder">📱</div>
-      <p class="qr-note">${L.paymentQRNote}</p>
-      <div class="momo-name">${L.paymentAccount}</div>
-      <p style="font-size:.82rem;color:var(--text-soft);margin-top:.4rem">${L.paymentPhone}</p>
-    </div>
-    <ul class="payment-steps">
-      ${L.paymentSteps.map(s => `<li>${s}</li>`).join("")}
-    </ul>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" onclick="confirmPayment()">
-      ${L.paymentConfirmBtn}
-    </button>
   `;
-  document.getElementById("plushie-modal").style.display = "none";
-  document.getElementById("payment-popup").style.display = "flex";
+  
+  document.getElementById('order-info').innerHTML = `
+    🐻 Plushie: <strong>${p.name}</strong><br/>
+    💰 Giá: <strong>${p.price}</strong><br/>
+    📦 Hình thức: Giao hàng toàn quốc<br/>
+    ⏱️ Thời gian: 3–5 ngày làm việc
+  `;
+  
+  // Reset steps
+  showPayStep(1);
+  document.getElementById('payment-popup').style.display = 'flex';
+}
+
+function showPayStep(step) {
+  [1,2,3].forEach(i => {
+    const el = document.getElementById(`pay-step-${i}`);
+    if (el) el.style.display = i === step ? 'block' : 'none';
+  });
 }
 
 function closePayment() {
-  document.getElementById("payment-popup").style.display = "none";
-  document.body.style.overflow = "";
+  document.getElementById('payment-popup').style.display = 'none';
 }
 
 function confirmPayment() {
-  const L = LANG[currentLang];
-  closePayment();
-  showToast(L.toastPayment);
-  const GOOGLE_FORM_URL = "https://forms.gle/YOUR_FORM_ID_HERE";
-  setTimeout(() => { window.open(GOOGLE_FORM_URL, "_blank"); showToast(L.toastForm); }, 1500);
+  showPayStep(3);
+  // Optionally auto-open Google Form after 2s
+  // setTimeout(() => {
+  //   window.open('YOUR_GOOGLE_FORM_LINK', '_blank');
+  // }, 2000);
 }
 
-// ═══════════════════════════════════════════════════════════
-// VISUAL NOVEL
-// ═══════════════════════════════════════════════════════════
-function initVisualNovel() {
-  vnStep = 0;
-  renderVNStep();
+function closePopupIfOutside(e) {
+  if (e.target === e.currentTarget) {
+    e.currentTarget.style.display = 'none';
+  }
 }
 
-function renderVNStep() {
-  const scripts = VN_SCRIPTS[currentLang];
-  const step = scripts[Math.min(vnStep, scripts.length - 1)];
-  const dialogue = document.getElementById("vn-dialogue");
-  const choicesEl = document.getElementById("vn-choices");
-  dialogue.textContent = "";
-  typeText(dialogue, step.text, 30);
-  choicesEl.innerHTML = step.choices.map((c, i) =>
-    `<button class="vn-choice" onclick="vnChoose(${i})">${c}</button>`
-  ).join("");
+/* ══════════════════════════════════════════════
+   VISUAL NOVEL
+   ══════════════════════════════════════════════ */
+function startVN() {
+  vnIndex = 0;
+  showVNLine();
 }
 
-function typeText(el, text, speed) {
-  let i = 0;
-  const interval = setInterval(() => {
-    if (i < text.length) { el.textContent += text[i]; i++; }
-    else clearInterval(interval);
-  }, speed);
+function showVNLine() {
+  const el = document.getElementById('vn-text');
+  if (!el) return;
+  const line = VN_SCRIPT[vnIndex % VN_SCRIPT.length];
+  typewrite(el, line, 28);
+  
+  const btn = document.getElementById('vn-next');
+  if (btn) {
+    btn.textContent = vnIndex >= VN_SCRIPT.length - 1 ? '↺ Lại từ đầu' : 'Tiếp →';
+  }
 }
 
-function vnChoose() {
-  const scripts = VN_SCRIPTS[currentLang];
-  vnStep = Math.min(vnStep + 1, scripts.length - 1);
-  renderVNStep();
+function vnNext() {
+  vnIndex = (vnIndex + 1) % VN_SCRIPT.length;
+  showVNLine();
 }
 
-// ═══════════════════════════════════════════════════════════
-// FEELINGS
-// ═══════════════════════════════════════════════════════════
-function initEmotionChips() {
-  document.querySelectorAll(".chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      chip.classList.toggle("active");
-      const val = chip.dataset.val;
-      if (chip.classList.contains("active")) selectedChips.push(val);
-      else selectedChips = selectedChips.filter(v => v !== val);
-    });
-  });
+/* ══════════════════════════════════════════════
+   COMFORT ROOM ACTIONS
+   ══════════════════════════════════════════════ */
+function sendHug() {
+  const hugs = [
+    { icon: '🫂', title: 'Ôm Ảo Từ Lumi', text: 'Lumi đang vươn tay ôm bạn thật chặt ngay lúc này. Dù không nhìn thấy, bạn có cảm nhận được không? 💜' },
+    { icon: '🐻', title: 'Mochi Ôm Bạn Nè', text: 'Mochi ôm chặt lắm! Chặt đến mức bông ở trong bé suýt văng ra rồi đó!' },
+    { icon: '🧸', title: 'Biscuit Giữ Bạn', text: 'Biscuit sẽ không buông ra cho đến khi bạn cảm thấy nhẹ hơn một chút. Cứ ở đây nhé.' },
+  ];
+  const hug = hugs[Math.floor(Math.random()*hugs.length)];
+  showComfortPopup(hug.icon, hug.title, hug.text);
+}
+
+function showDiary() {
+  const entry = DIARY_ENTRIES[Math.floor(Math.random()*DIARY_ENTRIES.length)];
+  showComfortPopup('📓', `Nhật Ký Của ${entry.bear}`, entry.text);
+}
+
+function showPlaylist() {
+  const pl = PLAYLISTS[Math.floor(Math.random()*PLAYLISTS.length)];
+  showComfortPopup('🎵', 'Bài Hát Hôm Nay', `${pl.song}\n\n✦ Tâm trạng: ${pl.mood}`);
+}
+
+function showComfortWord() {
+  const w = COMFORT_WORDS[Math.floor(Math.random()*COMFORT_WORDS.length)];
+  showComfortPopup(w.icon, w.title, w.text);
+}
+
+function showComfortPopup(icon, title, text) {
+  const content = document.getElementById('comfort-popup-content');
+  content.innerHTML = `
+    <div class="cp-icon">${icon}</div>
+    <h3>${title}</h3>
+    <p>${text.replace(/\n/g, '<br/>')}</p>
+  `;
+  document.getElementById('comfort-popup').style.display = 'flex';
+}
+
+function closeComfortPopup() {
+  document.getElementById('comfort-popup').style.display = 'none';
+}
+
+/* ══════════════════════════════════════════════
+   BREATHING EXERCISE
+   ══════════════════════════════════════════════ */
+function startBreathing() {
+  if (isBreathing) {
+    isBreathing = false;
+    clearInterval(breathingInterval);
+    const circle = document.getElementById('breathing-circle');
+    const text = document.getElementById('breathing-text');
+    const btn = document.getElementById('breath-btn');
+    circle.className = 'breathing-circle';
+    text.textContent = 'Bắt đầu';
+    btn.textContent = 'Bắt đầu thở cùng 🌸';
+    return;
+  }
+  
+  isBreathing = true;
+  breathingPhase = 0;
+  const btn = document.getElementById('breath-btn');
+  btn.textContent = 'Dừng lại';
+  
+  const phases = [
+    { label: 'Hít vào... 🌬️', class: 'inhale', duration: 4000 },
+    { label: 'Giữ... ✨', class: 'hold', duration: 4000 },
+    { label: 'Thở ra... 😌', class: 'exhale', duration: 4000 },
+    { label: 'Nghỉ... 🌸', class: '', duration: 2000 },
+  ];
+  
+  function runPhase() {
+    if (!isBreathing) return;
+    const phase = phases[breathingPhase % phases.length];
+    const circle = document.getElementById('breathing-circle');
+    const text = document.getElementById('breathing-text');
+    circle.className = 'breathing-circle ' + phase.class;
+    text.textContent = phase.label;
+    breathingPhase++;
+    breathingInterval = setTimeout(runPhase, phase.duration);
+  }
+  
+  runPhase();
+}
+
+/* ══════════════════════════════════════════════
+   FEELINGS
+   ══════════════════════════════════════════════ */
+function selectMood(btn) {
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedMood = btn.dataset.mood;
 }
 
 function sendFeelings() {
-  const text = document.getElementById("feelings-input").value.trim();
-  const L = LANG[currentLang];
-  if (!text && selectedChips.length === 0) { showToast(L.toastFeelings); return; }
-  const emotion = selectedChips[0] || "default";
-  const responses = PLUSHIE_RESPONSES[currentLang];
-  const resp = responses[emotion] || responses.default;
-  const responseEl = document.getElementById("plushie-response");
-  document.getElementById("response-text").textContent = resp.text;
-  document.getElementById("response-hearts").textContent = resp.hearts;
-  document.getElementById("response-suggest").textContent = resp.suggest;
-  responseEl.style.display = "block";
-  responseEl.scrollIntoView({ behavior: "smooth", block: "center" });
-  showToast(L.toastReceived);
+  const input = document.getElementById('feelings-input');
+  const text = input.value.trim();
+  
+  if (!text) {
+    input.placeholder = 'Hãy viết điều gì đó nhé... Lumi đang lắng nghe bạn 💜';
+    input.style.borderColor = 'var(--pink)';
+    setTimeout(() => { input.style.borderColor = 'var(--purple-1)'; }, 2000);
+    return;
+  }
+  
+  const mood = selectedMood || 'generic';
+  const data = FEELING_RESPONSES[mood] || FEELING_GENERIC;
+  const reply = data.replies[Math.floor(Math.random() * data.replies.length)];
+  
+  document.getElementById('reply-text').textContent = reply;
+  document.getElementById('reply-suggest').innerHTML = data.suggest || '';
+  document.getElementById('reply-note').textContent = data.note || '';
+  
+  const replyEl = document.getElementById('feelings-reply');
+  replyEl.style.display = 'block';
+  replyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  
+  // Float hearts
+  floatHearts();
 }
 
-// ═══════════════════════════════════════════════════════════
-// BLIND BOX
-// ═══════════════════════════════════════════════════════════
-function selectEmotionBox(el) {
-  document.querySelectorAll(".emotion-box-card").forEach(c => c.classList.remove("selected"));
-  el.classList.add("selected");
-  selectedBoxEmotion = el.dataset.emotion;
-  const boxes = BLIND_BOX_CONTENTS[currentLang];
-  const box = boxes[selectedBoxEmotion];
-  const revealEl = document.getElementById("blind-box-reveal");
-  const L = LANG[currentLang];
-  document.getElementById("reveal-icon").textContent = box.icon;
-  document.getElementById("reveal-title").textContent = box.title + " 💜";
-  document.getElementById("reveal-items").innerHTML = box.items.map(item =>
-    `<span class="reveal-item">${item}</span>`
-  ).join("");
-  revealEl.style.display = "block";
-  revealEl.scrollIntoView({ behavior: "smooth", block: "center" });
+function floatHearts() {
+  const hearts = ['💜','🌸','✨','💫','🤍'];
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      const h = document.createElement('div');
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.cssText = `
+        position: fixed;
+        left: ${20 + Math.random()*60}%;
+        bottom: 20%;
+        font-size: ${18 + Math.random()*14}px;
+        pointer-events: none;
+        z-index: 999;
+        animation: heartFloat 2s ease forwards;
+      `;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 2200);
+    }, i * 200);
+  }
+}
+
+// Add heart float animation dynamically
+const heartStyle = document.createElement('style');
+heartStyle.textContent = `
+  @keyframes heartFloat {
+    0%   { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-120px) scale(0.5); opacity: 0; }
+  }
+`;
+document.head.appendChild(heartStyle);
+
+/* ══════════════════════════════════════════════
+   BLIND BOX
+   ══════════════════════════════════════════════ */
+function selectEmotion(el, type) {
+  document.querySelectorAll('.emotion-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedEmotion = type;
+  
+  const box = BLIND_BOXES[type];
+  if (!box) return;
+  
+  document.getElementById('bbp-icon').textContent = box.icon;
+  document.getElementById('bbp-title').textContent = box.title;
+  document.getElementById('bbp-desc').textContent = box.desc;
+  document.getElementById('bbp-contents').innerHTML = box.contents.map(c => `<span class="bbp-item">${c}</span>`).join('');
+  
+  const preview = document.getElementById('blind-box-preview');
+  preview.style.display = 'block';
+  preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function orderBlindBox() {
-  if (!selectedBoxEmotion) return;
-  const box = BLIND_BOX_CONTENTS[currentLang][selectedBoxEmotion];
-  showToast(`🎁 ${box.title}... ${currentLang === "vi" ? "Đang mở form!" : "Opening order form!"}`);
-  setTimeout(() => window.open("https://forms.gle/YOUR_FORM_ID_HERE", "_blank"), 1500);
+  if (!selectedEmotion) return;
+  const box = BLIND_BOXES[selectedEmotion];
+  // Create a mock plushie for payment
+  currentPlushie = {
+    id: 'blind-box',
+    name: box.title,
+    emoji: box.icon,
+    image: null,
+    price: '350.000 ₫',
+    priceNum: 350000
+  };
+  
+  document.getElementById('popup-plushie-info').innerHTML = `
+    <div class="p-emoji">${box.icon}</div>
+    <div>
+      <div class="p-name">${box.title}</div>
+      <div class="p-price">350.000 ₫</div>
+    </div>
+  `;
+  
+  document.getElementById('order-info').innerHTML = `
+    🎁 Hộp: <strong>${box.title}</strong><br/>
+    💰 Giá: <strong>350.000 ₫</strong><br/>
+    📦 Nội dung: Bí mật (xem mô tả trên)<br/>
+    ⏱️ Thời gian: 3–5 ngày làm việc
+  `;
+  
+  showPayStep(1);
+  document.getElementById('payment-popup').style.display = 'flex';
 }
 
-// ═══════════════════════════════════════════════════════════
-// MUSIC — hỗ trợ nhiều file, fallback
-// ═══════════════════════════════════════════════════════════
-function initMusicBtn() {
-  const btn = document.getElementById("music-toggle");
-  const audio = document.getElementById("bg-music");
-
-  // Load music từ config
-  loadMusicTrack(audio, 0);
-
-  btn.addEventListener("click", () => {
-    const L = LANG[currentLang];
-    if (isMusicPlaying) {
-      audio.pause();
-      btn.classList.remove("playing");
-      document.querySelector(".music-icon").textContent = "🎵";
-      document.querySelector(".music-label").textContent = L.musicLabel;
-    } else {
-      audio.volume = 0.25;
-      audio.play().catch(() => {
-        // Thử track tiếp theo nếu lỗi
-        currentMusicIndex = (currentMusicIndex + 1) % MEDIA_CONFIG.music.length;
-        loadMusicTrack(audio, currentMusicIndex);
-        audio.play().catch(() => {});
-      });
-      btn.classList.add("playing");
-      document.querySelector(".music-icon").textContent = "🎶";
-      document.querySelector(".music-label").textContent = L.musicPlayingLabel;
-    }
-    isMusicPlaying = !isMusicPlaying;
-  });
-
-  // Auto-play next track
-  audio.addEventListener("ended", () => {
-    currentMusicIndex = (currentMusicIndex + 1) % MEDIA_CONFIG.music.length;
-    loadMusicTrack(audio, currentMusicIndex);
-    if (isMusicPlaying) audio.play().catch(() => {});
-  });
+/* ══════════════════════════════════════════════
+   COMFORT NOTIFICATION
+   ══════════════════════════════════════════════ */
+function showComfortNotif() {
+  const notif = document.getElementById('comfort-notif');
+  if (notif) {
+    notif.style.display = 'flex';
+    setTimeout(() => {
+      if (notif) notif.style.opacity = '0';
+      setTimeout(() => { if (notif) notif.style.display = 'none'; }, 500);
+    }, 6000);
+  }
 }
 
-function loadMusicTrack(audio, index) {
-  const tracks = MEDIA_CONFIG.music;
-  if (!tracks || tracks.length === 0) return;
-  const src = audio.querySelector("source");
-  if (src) src.src = tracks[index % tracks.length];
-  audio.load();
-}
+/* ══════════════════════════════════════════════
+   NAVBAR SCROLL EFFECT
+   ══════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 20) {
+    nav.style.boxShadow = '0 4px 30px rgba(176,143,232,0.2)';
+  } else {
+    nav.style.boxShadow = '0 2px 20px rgba(176,143,232,0.12)';
+  }
+}, { passive: true });
 
-// ═══════════════════════════════════════════════════════════
-// UTILITIES
-// ═══════════════════════════════════════════════════════════
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
-
-function showToast(msg) {
-  const toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.style.display = "block";
-  clearTimeout(toast._timer);
-  toast._timer = setTimeout(() => { toast.style.display = "none"; }, 3200);
-}
+/* ══════════════════════════════════════════════
+   KEYBOARD
+   ══════════════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('payment-popup').style.display = 'none';
+    document.getElementById('comfort-popup').style.display = 'none';
+  }
+});
