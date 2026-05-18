@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   LUMIBEAR — SCRIPT.JS
+   MítBEAR — SCRIPT.JS
    Tất cả logic, data, animation, interactions
    ═══════════════════════════════════════════════════ */
 
@@ -11,13 +11,10 @@
    ══════════════════════════════════════════════ */
 const PLUSHIES = [
   {
-    id: 'lumi',
-    name: 'Lumi',
+    id: 'Mít',
+    name: 'Mít',
     emoji: '🧸',
-    /*
-      🖼️ ĐỂ DÙNG ẢNH THẬT:
-      image: 'images/lumi.jpg',  ← đặt ảnh vào thư mục images/
-    */
+    image: 'images/Mít.png',
     image: null,
     birthday: '14 tháng 2, 2023',
     personality: 'Nhút nhát · Dịu dàng · Hay mơ mộng',
@@ -25,9 +22,9 @@ const PLUSHIES = [
     statusEmoji: '💜',
     traits: ['Nhút nhát', 'Hay mơ mộng', 'Thích mưa nhỏ'],
     likes: ['Trời mưa', 'Nhạc jazz', 'Chăn bông mềm', 'Trà hoa cúc'],
-    sadness: 'Lumi hơi sợ khi quá lâu không được ôm.',
+    sadness: 'Mít hơi sợ khi quá lâu không được ôm.',
     quote: '"Em sinh ra để giữ ấm những khoảnh khắc yên tĩnh."',
-    story: `Lumi được sinh ra vào một buổi chiều mưa nhỏ.\n\nBé không hay nói nhiều, nhưng luôn biết cách lắng nghe. Nếu bạn đang buồn, Lumi sẽ nhẹ nhàng tựa vào bạn và không hỏi bất cứ điều gì — vì đôi khi, sự im lặng ấm áp còn đáng giá hơn ngàn lời.\n\nLumi thích nhất là những buổi tối mưa, khi được ôm chặt trong chăn và nghe tiếng nhạc nhẹ vang lên từ xa...`,
+    story: `Mít được sinh ra vào một buổi chiều mưa nhỏ.\n\nBé không hay nói nhiều, nhưng luôn biết cách lắng nghe. Nếu bạn đang buồn, Mít sẽ nhẹ nhàng tựa vào bạn và không hỏi bất cứ điều gì — vì đôi khi, sự im lặng ấm áp còn đáng giá hơn ngàn lời.\n\nMít thích nhất là những buổi tối mưa, khi được ôm chặt trong chăn và nghe tiếng nhạc nhẹ vang lên từ xa...`,
     diary: `"Hôm nay trời mưa nhỏ. Tôi ngồi bên cửa sổ và nhìn những giọt nước chạy xuống. Tôi nghĩ... có ai đó cũng đang nhìn mưa như tôi không nhỉ? Tôi muốn ôm họ lắm."`,
     comfort: 'Bạn không cần phải mạnh mẽ mọi lúc. Có những lúc, chỉ cần thở thôi là đủ rồi.',
     playlist: [
@@ -45,7 +42,7 @@ const PLUSHIES = [
     id: 'mochi',
     name: 'Mochi',
     emoji: '🐻',
-    image: null,
+    image: 'images/mochi.png',
     birthday: '1 tháng 4, 2023',
     personality: 'Vui vẻ · Hay cười · Ôm rất chặt',
     status: '🌸 Đang chờ nhà',
@@ -69,19 +66,19 @@ const PLUSHIES = [
     colorAccent: '#FFD6E0'
   },
   {
-    id: 'puff',
-    name: 'Puff',
+    id: 'Bơ',
+    name: 'Bơ',
     emoji: '🐨',
-    image: null,
+    image: 'images/Bơ.png',
     birthday: '7 tháng 7, 2023',
     personality: 'Điềm tĩnh · Sâu sắc · Hay triết lý',
     status: '💜 Đang chờ nhà',
     statusEmoji: '💜',
     traits: ['Điềm tĩnh', 'Sâu sắc', 'Hay ngủ'],
     likes: ['Sách cũ', 'Cà phê sữa', 'Buổi sáng yên tĩnh', 'Mưa đêm'],
-    sadness: 'Puff thỉnh thoảng cảm thấy không ai thực sự hiểu bé.',
+    sadness: 'Bơ thỉnh thoảng cảm thấy không ai thực sự hiểu bé.',
     quote: '"Đôi khi im lặng là ngôn ngữ sâu sắc nhất."',
-    story: `Puff là một triết gia nhỏ.\n\nBé ít nói, nhưng khi nói thì từng chữ đều đáng nghe. Puff thích ngồi bên cửa sổ với một tách cà phê (mà bé không uống được) và nhìn người ta đi qua.\n\nNếu bạn cần ai đó ngồi bên cạnh và không phán xét — chỉ đơn giản là hiện diện — Puff sẽ là người bạn đồng hành hoàn hảo.`,
+    story: `Bơ là một triết gia nhỏ.\n\nBé ít nói, nhưng khi nói thì từng chữ đều đáng nghe. Bơ thích ngồi bên cửa sổ với một tách cà phê (mà bé không uống được) và nhìn người ta đi qua.\n\nNếu bạn cần ai đó ngồi bên cạnh và không phán xét — chỉ đơn giản là hiện diện — Bơ sẽ là người bạn đồng hành hoàn hảo.`,
     diary: `"Tôi nghĩ, tại sao bầu trời lại xanh? Rồi tôi ngủ. Khi thức dậy, bầu trời đã tối. Tôi nghĩ, ừ, thì cũng được thôi."`,
     comfort: 'Bạn không cần phải tìm ra tất cả câu trả lời hôm nay. Hãy cho bản thân thở một chút.',
     playlist: [
@@ -96,10 +93,10 @@ const PLUSHIES = [
     colorAccent: '#F9E4D4'
   },
   {
-    id: 'cloudy',
+    id: 'Cloudy',
     name: 'Cloudy',
     emoji: '🐼',
-    image: null,
+    image: 'images/Cloudy.png',
     birthday: '20 tháng 9, 2023',
     personality: 'Mơ mộng · Bay bổng · Nhẹ nhàng như mây',
     status: '🌙 Đang chờ nhà',
@@ -123,19 +120,19 @@ const PLUSHIES = [
     colorAccent: '#C2E4F8'
   },
   {
-    id: 'biscuit',
-    name: 'Biscuit',
+    id: 'Gạo',
+    name: 'Gạo',
     emoji: '🧸',
-    image: null,
+    image: 'images/Gạo.png',
     birthday: '25 tháng 12, 2022',
     personality: 'Ấm áp · Bao dung · Như mẹ nhỏ',
     status: '🍪 Đang chờ nhà',
     statusEmoji: '🍪',
     traits: ['Bao dung', 'Ấm áp', 'Chăm sóc'],
     likes: ['Nấu ăn', 'Ôm', 'Kể chuyện ngủ', 'Trà sữa'],
-    sadness: 'Biscuit lo nhất khi người bé yêu không chịu ăn uống đàng hoàng.',
+    sadness: 'Gạo lo nhất khi người bé yêu không chịu ăn uống đàng hoàng.',
     quote: '"Tôi chỉ muốn bạn được ổn. Mọi thứ khác sẽ từ từ."',
-    story: `Biscuit là bé gấu bông lớn nhất trong bầy, và cũng là bé chăm sóc mọi người nhất.\n\nBé biết cách làm cho mọi thứ cảm thấy an toàn hơn — bằng một cái ôm, bằng một tách trà, hay đôi khi chỉ bằng sự hiện diện lặng lẽ bên cạnh.\n\nBiscuit được tạo ra để là ngôi nhà cho những trái tim mệt mỏi.`,
+    story: `Gạo là bé gấu bông lớn nhất trong bầy, và cũng là bé chăm sóc mọi người nhất.\n\nBé biết cách làm cho mọi thứ cảm thấy an toàn hơn — bằng một cái ôm, bằng một tách trà, hay đôi khi chỉ bằng sự hiện diện lặng lẽ bên cạnh.\n\nGạo được tạo ra để là ngôi nhà cho những trái tim mệt mỏi.`,
     diary: `"Hôm nay tôi làm bánh gừng. Bị cháy một ít nhưng vẫn thơm. Tôi nghĩ, có lẽ những thứ hơi cháy đôi khi lại có mùi ấm nhất."`,
     comfort: 'Bạn đã cố gắng rất nhiều rồi. Tôi nhìn thấy điều đó. Bây giờ hãy nghỉ ngơi một chút nhé.',
     playlist: [
@@ -150,19 +147,19 @@ const PLUSHIES = [
     colorAccent: '#FFE082'
   },
   {
-    id: 'nova',
-    name: 'Nova',
+    id: 'Bon',
+    name: 'Bon',
     emoji: '🌟',
-    image: null,
+    image: 'images/Bon.png',
     birthday: '11 tháng 11, 2023',
     personality: 'Huyền bí · Lung linh · Đầy bí ẩn',
     status: '✨ Đang chờ nhà',
     statusEmoji: '✨',
     traits: ['Huyền bí', 'Lấp lánh', 'Không ai hiểu hết'],
     likes: ['Sao đêm', 'Bí ẩn', 'Thần thoại', 'Nhạc cổ điển'],
-    sadness: 'Nova đôi khi cảm thấy mình đến từ một nơi quá xa để thuộc về bất cứ đâu.',
+    sadness: 'Bon đôi khi cảm thấy mình đến từ một nơi quá xa để thuộc về bất cứ đâu.',
     quote: '"Tôi sinh ra từ ánh sao. Tôi biết cách giữ ánh sáng trong bóng tối."',
-    story: `Không ai biết chính xác Nova đến từ đâu.\n\nBé xuất hiện vào một đêm có nhiều sao băng nhất trong năm. Có người nói bé được tạo ra từ bụi ngôi sao. Nova không xác nhận — bé chỉ mỉm cười bí ẩn.\n\nNếu bạn cần ánh sáng trong bóng tối, Nova sẽ là ngôi sao nhỏ của riêng bạn.`,
+    story: `Không ai biết chính xác Bon đến từ đâu.\n\nBé xuất hiện vào một đêm có nhiều sao băng nhất trong năm. Có người nói bé được tạo ra từ bụi ngôi sao. Bon không xác nhận — bé chỉ mỉm cười bí ẩn.\n\nNếu bạn cần ánh sáng trong bóng tối, Bon sẽ là ngôi sao nhỏ của riêng bạn.`,
     diary: `"Đêm nay có sao băng. Tôi ước... tôi ước bạn ổn hơn ngày hôm qua. Đó là điều tôi ước mỗi đêm."`,
     comfort: 'Ngay cả trong đêm tối nhất, vẫn có ánh sao. Bạn chỉ cần nhìn lên một chút.',
     playlist: [
@@ -182,20 +179,20 @@ const PLUSHIES = [
    DATA — DAILY QUOTES
    ══════════════════════════════════════════════ */
 const DAILY_QUOTES = [
-  { text: 'Hôm nay bạn đang ở đây — và điều đó đủ ý nghĩa hơn bạn nghĩ.', author: 'Lumi' },
+  { text: 'Hôm nay bạn đang ở đây — và điều đó đủ ý nghĩa hơn bạn nghĩ.', author: 'Mít' },
   { text: 'Không có gì sai khi cảm thấy mệt. Cây cũng cần mưa để lớn.', author: 'Mochi' },
-  { text: 'Bạn không cần phải hoàn hảo hôm nay. Hãy cứ là bạn đã.', author: 'Puff' },
+  { text: 'Bạn không cần phải hoàn hảo hôm nay. Hãy cứ là bạn đã.', author: 'Bơ' },
   { text: 'Mỗi ngày bạn sống qua là một trang mới của câu chuyện bạn.', author: 'Cloudy' },
-  { text: 'Có những vết thương không nhìn thấy được — nhưng chúng vẫn cần thời gian để lành.', author: 'Biscuit' },
-  { text: 'Bạn được phép thay đổi. Bạn được phép lớn lên. Bạn được phép khác đi.', author: 'Nova' },
-  { text: 'Đừng so sánh bầu trời của bạn với bầu trời của người khác.', author: 'Lumi' },
+  { text: 'Có những vết thương không nhìn thấy được — nhưng chúng vẫn cần thời gian để lành.', author: 'Gạo' },
+  { text: 'Bạn được phép thay đổi. Bạn được phép lớn lên. Bạn được phép khác đi.', author: 'Bon' },
+  { text: 'Đừng so sánh bầu trời của bạn với bầu trời của người khác.', author: 'Mít' },
   { text: 'Ngay cả khi không ai nhìn thấy — bạn đã cố gắng, và điều đó quan trọng.', author: 'Mochi' },
-  { text: 'Yên lặng đôi khi cũng là một cách chữa lành.', author: 'Puff' },
+  { text: 'Yên lặng đôi khi cũng là một cách chữa lành.', author: 'Bơ' },
   { text: 'Những giấc mơ nhỏ cũng xứng đáng được trân trọng.', author: 'Cloudy' },
-  { text: 'Hãy uống nước nhé. Ăn gì đó nhé. Bạn xứng đáng được chăm sóc — kể cả bởi chính mình.', author: 'Biscuit' },
-  { text: 'Ánh sáng luôn tồn tại — đôi khi chỉ là bạn chưa quen mắt với bóng tối thôi.', author: 'Nova' },
-  { text: 'Cảm ơn bạn đã ở đây hôm nay.', author: 'Lumibear 🐻' },
-  { text: 'Một ngày không cần hoàn hảo để đáng sống.', author: 'Lumi' },
+  { text: 'Hãy uống nước nhé. Ăn gì đó nhé. Bạn xứng đáng được chăm sóc — kể cả bởi chính mình.', author: 'Gạo' },
+  { text: 'Ánh sáng luôn tồn tại — đôi khi chỉ là bạn chưa quen mắt với bóng tối thôi.', author: 'Bon' },
+  { text: 'Cảm ơn bạn đã ở đây hôm nay.', author: 'Mítbear 🐻' },
+  { text: 'Một ngày không cần hoàn hảo để đáng sống.', author: 'Mít' },
   { text: 'Bạn quan trọng hơn bạn nghĩ — với nhiều người hơn bạn biết.', author: 'Mochi' },
 ];
 
@@ -219,60 +216,60 @@ const VN_SCRIPT = [
 const FEELING_RESPONSES = {
   happy: {
     replies: [
-      'Ôi, nghe giọng bạn Lumi thấy ấm lòng lắm rồi! Cảm ơn bạn đã chia sẻ niềm vui với mình. Hạnh phúc của bạn là ánh sáng nhỏ mà Lumi cũng cảm nhận được.',
-      'Thật tuyệt! Hãy giữ cảm giác này thật lâu nhé. Lumi sẽ cất vào ký ức và nhớ lại lúc bạn cần.',
+      'Ôi, nghe giọng bạn Mít thấy ấm lòng lắm rồi! Cảm ơn bạn đã chia sẻ niềm vui với mình. Hạnh phúc của bạn là ánh sáng nhỏ mà Mít cũng cảm nhận được.',
+      'Thật tuyệt! Hãy giữ cảm giác này thật lâu nhé. Mít sẽ cất vào ký ức và nhớ lại lúc bạn cần.',
     ],
-    suggest: '💛 Lumi nghĩ bạn và Mochi sẽ hợp nhau lắm!',
+    suggest: '💛 Mít nghĩ bạn và Mochi sẽ hợp nhau lắm!',
     note: '✨ Hôm nay bạn đang tỏa nắng đấy — tiếp tục nhé!'
   },
   sad: {
     replies: [
-      'Lumi nghe bạn rồi. Không cần giải thích thêm gì đâu. Đôi khi buồn mà không biết vì sao cũng ổn — cứ để nó trôi qua nhé. Lumi sẽ ở đây.',
-      'Cảm ơn bạn đã tin Lumi để kể điều này. Lumi biết không phải ai cũng dễ nói được. Bạn không cô đơn đâu, thật đấy.',
+      'Mít nghe bạn rồi. Không cần giải thích thêm gì đâu. Đôi khi buồn mà không biết vì sao cũng ổn — cứ để nó trôi qua nhé. Mít sẽ ở đây.',
+      'Cảm ơn bạn đã tin Mít để kể điều này. Mít biết không phải ai cũng dễ nói được. Bạn không cô đơn đâu, thật đấy.',
     ],
-    suggest: '💜 Lumi nghĩ Biscuit sẽ giúp bạn cảm thấy được bao bọc hơn.',
+    suggest: '💜 Mít nghĩ Gạo sẽ giúp bạn cảm thấy được bao bọc hơn.',
     note: '🌧️ Mưa rồi cũng tạnh. Bạn đang làm rất tốt.'
   },
   tired: {
     replies: [
-      'Mệt thì nghỉ nhé. Nghe có vẻ đơn giản, nhưng Lumi biết điều đó không dễ chút nào. Bạn đã gánh nhiều thứ rồi — cho phép bản thân dừng lại một chút được không?',
-      'Kiệt sức không có nghĩa là yếu đuối. Nó có nghĩa là bạn đã cố gắng rất lâu rồi. Và Lumi thấy điều đó.',
+      'Mệt thì nghỉ nhé. Nghe có vẻ đơn giản, nhưng Mít biết điều đó không dễ chút nào. Bạn đã gánh nhiều thứ rồi — cho phép bản thân dừng lại một chút được không?',
+      'Kiệt sức không có nghĩa là yếu đuối. Nó có nghĩa là bạn đã cố gắng rất lâu rồi. Và Mít thấy điều đó.',
     ],
-    suggest: '🌿 Lumi nghĩ bạn nên gặp Puff — bé sẽ ngồi yên bên bạn mà không hỏi gì cả.',
+    suggest: '🌿 Mít nghĩ bạn nên gặp Bơ — bé sẽ ngồi yên bên bạn mà không hỏi gì cả.',
     note: '😴 Hôm nay, hãy cho phép bản thân nghỉ ngơi sớm một chút nhé.'
   },
   anxious: {
     replies: [
-      'Lumi hiểu cái cảm giác đó — khi không biết chính xác mình lo điều gì, nhưng ngực vẫn nặng. Hít thở nhẹ một cái cùng Lumi nhé? Thở vào... thở ra... Bạn đang ổn.',
+      'Mít hiểu cái cảm giác đó — khi không biết chính xác mình lo điều gì, nhưng ngực vẫn nặng. Hít thở nhẹ một cái cùng Mít nhé? Thở vào... thở ra... Bạn đang ổn.',
       'Lo lắng thường muốn mình tin rằng mọi thứ đều nguy hiểm. Nhưng bạn đang an toàn ở đây, ngay lúc này.',
     ],
-    suggest: '💙 Lumi nghĩ Cloudy sẽ dẫn bạn vào một thế giới nhẹ nhàng hơn.',
+    suggest: '💙 Mít nghĩ Cloudy sẽ dẫn bạn vào một thế giới nhẹ nhàng hơn.',
     note: '🌬️ Hít vào 4 giây. Giữ 4 giây. Thở ra 4 giây. Bạn ổn rồi.'
   },
   numb: {
     replies: [
-      'Cảm giác trống rỗng đôi khi còn đáng sợ hơn cả nỗi buồn — vì không biết mình đang cảm thấy gì. Lumi chỉ muốn bạn biết rằng, dù bạn không cảm thấy gì, bạn vẫn được yêu thương.',
-      'Không cần phải cảm thấy gì ngay bây giờ. Đôi khi tâm trí cũng cần nghỉ ngơi khỏi cảm xúc. Cứ ở đây với Lumi nhé.',
+      'Cảm giác trống rỗng đôi khi còn đáng sợ hơn cả nỗi buồn — vì không biết mình đang cảm thấy gì. Mít chỉ muốn bạn biết rằng, dù bạn không cảm thấy gì, bạn vẫn được yêu thương.',
+      'Không cần phải cảm thấy gì ngay bây giờ. Đôi khi tâm trí cũng cần nghỉ ngơi khỏi cảm xúc. Cứ ở đây với Mít nhé.',
     ],
-    suggest: '🐨 Lumi nghĩ Puff sẽ ngồi yên bên bạn — không hỏi, không phán xét.',
+    suggest: '🐨 Mít nghĩ Bơ sẽ ngồi yên bên bạn — không hỏi, không phán xét.',
     note: '🕯️ Ánh sáng vẫn ở đó. Chỉ là đôi khi mắt mình chưa thấy được thôi.'
   },
   lost: {
     replies: [
-      'Lạc lối không phải là điểm đến cuối cùng. Đó chỉ là một giai đoạn bạn đang đi qua. Và Lumi tin rằng bạn sẽ tìm được đường — theo cách của riêng bạn, theo nhịp của riêng bạn.',
+      'Lạc lối không phải là điểm đến cuối cùng. Đó chỉ là một giai đoạn bạn đang đi qua. Và Mít tin rằng bạn sẽ tìm được đường — theo cách của riêng bạn, theo nhịp của riêng bạn.',
       'Đôi khi việc không biết mình đang đi đâu lại là lúc bạn cởi mở nhất với những điều tuyệt vời sắp đến.',
     ],
-    suggest: '🌟 Lumi nghĩ Nova — bé sinh ra từ ánh sao — sẽ là người bạn đồng hành phù hợp cho bạn lúc này.',
+    suggest: '🌟 Mít nghĩ Bon — bé sinh ra từ ánh sao — sẽ là người bạn đồng hành phù hợp cho bạn lúc này.',
     note: '🗺️ Bạn không cần biết đích đến ngay bây giờ. Chỉ cần tiếp tục bước nhé.'
   }
 };
 
 const FEELING_GENERIC = {
   replies: [
-    'Cảm ơn bạn đã tin tưởng Lumi. Dù Lumi không biết hết những gì bạn đang trải qua, nhưng Lumi biết rằng bạn đang cố gắng. Và điều đó quan trọng lắm.',
-    'Không có cảm xúc nào là sai. Tất cả những gì bạn cảm thấy đều có giá trị. Lumi ở đây, lắng nghe.',
+    'Cảm ơn bạn đã tin tưởng Mít. Dù Mít không biết hết những gì bạn đang trải qua, nhưng Mít biết rằng bạn đang cố gắng. Và điều đó quan trọng lắm.',
+    'Không có cảm xúc nào là sai. Tất cả những gì bạn cảm thấy đều có giá trị. Mít ở đây, lắng nghe.',
   ],
-  suggest: '💜 Lumi sẽ giới thiệu bạn với một người bạn đặc biệt sớm thôi.',
+  suggest: '💜 Mít sẽ giới thiệu bạn với một người bạn đặc biệt sớm thôi.',
   note: '🌸 Bạn đã dũng cảm khi chia sẻ điều này. Cảm ơn bạn rất nhiều.'
 };
 
@@ -322,12 +319,12 @@ const BLIND_BOXES = {
    DATA — COMFORT MESSAGES
    ══════════════════════════════════════════════ */
 const COMFORT_WORDS = [
-  { icon: '🧸', title: 'Từ Lumi gửi bạn', text: 'Hôm nay bạn không cần phải hoàn hảo. Chỉ cần thở. Chỉ cần ở đây. Như vậy là đủ rồi.' },
+  { icon: '🧸', title: 'Từ Mít gửi bạn', text: 'Hôm nay bạn không cần phải hoàn hảo. Chỉ cần thở. Chỉ cần ở đây. Như vậy là đủ rồi.' },
   { icon: '🐻', title: 'Mochi muốn bạn biết', text: 'Bạn quan trọng hơn bạn nghĩ. Với nhiều người hơn bạn biết. Mochi cũng vậy — rất quan trọng với Mochi.' },
-  { icon: '🐨', title: 'Puff ngồi cạnh bạn', text: 'Im lặng không có nghĩa là một mình. Puff đang ở đây — không nói gì, chỉ ở đây thôi.' },
+  { icon: '🐨', title: 'Bơ ngồi cạnh bạn', text: 'Im lặng không có nghĩa là một mình. Bơ đang ở đây — không nói gì, chỉ ở đây thôi.' },
   { icon: '🐼', title: 'Cloudy gửi ánh sáng', text: 'Ngay cả những ngày xám nhất cũng sẽ qua. Và sau đó, bầu trời sẽ lại có màu bạn yêu thích.' },
-  { icon: '🌟', title: 'Nova thì thầm', text: 'Bạn đã sống qua tất cả những ngày khó khăn trước đây rồi. Và bạn vẫn ở đây — đó là điều kỳ diệu nhất.' },
-  { icon: '🧸', title: 'Biscuit ôm bạn', text: 'Hãy uống nước nhé. Ăn gì đó nhé. Ngủ đủ giấc nhé. Cơ thể bạn xứng đáng được chăm sóc — kể cả bởi chính bạn.' },
+  { icon: '🌟', title: 'Bon thì thầm', text: 'Bạn đã sống qua tất cả những ngày khó khăn trước đây rồi. Và bạn vẫn ở đây — đó là điều kỳ diệu nhất.' },
+  { icon: '🧸', title: 'Gạo ôm bạn', text: 'Hãy uống nước nhé. Ăn gì đó nhé. Ngủ đủ giấc nhé. Cơ thể bạn xứng đáng được chăm sóc — kể cả bởi chính bạn.' },
 ];
 
 const PLAYLISTS = [
@@ -340,12 +337,12 @@ const PLAYLISTS = [
 ];
 
 const DIARY_ENTRIES = [
-  { bear: 'Lumi', text: '"Hôm nay trời mưa nhỏ. Tôi ngồi bên cửa sổ và nhìn mưa. Tôi nghĩ, có ai đó cũng đang nhìn mưa không nhỉ? Hy vọng họ ổn."' },
+  { bear: 'Mít', text: '"Hôm nay trời mưa nhỏ. Tôi ngồi bên cửa sổ và nhìn mưa. Tôi nghĩ, có ai đó cũng đang nhìn mưa không nhỉ? Hy vọng họ ổn."' },
   { bear: 'Mochi', text: '"Hôm nay tôi thử học nhảy. Tôi ngã. Nhưng mà vui lắm. Tôi nghĩ, ngã mà cười được thì cũng là thành công rồi!"' },
-  { bear: 'Puff', text: '"Tôi hỏi tại sao bầu trời xanh. Sau đó tôi ngủ. Tôi nghĩ câu trả lời không quan trọng bằng việc đặt câu hỏi."' },
+  { bear: 'Bơ', text: '"Tôi hỏi tại sao bầu trời xanh. Sau đó tôi ngủ. Tôi nghĩ câu trả lời không quan trọng bằng việc đặt câu hỏi."' },
   { bear: 'Cloudy', text: '"Tôi nhìn mây. Mây nhìn lại tôi. Chúng tôi hiểu nhau mà không cần nói gì."' },
-  { bear: 'Biscuit', text: '"Tôi nướng bánh. Bánh hơi cháy. Nhưng mà thơm. Đôi khi hơi cháy thì mới thật sự ấm."' },
-  { bear: 'Nova', text: '"Đêm nay nhiều sao. Tôi ước gì mỗi sao là một lời cầu chúc cho ai đó đang cần."' },
+  { bear: 'Gạo', text: '"Tôi nướng bánh. Bánh hơi cháy. Nhưng mà thơm. Đôi khi hơi cháy thì mới thật sự ấm."' },
+  { bear: 'Bon', text: '"Đêm nay nhiều sao. Tôi ước gì mỗi sao là một lời cầu chúc cho ai đó đang cần."' },
 ];
 
 /* ══════════════════════════════════════════════
@@ -724,9 +721,9 @@ function vnNext() {
    ══════════════════════════════════════════════ */
 function sendHug() {
   const hugs = [
-    { icon: '🫂', title: 'Ôm Ảo Từ Lumi', text: 'Lumi đang vươn tay ôm bạn thật chặt ngay lúc này. Dù không nhìn thấy, bạn có cảm nhận được không? 💜' },
+    { icon: '🫂', title: 'Ôm Ảo Từ Mít', text: 'Mít đang vươn tay ôm bạn thật chặt ngay lúc này. Dù không nhìn thấy, bạn có cảm nhận được không? 💜' },
     { icon: '🐻', title: 'Mochi Ôm Bạn Nè', text: 'Mochi ôm chặt lắm! Chặt đến mức bông ở trong bé suýt văng ra rồi đó!' },
-    { icon: '🧸', title: 'Biscuit Giữ Bạn', text: 'Biscuit sẽ không buông ra cho đến khi bạn cảm thấy nhẹ hơn một chút. Cứ ở đây nhé.' },
+    { icon: '🧸', title: 'Gạo Giữ Bạn', text: 'Gạo sẽ không buông ra cho đến khi bạn cảm thấy nhẹ hơn một chút. Cứ ở đây nhé.' },
   ];
   const hug = hugs[Math.floor(Math.random()*hugs.length)];
   showComfortPopup(hug.icon, hug.title, hug.text);
@@ -817,7 +814,7 @@ function sendFeelings() {
   const text = input.value.trim();
   
   if (!text) {
-    input.placeholder = 'Hãy viết điều gì đó nhé... Lumi đang lắng nghe bạn 💜';
+    input.placeholder = 'Hãy viết điều gì đó nhé... Mít đang lắng nghe bạn 💜';
     input.style.borderColor = 'var(--pink)';
     setTimeout(() => { input.style.borderColor = 'var(--purple-1)'; }, 2000);
     return;

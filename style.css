@@ -182,9 +182,12 @@ textarea, input { font-family: var(--font-body); }
   animation: cloudDrift linear infinite;
   filter: blur(1px);
 }
-.cloud-1 { top: 12%; animation-duration: 28s; animation-delay: 0s; font-size: 50px; }
+.cloud-1 { top: 12%; animation-duration: 28s; animation-delay: 0s; font-size: 150px; }
 .cloud-2 { top: 30%; animation-duration: 22s; animation-delay: -8s; }
-.cloud-3 { top: 55%; animation-duration: 35s; animation-delay: -14s; font-size: 30px; }
+.cloud-3 { top: 55%; animation-duration: 35s; animation-delay: -14s; font-size: 130px; }
+.cloud-4 { top: 70%; animation-duration: 30s; animation-delay: -14s; font-size: 130px; }
+.cloud-5 { top: 45%; animation-duration: 25s; animation-delay: -14s; font-size: 130px; }
+.cloud-6 { top: 60%; animation-duration: 15s; animation-delay: -14s; font-size: 130px; }
 @keyframes cloudDrift {
   0%   { left: -80px; opacity: 0; }
   5%   { opacity: 0.8; }
