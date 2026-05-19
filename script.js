@@ -12,7 +12,7 @@ const PLUSHIES = [
     id: 'Mít',
     name: 'Mít',
     emoji: '🧸',
-    image: 'images/mít.png',
+    image: 'images/Mit.png',
     birthday: '14 tháng 2, 2023',
     personality: 'Nhút nhát · Dịu dàng · Hay mơ mộng',
     status: '💜 Đang chờ nhà',
